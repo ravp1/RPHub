@@ -1,0 +1,33 @@
+
+{
+name:String,
+category:String,
+posts:[{poster:String, content:String, timePosted:Date}]
+}
+
+{
+name:String,
+tags:[{tagName:String, posts:[{poster:String, content:String, timePosted:Date}]]
+}
+
+
+
+{
+username:String,
+password:String //hash, not actual password
+interests:[String]
+}
+
+
+
+interests = ["EE","guitar"];
+var interest = "ee"
+Category.find({name:interest},function(err,categories){
+	if (err) resp.write("your interests don't exist. be more normal");
+	esle
+	{
+		for (var i = 0; i < categories.length; i++)
+			resp.write(categories[i].name
+	}
+
+})

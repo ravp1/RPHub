@@ -48,8 +48,6 @@ performance.save();
 //console.log(performance);
 
 
-
-
 //Setup the server to listen on port 80 (Web traffic port), allow it to parse POSTED body data, and let it render EJS pages 
 server.listen(80);
 app.use(bodyParser());
@@ -92,11 +90,6 @@ app.get("/categories",function(req,res){
 	});
 
 });
-
-
-
-
-
 
 
 /*

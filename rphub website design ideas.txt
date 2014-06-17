@@ -1,0 +1,23 @@
+main page
+--list of requests made (not intimidating though)
+--upper right login thing
+--right sidebar, list of "tags"
+--(no left sidebar, but request list is centered)
+
+
+"requested" pages
+--request description provided by the person
+--contact information
+--"tags"
+
+
+"requesting" page
+--request description box
+--enter contact information (use rpi email as default)
+--"tags"
+
+
+signin page
+--via rennselaer cas
+
+

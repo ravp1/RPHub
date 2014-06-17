@@ -61,6 +61,7 @@ app.use(express.static(__dirname));
 //}).listen(8080, '127.0.0.1');
 app.get('/', function(req, res){
 	  res.redirect('index.html');
+	  res.redirect('request.html');
 });
 
 /*var server = app.listen(80, function() {

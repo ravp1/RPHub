@@ -5,6 +5,7 @@ category:String,
 posts:[{poster:String, content:String, timePosted:Date}]
 }
 
+
 {
 name:String,
 tags:[{tagName:String, posts:[{poster:String, content:String, timePosted:Date}]]

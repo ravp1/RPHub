@@ -63,6 +63,7 @@ app.use(express.static(__dirname));
 app.get('/', function(req, res){
 	  res.redirect('index.html');
 	  res.redirect('request.html');
+	  res.redirect('makeTags.js');
 });
 
 /*var server = app.listen(80, function() {

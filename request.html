@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	
+	<!-- JavaScript -->
+	<!-- <script src="js/jquery-1.10.2.js"></script> -->
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	
+	<!-- 
+	<script> 
+		$(function(){$("#sidebar").load("common-sidebartags.html");});
+		$(function(){$("#header").load("common-header.html");});
+		$(function(){$("#footer").load("common-footer.html");});
+	</script> 
+	 -->
+	
+	<title>RPHub - things</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="css/bootstrap.css" rel="stylesheet">
+
+	<!-- Add custom CSS here -->
+	<link href="css/RPHub-test.css" rel="stylesheet">
+
+</head>
+
+<body>
+	
+	<!-- header -->
+	<!-- <div id="header"></div> -->
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="RPHub-test.html">RPHub</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="#about">About</a>
+					</li>
+					<li><a href="#services">Profile</a>
+					</li>
+					<li><a href="#contact">Contact</a>
+					</li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container -->
+	</nav>
+	
+	<!-- /header -->
+	
+	
+	<div class="container">
+
+		<div class="row"> <!-- entire body -->
+			
+			<div id="main" class="col-md-9"> <!-- center part -->
+				
+				<br>
+				
+				<div class="well">
+					
+					<!-- <div class="text-right">
+						<a class="btn btn-success">Request Something</a>
+					</div> -->
+					
+					<form action="" id="contact-form" class="form-horizontal">
+					  <fieldset>
+						<legend>Request Form <small>asdf</small></legend>
+						<!--
+						<div class="control-group">
+						  <label class="control-label" for="name">Name</label>
+						  <div class="controls">
+							<input type="text" class="input-xlarge" name="name" id="name">
+						  </div>
+						</div>
+						
+						<div class="control-group">
+						  <label class="control-label" for="email">Contact Information</label>
+						  <div class="controls">
+							<input type="text" class="input-xlarge" name="email" id="email">
+						  </div>
+						</div>
+						-->
+						<div class="control-group">
+						  <label class="control-label" for="subject">Subject</label>
+						  <div class="controls">
+							<input type="text" class="input-xlarge" name="subject" id="subject">
+						  </div>
+						</div>
+						
+						<div class="control-group">
+						  <label class="control-label" for="message">Request</label>
+						  <div class="controls">
+							<textarea class="input-xlarge" name="message" id="message" 
+									rows="5" ></textarea>
+						  </div>
+						</div>
+						
+						<p></p> <!--add some space-->
+						
+						<div class="form-actions">
+						  <button type="submit" class="btn btn-primary btn-large">Submit</button>
+						  <a href="#som" class="btn btn-default">Cancel</a>
+						</div>
+					  </fieldset>
+					</form>
+					
+				</div>
+
+			</div>
+			
+			<!-- sidebar/tags -->
+			<!-- <div id="sidebar"></div> -->
+			<div id="tags" class="col-md-3"> <!--tags-->
+				<p class="lead">Tags</p>
+				<div class="list-group">
+					<div class="list-group">
+						<a class="list-group-item active">Popular</a>
+						<a href="#" class="list-group-item">Textbooks</a>
+						<a href="#" class="list-group-item">asdfasdf</a>	
+					</div>
+					<div class="list-group">
+						<a href="#" class="list-group-item active">Engineering</a>
+						<a href="#" class="list-group-item">Mechanical</a>
+						<a href="#" class="list-group-item">Electrical</a>	
+					</div>
+					<div class="list-group">
+						<a href="#" class="list-group-item active">Humanities</a>
+						<a href="#" class="list-group-item">Arts</a>
+						<a href="#" class="list-group-item">Music</a>	
+					</div>
+					<div class="list-group">
+						<a href="#" class="list-group-item active">Miscellaneous</a>
+						<a href="#" class="list-group-item">Blue-Collar</a>
+						<a href="#" class="list-group-item">Other</a>	
+					</div>
+				</div>
+			</div>
+			
+			
+			<!-- /sidebar/tags -->
+			
+		</div>
+
+	</div>
+	<!-- /.container -->
+	
+	<!-- footer -->
+	<!-- <div id="footer"></div> -->
+	<div class="container">
+		<footer>
+			<div class="row">
+				<div class="col-lg-12">
+					RPHub © by Henry Choi and Ravi Panse. An <a href="http://rcos.rpi.edu/"> RCOS </a> Project.
+				</div>
+			</div>
+		</footer>
+	</div>
+	<!-- /footer -->
+	
+</body>
+
+</html>

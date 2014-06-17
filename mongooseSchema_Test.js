@@ -15,6 +15,7 @@ db.once('open', function callback(){
 
 });
 
+
 var Schema = mongoose.Schema;
 
 //a category may be, for example, engineering or performance

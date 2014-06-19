@@ -178,6 +178,7 @@
 				for (var j = 0; j < categories[i].interests.length; j++)
 				{
 					cat += '<a href="#" class="list-group-item">' + categories[i].interests[j].name + '</a>';
+					/*
 					if (categories[i].interests[j].posts.length>0){
 						for ( var k=0; k < categories[i].interests[j].posts.length; k++){
 							posts += '<div class="row"> <div class="col-md-12"> <b>' + categories[i].interests[j].posts[k].poster + '</b><span class="pull-right">' + 
@@ -185,14 +186,13 @@
 								'</p></div></div></div><hr>';
 						}
 					}
+					*/
 				}
 				cat += "</div>";
 				$("#categoriesListGroup").append(cat);
-				$("#postBox").append(posts);
+				//$("#postBox").append(posts);
 			}
-			
 		});
-	
 	});
 	
 	</script>

@@ -20,6 +20,7 @@ var Schema = mongoose.Schema;
 
 //a category may be, for example, engineering or performance
 //a sub-interest may be electrical engineering or guitar
+/*
 var categorySchema = new Schema({
 	name: String,
 	
@@ -33,21 +34,94 @@ var categorySchema = new Schema({
 var Category = mongoose.model('Category', categorySchema);
 
 Category.remove({},function(err){
-	console.log("removed categores");
+	console.log("removed categories");
 });
 
 var engineering = new Category({ name: 'engineering'});
 engineering.interests.push({name:'electrical engineering'});
 engineering.interests[0].posts.push({poster:'Dr. ABC', content:'For students looking for experience with digital design', title:'VLSI Project'});
 engineering.save();
-//console.log(engineering);
 
 var performance = new Category({name:'performance'});
 performance.interests.push({name:'pop music'});
 performance.interests[0].posts.push({poster:'Dr. ABC', content:"Performance during my daughter's graduation party. Formal attire requested.", title:'Performance June 21'});
 performance.save();
-//console.log(performance);
+*/
 
+var interestSchema = new Schema({
+	name: String
+});
+
+var categorySchema = new Schema({
+	name: String,
+	
+	interests: [interestSchema],
+	meta: {
+		following: Number,
+	}
+	
+});
+
+var postSchema = new Schema({
+	poster: String,
+	content: String,
+	title: String,
+	timePosted: Date,
+	//tags: [interestSchema],
+	tags: [String], //interest 
+	fullfilled: Boolean,
+	comments: [{name: String, posts:[{poster:String, content:String, timePosted:Date}]}],
+});
+var Category = mongoose.model('Category', categorySchema);
+
+Category.remove({},function(err){
+	console.log("removed categories");
+});
+
+var Post = mongoose.model('Post', postSchema);
+
+interestSchema.methods.returnPosts = function(){
+Post.find({tags:this.name}, function(err, relevantPosts){
+
+	console.log(relevantPosts);
+});
+}
+
+Post.remove({}, function(err){
+	console.log("removed posts");
+});
+
+var Interest = mongoose.model('Interest', interestSchema);
+
+
+var engineering = new Category({ name: 'Engineering'});
+var eeInterest = new Interest({name:'Electrical Engineering'});
+eeInterest.save();
+engineering.interests.push(eeInterest);
+engineering.save();
+
+var science = new Category({name:'Science'});
+var physicsInterest = new Interest({name:'Physics'});
+physicsInterest.save();
+science.interests.push(physicsInterest);
+science.save();
+
+var posts = [];
+var post1 = new Post({poster:'Dr. ABC', content:'For students looking for experience with digital design. For credit or salary.', title:'VLSI Project', tags:['Electrical Engineering']});
+post1.save();
+posts.push(post1);
+var post2 = new Post({poster:'Dr. DEF', content:"Computational physics research in density functional theory. Must be junior or above with programming experience.", title:'DFT Research'});
+post2.save();
+posts.push(post2);
+console.log("engineering: " + JSON.stringify(engineering));
+//console.log("first interest posts: " + Interest.findOne().exec().returnPosts());
+Interest.findOne({},function(err,result){
+	console.log("err is " + err);
+	//console.log("first interest posts: " + JSON.stringify(result.returnPosts() ) );
+	result.returnPosts()
+});
+//engineering.interests[0].returnPosts();
+//console.log(posts);
 
 //Setup the server to listen on port 80 (Web traffic port), allow it to parse POSTED body data, and let it render EJS pages 
 server.listen(80);
@@ -95,7 +169,17 @@ app.get("/categories",function(req,res){
 });
 
 
+
+//db.collection("posts").find({tags:this.name});
+
 /*
+
+interestSchema.methods.returnPosts = function(){
+	return Post.find().where(this).in().exec(function(err, relevantPosts){
+		if(err) return console.error(err);
+		else return relevantPosts;
+	}
+}
 
 function makeNewCategory(name, interests)
 {
@@ -119,4 +203,5 @@ Category.find({name:"engineering"}, function(err, categories){
 		{
 			resp.write(categories[i].name);
 		}
-	}*/
+	}
+});*/

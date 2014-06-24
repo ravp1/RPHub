@@ -76,41 +76,11 @@
 					</div>
 					
 					<hr>
-					<!--
-					<div class="row">
-						<div class="col-md-12">
-							<b>Professor ABC</b>
-							<span class="pull-right">1 day ago</span>
-							<div class="list-group">
-								<p>#graphicdesign - Hi students, Need something done with something</p>
-								<p>reward - $10/hr</p>
-							</div>
-						</div>
-					</div>
-					<hr>
-					<div class="row">
-						<div class="col-md-12">
-							<b>Student John Smith</b>
-							<span class="pull-right">2 days ago</span>
-							<div class="list-group">
-								<p>#electronics #textbooks - Hi, textbooks COCO abcdetc</p>
-								<p>reward - $50</p>
-							</div>
-						</div>
-					</div>
-					<hr>
-					<div class="row">
-						<div class="col-md-12">
-							<b>Student</b>
-							<span class="pull-right">999 day ago</span>
-							<div class="list-group">
-								<p>#other - Need something done with something</p>
-								<p>reward - something
-								</p>
-							</div>
-						</div>
-					</div>
-					-->
+					
+					
+					<!-- stuff goes here -->
+					
+					
 				</div>
 
 			</div>
@@ -179,6 +149,18 @@
 				//$("#postBox").append(posts);
 			}
 		});
+		/*
+		$.get("posts",function(posts){
+			posts = $.parseJSON(posts);
+			var postHTML = ''
+			for (var i =0; i< posts.length; i++){
+				postHTML += '<div class="row"> <div class="col-md-12"> <b>' + posts[i].poster + '</b><span class="pull-right">' + 
+								posts[i].timePosted + '</span><div class="list-group"><p>' + posts[i].content +
+								'</p></div></div></div><hr>';
+			}
+			$("#postBox").append(postHTML);
+		});
+		*/
 		$.get("posts",function(posts){
 			posts = $.parseJSON(posts);
 			var postHTML = ''

@@ -67,7 +67,6 @@ var postSchema = new Schema({
 	content: String,
 	title: String,
 	timePosted: Date,
-	//tags: [interestSchema],
 	tags: [String], //interest 
 	fullfilled: Boolean,
 	comments: [{name: String, posts:[{poster:String, content:String, timePosted:Date}]}],
@@ -82,7 +81,7 @@ var Post = mongoose.model('Post', postSchema);
 
 interestSchema.methods.returnPosts = function(){
 Post.find({tags:this.name}, function(err, relevantPosts){
-
+	if(err) return console.error(err);
 	console.log(relevantPosts);
 });
 }
@@ -138,6 +137,7 @@ app.get('/', function(req, res){
 	  res.redirect('index.html');
 	  res.redirect('request.html');
 	  res.redirect('makeTags.js');
+	  res.redirect('post.html');
 });
 
 /*var server = app.listen(80, function() {
@@ -168,7 +168,13 @@ app.get("/categories",function(req,res){
 
 });
 
-
+app.get("/posts", function(req, res){
+	Post.find({}, function(err,data){
+		console.log("found posts. data.length is " + data.length);
+		res.write(JSON.stringify(data));
+		res.end();
+	});
+});
 
 //db.collection("posts").find({tags:this.name});
 

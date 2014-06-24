@@ -150,8 +150,6 @@
 	
 		console.log("about to try to get categories");
 		$.get("/categories",function(categories){
-		
-			
 			/*console.log("typeof response is " + typeof response);
 			response = $.parseJSON(response);
 			console.log("typeof response is " + typeof response);
@@ -169,29 +167,27 @@
 			categories = $.parseJSON(categories);
 			for (var i = 0; i < categories.length; i++)
 			{
-				/*var cat  = '<div class="list-group">\n' +
-						'<a href="#" class="list-group-item active">' + names[i] + '</a>\n' +	
-					 '</div>\n'*/
 				var cat = '<div class="list-group">\n' + 
 					'<a href="#" class="list-group-item active">' + categories[i].name + '</a>\n';
 				var posts = '';
 				for (var j = 0; j < categories[i].interests.length; j++)
 				{
 					cat += '<a href="#" class="list-group-item">' + categories[i].interests[j].name + '</a>';
-					/*
-					if (categories[i].interests[j].posts.length>0){
-						for ( var k=0; k < categories[i].interests[j].posts.length; k++){
-							posts += '<div class="row"> <div class="col-md-12"> <b>' + categories[i].interests[j].posts[k].poster + '</b><span class="pull-right">' + 
-								categories[i].interests[j].posts[k].timePosted + '</span><div class="list-group"><p>' + categories[i].interests[j].posts[k].content +
-								'</p></div></div></div><hr>';
-						}
-					}
-					*/
 				}
 				cat += "</div>";
 				$("#categoriesListGroup").append(cat);
 				//$("#postBox").append(posts);
 			}
+		});
+		$.get("posts",function(posts){
+			posts = $.parseJSON(posts);
+			var postHTML = ''
+			for (var i =0; i< posts.length; i++){
+				postHTML += '<div class="row"> <div class="col-md-12"> <b>' + posts[i].poster + '</b><span class="pull-right">' + 
+								posts[i].timePosted + '</span><div class="list-group"><p>' + posts[i].content +
+								'</p></div></div></div><hr>';
+			}
+			$("#postBox").append(postHTML);
 		});
 	});
 	

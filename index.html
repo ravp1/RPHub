@@ -162,13 +162,13 @@
 			posts = $.parseJSON(posts);
 			var postHTML = ''
 			for (var i =0; i< posts.length; i++){
-				postHTML += 
+				postHTML +=
 				'\
 				<br>\
 				<li class="list-group-item collapse-group">\
 					<fieldset>\
 						<legend>\
-							<!-- <span class="glyphicon glyphicon-' + ( posts[i].fulfilled ? 'ok" style="color: green':'remove" style="color: grey' ) + '"></span>' +
+							<!-- <span class="glyphicon glyphicon-' + ( posts[i].fulfilled ? 'ok" style="color: green':'remove" style="color: grey' ) + '"></span> -->' +
 							posts[i].title + '\
 							<small>- ' + posts[i].poster + '</small>\
 							\
@@ -194,6 +194,7 @@
 					</fieldset>\
 				</li>\
 				';
+				console.log(JSON.stringify(posts));
 			}
 			$("#listofPosts").append(postHTML);
 			

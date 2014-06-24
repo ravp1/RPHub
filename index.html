@@ -168,7 +168,7 @@
 				<li class="list-group-item collapse-group">\
 					<fieldset>\
 						<legend>\
-							<span class="glyphicon glyphicon-' + ( posts[i].fulfilled ? 'ok" style="color: green':'remove" style="color: grey' ) + '"></span>' +
+							<!-- <span class="glyphicon glyphicon-' + ( posts[i].fulfilled ? 'ok" style="color: green':'remove" style="color: grey' ) + '"></span>' +
 							posts[i].title + '\
 							<small>- ' + posts[i].poster + '</small>\
 							\
@@ -196,23 +196,24 @@
 				';
 			}
 			$("#listofPosts").append(postHTML);
-		});
+			
+			//collapse stuff
+			$('.collapse-group').on('click', function(c) {
+				c.preventDefault();
+				var collapse = $(this).find('.collapse');
+				collapse.show();
+			});
+			
+			$('.collapse-button').on('click', function(e) {
+				//alert('clicked');
+				e.preventDefault();
+				var collapse = $(this).closest('.collapse');
+				console.log(collapse.html())
+				collapse.hide();
+				console.log(collapse.css("display"));
+				e.stopPropagation();
+			});
 		
-		//collapse stuff
-		$('.collapse-group').on('click', function(c) {
-			c.preventDefault();
-			var collapse = $(this).find('.collapse');
-			collapse.show();
-		});
-		
-		$('.collapse-button').on('click', function(e) {
-			//alert('clicked');
-			e.preventDefault();
-			var collapse = $(this).closest('.collapse');
-			console.log(collapse.html())
-			collapse.hide();
-			console.log(collapse.css("display"));
-			e.stopPropagation();
 		});
 		
 	});	//end of main thing

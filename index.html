@@ -69,23 +69,17 @@
 				<img class="img-responsive" src="logo.svg" alt="" style="border:none;"/>
 				<!-- <div style="font-family: 'Indie Flower', cursive; font-size:140pt; text-align:center; line-height:70%;">RPHub</div> -->
 				
-				<div class="well" id="postBox">
-					
+				
+				
+				<ul class="list-group well" id="listofPosts">
 					<div class="text-right">
 						<a href="request.html" class="btn btn-success">Request Something</a>
 					</div>
 					
-					<hr>
-					
-					<ul class="list-group well" id="listofPosts">
-					
 					<!-- database stuff goes here -->
 					
-					</ul>
-					
+				</ul>
 				
-				</div>
-
 			</div>
 			
 			
@@ -174,7 +168,7 @@
 				<li class="list-group-item collapse-group">\
 					<fieldset>\
 						<legend>\
-							<span class="glyphicon glyphicon-ok" style="color: green"></span>' +
+							<span class="glyphicon glyphicon-' + ( posts[i].fulfilled ? 'ok':'remove' ) + '" style="color: green"></span>' +
 							posts[i].title + '\
 							<small>- ' + posts[i].poster + '</small>\
 							\

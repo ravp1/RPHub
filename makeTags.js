@@ -20,6 +20,12 @@ $(document).ready(function(){
 			}
 			
 		});
+		
+		/*$('.submit').on('click', function(e) {
+			//alert('clicked');
+			e.preventDefault();
+			
+		});*/
 	
 	});
 	

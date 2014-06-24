@@ -179,6 +179,28 @@ app.get("/posts", function(req, res){
 	});
 });
 
+app.post("/sendMessage",function(req,res){
+
+	console.log("fjdlksajf");
+
+	subject = req.body.subject;
+	message = req.body.message;
+	console.log(subject);
+	console.log(message);
+	if (subject == null || message == null)
+	{
+		res.redirect("request.html");
+		return;
+	}
+	var post = new Post({content:message, title:subject, fulfilled:false});
+	post.save();
+	posts.push(post);
+	
+	res.redirect("request.html");
+	//res.end();
+
+});
+
 //db.collection("posts").find({tags:this.name});
 
 /*

@@ -79,9 +79,9 @@
 						<a class="btn btn-success">Request Something</a>
 					</div> -->
 					
-					<form action="" id="contact-form" class="form-horizontal">
-						<fieldset>
-							<legend>Request Form <small>asdf</small></legend>
+					<form id="contact-form" action="/sendMessage" method="post" class="form-horizontal">
+						<!-- <fieldset> -->
+							<legend>Request Form</legend>
 
 							<div class="control-group">
 								<label class="control-label" for="subject">Subject</label>
@@ -101,10 +101,10 @@
 							<p></p> <!--add some space-->
 
 							<div class="form-actions">
-								<button type="submit" class="btn btn-primary btn-large">Submit</button>
-								<a href="#som" class="btn btn-default">Cancel</a>
+								<button type="submit" value="Submit" class="btn btn-primary btn-large submit">Submit</button>
+								<a href="#som" class="btn btn-default cancel">Cancel</a>
 							</div>
-						</fieldset>
+						<!-- </fieldset> -->
 					</form>
 					
 				</div>
@@ -116,6 +116,7 @@
 			<div id="tags" class="col-md-3"> <!--tags-->
 				<p class="lead">Tags</p>
 				<div id="categoriesListGroup" class="list-group">
+					<!-- tags generated dynamically-->
 					<script src="makeTags.js">
 					</script>
 				</div>

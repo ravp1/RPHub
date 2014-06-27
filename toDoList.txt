@@ -2,6 +2,15 @@ HTML/CSS
 modify the navbar to include search bar, person's name - make the navbar BIG so it's clear who's logged in
 make a register.html page
 make a user.html page
+	features:
+		have a place to display all posts - and an option to modify or delete them
+		have a place to display all interests
+		have a place to display all completed projects ("resume" of sorts)
+		have a place to display personal info (including actual resume????)
+		have a place to edit personal information
+		have a place to add interests
+		have a widget that shows frequent collaborators (like the friends widget on fb)
+		have a "request something" button
 make an interest.html page
 	make an about.html
 	make a contact.html

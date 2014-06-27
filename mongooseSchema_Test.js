@@ -47,7 +47,15 @@ performance.interests.push({name:'pop music'});
 performance.interests[0].posts.push({poster:'Dr. ABC', content:"Performance during my daughter's graduation party. Formal attire requested.", title:'Performance June 21'});
 performance.save();
 */
-
+var userSchema = new Schema({
+	fullName: String,
+	email: String,
+	password: String,
+	loginTries: Number,
+	interests: [interestSchema],
+	blocked: Boolean,
+	loginFail: Boolean,
+});
 var interestSchema = new Schema({
 	name: String
 });
@@ -71,11 +79,6 @@ var postSchema = new Schema({
 	fullfilled: Boolean,
 	comments: [{name: String, posts:[{poster:String, content:String, timePosted:Date}]}],
 });
-var Category = mongoose.model('Category', categorySchema);
-
-Category.remove({},function(err){
-	console.log("removed categories");
-});
 
 var Post = mongoose.model('Post', postSchema);
 
@@ -86,12 +89,26 @@ Post.find({tags:this.name}, function(err, relevantPosts){
 });
 }
 
+var User = mongoose.model('User', userSchema);
+
+var Category = mongoose.model('Category', categorySchema);
+
+var Interest = mongoose.model('Interest', interestSchema);
+
+User.remove({}, function(err){
+	console.log("removed users");
+});
+
+Category.remove({},function(err){
+	console.log("removed categories");
+});
+
 Post.remove({}, function(err){
 	console.log("removed posts");
 });
 
-var Interest = mongoose.model('Interest', interestSchema);
-
+var sampleUser = new User({email: 'sample@rpi.edu', password: 'password', blocked: false, loginFail: false});
+sampleUser.save();
 
 var engineering = new Category({ name: 'Engineering'});
 var eeInterest = new Interest({name:'Electrical Engineering'});
@@ -117,14 +134,16 @@ post3.save();
 posts.push(post3);
 console.log("engineering: " + JSON.stringify(engineering));
 //console.log("first interest posts: " + Interest.findOne().exec().returnPosts());
+
 Interest.findOne({},function(err,result){
 	console.log("err is " + err);
 	//console.log("first interest posts: " + JSON.stringify(result.returnPosts() ) );
 	result.returnPosts()
 });
+
 //engineering.interests[0].returnPosts();
 //console.log(posts);
-
+console.log(sampleUser);
 //Setup the server to listen on port 80 (Web traffic port), allow it to parse POSTED body data, and let it render EJS pages 
 server.listen(80);
 app.use(bodyParser());
@@ -181,8 +200,6 @@ app.get("/posts", function(req, res){
 
 app.post("/sendMessage",function(req,res){
 
-	console.log("fjdlksajf");
-
 	subject = req.body.subject;
 	message = req.body.message;
 	console.log(subject);
@@ -197,6 +214,39 @@ app.post("/sendMessage",function(req,res){
 	posts.push(post);
 	
 	res.redirect("request.html");
+	//res.end();
+
+});
+
+app.post("/login",function(req,res){
+
+	sentEmail = req.body.email;
+	sentPassword = req.body.password;
+	console.log(sentEmail);
+	console.log(sentPassword);
+	
+	if (sentEmail == undefined || sentPassword == undefined)
+	{
+		res.redirect("login.html");
+		return;
+	}
+	User.findOne({email:sentEmail, password:sentPassword}, function(err, loggedUser){
+		if(err) return console.error(err);
+		console.log(loggedUser);
+		if(loggedUser!=null){
+			res.redirect("index.html");
+		}
+		else{
+			console.log("Failed login; please try again.");
+			res.redirect("login.html");
+		}
+	});
+	/*
+	var post = new Post({content:password, title:email, fulfilled:false});
+	post.save();
+	posts.push(post);
+	
+	res.redirect("index.html");*/
 	//res.end();
 
 });
@@ -236,3 +286,4 @@ Category.find({name:"engineering"}, function(err, categories){
 		}
 	}
 });*/
+

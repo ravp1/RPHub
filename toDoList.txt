@@ -1,0 +1,18 @@
+HTML/CSS
+modify the navbar to include search bar, person's name - make the navbar BIG so it's clear who's logged in
+make a register.html page
+make a user.html page
+make an interest.html page
+	make an about.html
+	make a contact.html
+
+
+Server backend
+include users into every aspect of existing processes - when you add a new post, make sure it also sends the user information
+implement a process for registration
+add code to interest.html so it actively samples all posts with tagged interest
+make a robust search bar that can find posts, interests, and people
+figure out a system so that the website always 'knows' who is logged in
+modify user.html so people can add/edit personal information if the displayed user is the user the website knows is logged in
+if the user being shown on user.html is not the logged user, display the personal information they have added
+add code to automatically check for tags in a post before adding it to the library of posts

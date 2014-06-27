@@ -4,6 +4,7 @@ $(document).ready(function(){
 		$.get("/categories",function(categories){
 			
 			categories = $.parseJSON(categories);
+			var cat 
 			for (var i = 0; i < categories.length; i++)
 			{
 				/*var cat  = '<div class="list-group">\n' +

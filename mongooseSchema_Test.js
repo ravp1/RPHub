@@ -48,7 +48,11 @@ performance.interests[0].posts.push({poster:'Dr. ABC', content:"Performance duri
 performance.save();
 */
 var userSchema = new Schema({
-	fullName: String,
+	name: 
+	{
+		first: String,
+		last: String,
+	},
 	email: String,
 	password: String,
 	loginTries: Number,
@@ -89,16 +93,20 @@ Post.find({tags:this.name}, function(err, relevantPosts){
 });
 }
 
+userSchema.virtual('name.full').get(function () {
+  return this.name.first + ' ' + this.name.last;
+});
+
 var User = mongoose.model('User', userSchema);
 
 var Category = mongoose.model('Category', categorySchema);
 
 var Interest = mongoose.model('Interest', interestSchema);
-
+/*
 User.remove({}, function(err){
 	console.log("removed users");
 });
-
+*/
 Category.remove({},function(err){
 	console.log("removed categories");
 });
@@ -106,10 +114,10 @@ Category.remove({},function(err){
 Post.remove({}, function(err){
 	console.log("removed posts");
 });
-
+/*
 var sampleUser = new User({email: 'sample@rpi.edu', password: 'password', blocked: false, loginFail: false});
 sampleUser.save();
-
+*/
 var engineering = new Category({ name: 'Engineering'});
 var eeInterest = new Interest({name:'Electrical Engineering'});
 eeInterest.save();
@@ -143,7 +151,6 @@ Interest.findOne({},function(err,result){
 
 //engineering.interests[0].returnPosts();
 //console.log(posts);
-console.log(sampleUser);
 //Setup the server to listen on port 80 (Web traffic port), allow it to parse POSTED body data, and let it render EJS pages 
 server.listen(80);
 app.use(bodyParser());
@@ -175,7 +182,6 @@ app.get("/categories",function(req,res){
 
 	Category.find({},function(err,data){
 	
-		console.log("found categories. data.length is " + data.length);
 	
 		/*var response = {names:[]};
 		for (var i = 0; i < data.length; i++)
@@ -192,7 +198,6 @@ app.get("/categories",function(req,res){
 
 app.get("/posts", function(req, res){
 	Post.find({}, function(err,data){
-		console.log("found posts. data.length is " + data.length);
 		res.write(JSON.stringify(data));
 		res.end();
 	});
@@ -248,6 +253,34 @@ app.post("/login",function(req,res){
 	
 	res.redirect("index.html");*/
 	//res.end();
+
+});
+
+app.post("/register", function(req, res){
+	sentEmail = req.body.email;
+	sentPassword = req.body.password;
+	sentFirst = req.body.firstName;
+	sentLast = req.body.lastName;
+	console.log(sentEmail);
+	console.log(sentFirst);
+	
+	User.findOne({email:sentEmail}, function(err, loggedUser){
+		if(err) return console.error(err);
+		if(loggedUser!=null){
+			console.log("There is already an account associated with this email. Please login or click 'Forgot password'");
+			res.redirect("register.html");
+		}
+		else if (sentEmail == "" || sentPassword == "" || sentFirst == "" || sentLast == "")
+		{
+			console.log("You have left some fields blank. Please try again.");
+		}
+		else{
+			var newUser = new User({email: sentEmail, password: sentPassword, name:{first:sentFirst, last:sentLast}, blocked: false, loginFail: false, loginTries:0});
+			newUser.save();
+			console.log("Congratulations! You have created a new user!");
+			res.redirect('index.html');
+		}
+	});
 
 });
 

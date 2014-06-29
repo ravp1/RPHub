@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	
+	<!-- JavaScript -->
+	<!-- <script src="js/jquery-1.10.2.js"></script> -->
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	
+	<!-- 
+	<script> 
+		$(function(){$("#sidebar").load("common-sidebartags.html");});
+		$(function(){$("#header").load("common-header.html");});
+		$(function(){$("#footer").load("common-footer.html");});
+	</script> 
+	 -->
+	
+	<title>RPHub - things</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="css/bootstrap.css" rel="stylesheet">
+
+	<!-- Add custom CSS here -->
+	<link href="css/RPHub-test.css" rel="stylesheet">
+
+</head>
+
+<body>
+	
+	<!-- header -->
+	<!-- <div id="header"></div> -->
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index.html">RPHub</a>
+			</div>
+			
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav navbar-left">
+					<li><a href="#about">About</a>
+					</li>
+					<li><a href="#profile">Profile</a>
+					</li>
+					<li><a href="#contact">Contact</a>
+					</li>
+				</ul>
+				
+				<form role="search" class="navbar-form navbar-left" style="margin-bottom: 0px; margin-top: 4px;">
+					<div class="form-group">
+						<input type="text" placeholder="Search" class="form-control">
+					</div>
+				</form>
+				
+				<ul class="nav navbar-nav navbar-right">
+					<!-- <li><a href="#login"> Login </a></li> -->
+					<li><a> Firstname Lastname </a></li>
+					<li><a href="#favorites" class="glyphicon glyphicon-star"></a></li>
+					<li><a href="#notif" class="glyphicon glyphicon-asterisk"></a></li>
+					<li><a href="#home" class="glyphicon glyphicon-home"></a></li>
+					<li><a href="#logoff" class="glyphicon glyphicon-off"></a></li>
+				</ul>
+			
+			</div>
+			<!-- /.navbar-collapse -->
+			
+		</div>
+		<!-- /.container -->
+	</nav>
+	
+	<!-- /header -->
+	
+	<div class="container">
+
+		<div class="row"> <!-- entire body -->
+			
+			<div id="main" class="col-md-9"> <!-- center part -->
+				
+				<br>
+				
+				<ul class="list-group well" id="listlist">
+					
+					
+					
+				</ul>
+				
+				
+				<script>
+				var postHTML = ''
+				postHTML += 
+					'\
+					<br>\
+					<li class="list-group-item collapse-group">\
+						<fieldset>\
+							<legend>\
+								<span class="glyphicon glyphicon-' + ( false ? 'ok" style="color: green':'remove" style="color: grey' ) + '"></span>' +
+								'title' + '\
+								<small>- ' + 'poster' + '</small>\
+								\
+								<small style="float: right">' + 'time' + '</small>\
+							</legend>\
+							\
+							<p>' + 'content' + '</p>\
+							<div style="text-align:center"> <button class="btn btn-default" align="center"> Respond &raquo </button> </div>\
+							\
+							<div class="collapse">\
+								<br>\
+								Send a message to <a href="mailto:professor@rpi.edu?Subject=NAMEOFPROJECT">professor@rpi.edu</a>\
+								<textarea class="input-xlarge" name="message" id="message" rows="5" ></textarea>\
+								\
+								<br>\
+								\
+								<div class="form-actions">\
+									<button type="submit" class="btn btn-primary btn-large">Submit</button>\
+									<button class="btn btn-default collapse-button">Collapse</button>\
+								</div>\
+							</div>\
+						\
+						</fieldset>\
+					</li>\
+					';
+					
+					$("#listlist").append(postHTML);
+				</script>
+				
+				<script>
+				
+					$('.collapse-group').on('click', function(c) {
+						c.preventDefault();
+						var collapse = $(this).find('.collapse');
+						collapse.show();
+					});
+					
+					$('.collapse-button').on('click', function(e) {
+						//alert('clicked');
+						e.preventDefault();
+						var collapse = $(this).closest('.collapse');
+						console.log(collapse.html())
+						collapse.hide();
+						console.log(collapse.css("display"));
+						e.stopPropagation();
+					});
+					
+				</script>
+
+			</div>
+			
+			<!-- sidebar/tags -->
+			<!-- <div id="sidebar"></div> -->
+			<div id="tags" class="col-md-3"> <!--tags-->
+				<p class="lead">Tags</p>
+				<div id="categoriesListGroup" class="list-group">
+					<script src="makeTags.js">
+					</script>
+				</div>
+			</div>
+			
+			<!-- /sidebar/tags -->
+			
+		</div>
+
+	</div>
+	<!-- /.container -->
+	
+	<!-- footer -->
+	<!-- <div id="footer"></div> -->
+	<div class="container">
+		<footer>
+			<div class="row">
+				<div class="col-lg-12">
+					RPHub © by Henry Choi and Ravi Panse. An <a href="http://rcos.rpi.edu/"> RCOS </a> Project.
+				</div>
+			</div>
+		</footer>
+	</div>
+	<!-- /footer -->
+	
+</body>
+
+</html>

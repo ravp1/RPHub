@@ -244,6 +244,10 @@ app.post("/login",function(req,res){
 		else{
 			console.log("Failed login; please try again.");
 			res.redirect("login.html");
+			app.get("/loginError", function(req, res){
+				res.write('true');
+				res.end();
+			});
 		}
 	});
 	/*
@@ -283,7 +287,17 @@ app.post("/register", function(req, res){
 	});
 
 });
-
+/*
+app.post("/unloadError",function(req, res){
+	console.log("The request is: " +req.body.unload);
+	if(req.body.unload==='true'){
+		app.get("/loginError", function(req, res){
+				res.write('false');
+				res.end();
+		});
+	}
+});
+*/
 //db.collection("posts").find({tags:this.name});
 
 /*

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	
+	<!-- JavaScript -->
+	<!-- <script src="js/jquery-1.10.2.js"></script> -->
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	
+	<!-- 
+	<script> 
+		$(function(){$("#sidebar").load("common-sidebartags.html");});
+		$(function(){$("#header").load("common-header.html");});
+		$(function(){$("#footer").load("common-footer.html");});
+	</script> 
+	 -->
+	
+	<title>RPHub - things</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="css/bootstrap.css" rel="stylesheet">
+
+	<!-- Add custom CSS here -->
+	<link href="css/RPHub-test.css" rel="stylesheet">
+
+</head>
+
+<body>
+	
+	<!-- header -->
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<!-- <div class="container"> -->
+		<div class="navbar-header pull-left">
+			<a href="index.html" class="navbar-brand" style="padding-right: 5px;">RPHub</a>
+			
+			<form class="navbar-text"> <!-- navbar-form -->
+				<div class="form-group" style="display:inline">
+					<div class="input-group" style="display:table;padding-right: 15px;padding-left: 15px;">
+						<span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+						<input class="form-control" style="display:table-cell; width:100%" name="search" placeholder="Search" type="text">
+					</div>
+				</div>
+			</form>
+		
+			
+			
+		</div>
+		<div class="navbar-header pull-right">
+			
+			<!-- <ul class="nav navbar-nav list-inline"> <!-- navbar-right
+				<li><span style="padding-top: 16px;padding-bottom: 13px"> First Last </span></li>
+				<li><a href="#favorites"><span title="Favorites" class="glyphicon glyphicon-star"></span></a></li>
+				<li class="dropdown"><a href="#notif"><span class="glyphicon glyphicon-asterisk" class="dropdown-toggle" data-toggle="dropdown"></span></a></li>
+				<ul class="dropdown-menu">
+					<li> notifications </li>
+				</ul>
+				<li><a href="#home"><span class="glyphicon glyphicon-home"></span></a></li>
+				<li><a href="#logoff"><span class="glyphicon glyphicon-off"></span></a></li>
+			</ul> -->
+			
+			<ul class="navbar-nav list-inline">
+              <li><a href="#"><span id="timer" class="glyphicon glyphicon-time"></span></a></li>
+              <li><a href="#"><span class="glyphicon glyphicon-pencil"></span></a></li>
+              <li><a href="#"><span class="glyphicon glyphicon-plus-sign"></span></a></li>
+              <li><a href="#"><span class="glyphicon glyphicon-volume-off"></span></a></li>
+              <li><a href="#"><span class="glyphicon glyphicon-info-sign"></span></a></li>
+              <li><a href="#"><span class="glyphicon glyphicon-backward"></span></a></li>
+              <li><a href="#"><span class="glyphicon glyphicon-forward"></span></a></li>
+            </ul>
+		
+			
+			
+		</div>
+		
+		
+		<!-- </div> -->
+		<!-- /.container -->
+	</nav>
+	<!-- /header -->
+	
+	
+	<div class="container">
+
+		<div class="row"> <!-- entire body -->
+			
+			<div id="main" class="col-md-9"> <!-- center part -->
+				
+				<br>
+				
+				<div class="well" id="interest-heading">
+					<p style="font-size: 60px; text-align: center"> Electrical Engineering</p>
+					
+					<span >
+						<a href="#mech" class="btn btn-default"> Mechanical </a>
+						<a href="#aero" class="btn btn-default"> Aerospace </a>
+						<a href="#nuke" class="btn btn-default"> Nuclear </a>
+						<a href="#biot" class="btn btn-default"> Biotech </a>
+						<a href="#interests" class="btn btn-default"> See more &raquo </a>
+					</span>
+					
+				</div>
+				
+				
+				<ul class="list-group well">
+					
+					<!-- <div class="text-right">
+						<a class="btn btn-success">Request Something</a>
+					</div> -->
+					
+					<li class="list-group-item collapse-group">
+						<fieldset>
+							
+							<legend>
+								<span class="glyphicon glyphicon-remove" style="color: grey"></span>
+								Title
+								<small>- Poster</small>
+								<small style="float: right">Date</small>
+							</legend>
+							
+							<label class="control-label" for="subject">not done yet--I have a request about something</label>
+							<p>This is what i need content content content content  lorem ipsum shi</p>
+							<div style="text-align:center"> <button class="btn btn-default" align="center"> Respond &raquo </button> </div>
+							
+							<div class="collapse">
+								<br>
+								Send a message to <a href="mailto:professor@rpi.edu?Subject=NAMEOFPROJECT">professor@rpi.edu</a>
+								<textarea class="input-xlarge" name="message" id="message" rows="5" ></textarea>
+								
+								<br> <!--add some space-->
+								
+								<div class="form-actions">
+									<button type="submit" class="btn btn-primary btn-large">Submit</button>
+									<button class="btn btn-default collapse-button">Collapse</button>
+								</div>
+							</div>
+						
+						</fieldset>
+					</li>
+					
+					<br>
+					
+					<li class="list-group-item collapse-group">
+						<fieldset>
+							<legend>
+								<span class="glyphicon glyphicon-remove" style="color: grey"></span>
+								Title
+								<small>- Poster</small>
+								
+								<small style="float: right">Date</small>
+							</legend>
+							
+							<label class="control-label" for="subject">I have a request about something</label>
+							<p>This is what i need content content content content  lorem ipsum shi</p>
+							<div style="text-align:center"> <button class="btn btn-default" align="center"> Respond &raquo </button> </div>
+							
+							<div class="collapse">
+								<br>
+								Send a message to <a href="mailto:professor@rpi.edu?Subject=NAMEOFPROJECT">professor@rpi.edu</a>
+								<textarea class="input-xlarge" name="message" id="message" rows="5" ></textarea>
+								
+								<br> <!--add some space-->
+								
+								<div class="form-actions">
+									<button type="submit" class="btn btn-primary btn-large">Submit</button>
+									<button class="btn btn-default collapse-button">Collapse</button>
+								</div>
+							</div>
+						
+						</fieldset>
+					</li>
+					
+					<br>
+					
+					<li class="list-group-item collapse-group">
+						<fieldset>
+							<legend>
+								<span class="glyphicon glyphicon-ok" style="color: green"></span>
+								Title
+								<small>- Poster</small>
+								
+								<small style="float: right">Date</small>
+							</legend>
+							
+							<label class="control-label" for="subject">it has been done--I have a request about something</label>
+							<p>This is what i need content content content content  lorem ipsum shi</p>
+							<div style="text-align:center"> <button class="btn btn-default" align="center"> Respond &raquo </button> </div>
+							
+							<div class="collapse">
+								<br>
+								Send a message to <a href="mailto:professor@rpi.edu?Subject=NAMEOFPROJECT">professor@rpi.edu</a>
+								<textarea class="input-xlarge" name="message" id="message" rows="5" ></textarea>
+								
+								<br> <!--add some space-->
+								
+								<div class="form-actions">
+									<button type="submit" class="btn btn-primary btn-large">Submit</button>
+									<button class="btn btn-default collapse-button">Collapse</button>
+								</div>
+							</div>
+						
+						</fieldset>
+					</li>
+					
+				</ul>
+				
+				<script>
+					$('.collapse-group').on('click', function(c) {
+						c.preventDefault();
+						var collapse = $(this).find('.collapse');
+						collapse.show();
+					});
+					
+					$('.collapse-button').on('click', function(e) {
+						//alert('clicked');
+						e.preventDefault();
+						var collapse = $(this).closest('.collapse');
+						console.log(collapse.html())
+						collapse.hide();
+						console.log(collapse.css("display"));
+						e.stopPropagation();
+					});
+					
+				</script>
+
+			</div>
+			
+			<!-- sidebar/tags -->
+			<!-- <div id="sidebar"></div> -->
+			<div id="tags" class="col-md-3"> <!--tags-->
+				<p class="lead">Tags</p>
+				<div id="categoriesListGroup" class="list-group">
+					<script src="makeTags.js">
+					</script>
+				</div>
+			</div>
+			
+			<!-- /sidebar/tags -->
+			
+		</div>
+
+	</div>
+	<!-- /.container -->
+	
+	<!-- footer -->
+	<!-- <div id="footer"></div> -->
+	<div class="container">
+		<footer>
+			<div class="row">
+				<div class="col-lg-12">
+					RPHub © by Henry Choi and Ravi Panse. An <a href="http://rcos.rpi.edu/"> RCOS </a> Project.
+				</div>
+			</div>
+		</footer>
+	</div>
+	<!-- /footer -->
+	
+</body>
+
+</html>

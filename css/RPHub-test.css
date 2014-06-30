@@ -1,3 +1,20 @@
+.navbar-collapse.collapse {
+display: block!important;
+}
+
+.navbar-nav>li, .navbar-nav {
+float: left !important;
+}
+
+
+.navbar-nav.navbar-right:last-child {
+margin-right: -15px !important;
+}
+
+.navbar-right {
+float: right!important;
+}
+
 body {
   padding-top: 50px;
   background-color: #c2c2c2;
@@ -16,21 +33,22 @@ footer {
   margin: 50px 0;
 }
 
-/* makes navbar shorter */
+/* makes navbar shorter
 .navbar {
 	min-height:42px !important;
 	margin-bottom: 0px;
-}
+} */
 
 /*.navbar-nav*/
 .navbar-left  > li > a { /*  > li > a  child selector */
-	padding-top: 11px;		/*top spacing in both menus*/
-	padding-bottom: 5px;	/*for spacing in collapse menu*/
-	padding: 10px 10px;
+	/*padding-top: 11px;		/*top spacing in both menus*/
+	/*padding-bottom: 5px;	/*for spacing in collapse menu*/
+	padding-left:  8px;
+	padding-right: 8px;
 }
 .navbar-right  > li > a { /*  > li > a  child selector */
-	padding-top: 11px;		/*top spacing in both menus*/
-	padding-bottom: 5px;	/*for spacing in collapse menu*/
+	/*padding-top: 11px;		/*top spacing in both menus*/
+	/*padding-bottom: 5px;	/*for spacing in collapse menu*/
 	padding-left: 5px;
 	padding-right: 5px;
 	
@@ -38,18 +56,16 @@ footer {
 	color: #9999aa !important;
 	font-size: 1.2em;
 }
-
-
-
+/*
 .navbar-brand {
     padding: 11px;
-}
-
+}*/
+/*
 .navbar-toggle {
     padding: 8px 10px;
     margin-top: 5px;
     margin-bottom: 4px;
-}
+}*/
 /*
 .navbar-collapse {
 	background-color: #ededed;
@@ -58,7 +74,16 @@ footer {
 /*input boxes */
 .input-xlarge{
 	width: 100%;
-} 
+}
+
+/********interests.html*******/
+/*
+#interest-heading > span > a{
+	btn btn-default;
+}
+*/
+
+
 
 #tags{
 	padding-top: 20px;

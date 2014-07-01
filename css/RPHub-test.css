@@ -50,8 +50,8 @@ footer {
 .navbar-right  > li > a { /*  > li > a  child selector */
 	/*padding-top: 11px;		/*top spacing in both menus*/
 	/*padding-bottom: 5px;	/*for spacing in collapse menu*/
-	padding-left: 5px;
-	padding-right: 5px;
+	padding-left: 10px;
+	padding-right: 0px;
 	
 	/*****for icons only*****/
 	color: #9999aa !important;

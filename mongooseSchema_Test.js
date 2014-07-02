@@ -6,6 +6,7 @@ var express = require('express'),
   crypto=require("crypto"),
   bodyParser = require("body-parser");
 var mongoose = require('mongoose');
+var session = require('express-session');
 
 mongoose.connect('mongodb://localhost/test');
 
@@ -20,33 +21,7 @@ var Schema = mongoose.Schema;
 
 //a category may be, for example, engineering or performance
 //a sub-interest may be electrical engineering or guitar
-/*
-var categorySchema = new Schema({
-	name: String,
-	
-	interests: [{name: String, posts:[{poster:String, content:String, title: String, timePosted:Date}]}],
-	meta: {
-		following: Number,
-	}
-	
-});
 
-var Category = mongoose.model('Category', categorySchema);
-
-Category.remove({},function(err){
-	console.log("removed categories");
-});
-
-var engineering = new Category({ name: 'engineering'});
-engineering.interests.push({name:'electrical engineering'});
-engineering.interests[0].posts.push({poster:'Dr. ABC', content:'For students looking for experience with digital design', title:'VLSI Project'});
-engineering.save();
-
-var performance = new Category({name:'performance'});
-performance.interests.push({name:'pop music'});
-performance.interests[0].posts.push({poster:'Dr. ABC', content:"Performance during my daughter's graduation party. Formal attire requested.", title:'Performance June 21'});
-performance.save();
-*/
 var userSchema = new Schema({
 	name: 
 	{
@@ -61,7 +36,8 @@ var userSchema = new Schema({
 	loginFail: Boolean,
 });
 var interestSchema = new Schema({
-	name: String
+	name: String,
+	nickname: String
 });
 
 var categorySchema = new Schema({
@@ -73,6 +49,9 @@ var categorySchema = new Schema({
 	}
 	
 });
+
+app.use(session({secret: 'monkey wizard'}))
+
 
 var postSchema = new Schema({
 	poster: String,
@@ -114,21 +93,112 @@ Category.remove({},function(err){
 Post.remove({}, function(err){
 	console.log("removed posts");
 });
+
+Interest.remove({}, function(err){
+	console.log("removed interests");
+});
+
 /*
 var sampleUser = new User({email: 'sample@rpi.edu', password: 'password', blocked: false, loginFail: false});
 sampleUser.save();
 */
+//{ SETUP ENGINEERING CATEGORY
 var engineering = new Category({ name: 'Engineering'});
-var eeInterest = new Interest({name:'Electrical Engineering'});
-eeInterest.save();
-engineering.interests.push(eeInterest);
-engineering.save();
 
+engineering.interests[engineering.interests.length] = new Interest({name:'Aeronautical Engineering', nickname:"Aero"});
+engineering.interests[engineering.interests.length] = new Interest({name:'Biomedical Engineering', nickname:"BME"});
+engineering.interests[engineering.interests.length] = new Interest({name:'Chemical Engineering', nickname:"ChemE"});
+engineering.interests[engineering.interests.length] = new Interest({name:'Civil Engineering', nickname:"Civil"});
+engineering.interests[engineering.interests.length] = new Interest({name:'Computer & Systems Engineering', nickname:"CSE"});
+engineering.interests[engineering.interests.length] = new Interest({name:'Electrical Engineering', nickname:"EE"});
+engineering.interests[engineering.interests.length] = new Interest({name:'Environmental Engineering', nickname:"EnvE"});
+engineering.interests[engineering.interests.length] = new Interest({name:'Industrial & Management Engineering', nickname:"IME"});
+engineering.interests[engineering.interests.length] = new Interest({name:'Materials Engineering', nickname:"MatSci"});
+engineering.interests[engineering.interests.length] = new Interest({name:'Mechanical Engineering', nickname:"MechE"});
+engineering.interests[engineering.interests.length] = new Interest({name:'Nuclear Engineering', nickname:"NucE"});
+for (var i =0; i< engineering.interests.length; i++){
+	engineering.interests[i].save();
+}
+console.log(engineering.interests[3]);
+engineering.save();
+//}
+
+//{ SETUP SCIENCE CATEGORY
 var science = new Category({name:'Science'});
-var physicsInterest = new Interest({name:'Physics'});
-physicsInterest.save();
-science.interests.push(physicsInterest);
+science.interests[science.interests.length] = new Interest({name:'Biology', nickname:"Bio"});
+science.interests[science.interests.length] = new Interest({name:'Biochemistry & Biophysics', nickname:"BCBP"});
+science.interests[science.interests.length] = new Interest({name:'Bioinformatics & Molecular Biology', nickname:"BIMB"});
+science.interests[science.interests.length] = new Interest({name:'Chemistry', nickname:"Chem"});
+science.interests[science.interests.length] = new Interest({name:'Computer Science', nickname:"CompSci"});
+science.interests[science.interests.length] = new Interest({name:'Environmental Science', nickname:"EnvSci"});
+science.interests[science.interests.length] = new Interest({name:'Geology', nickname:"Geo"});
+science.interests[science.interests.length] = new Interest({name:'Hydrogeology', nickname:"Hydrogeo"});
+science.interests[science.interests.length] = new Interest({name:'Mathematics', nickname:"Math"});
+science.interests[science.interests.length] = new Interest({name:'Physics & Applied Physics', nickname:"Phys"});
+for (var i =0; i< science.interests.length; i++){
+	science.interests[i].save();
+}
 science.save();
+//}
+
+//{ SETUP MANAGEMENT CATEGORY
+var management = new Category({ name: 'Management'});
+
+management.interests[management.interests.length] = new Interest({name:'Business & Management', nickname:"MGMT"});
+management.interests[management.interests.length] = new Interest({name:'Financial Engineering', nickname:"Finance"});
+for (var i =0; i< management.interests.length; i++){
+	management.interests[i].save();
+}
+
+management.save();
+//}
+
+//{ SETUP HASS CATEGORY
+var hass = new Category({ name: 'Humanities, Arts, & Soc. Sciences'});
+
+hass.interests[hass.interests.length] = new Interest({name:'Cognitive Science', nickname:"CogSci"});
+hass.interests[hass.interests.length] = new Interest({name:'Communication', nickname:"Comm"});
+hass.interests[hass.interests.length] = new Interest({name:'Design, Innovation, and Society', nickname:"DIS"});
+hass.interests[hass.interests.length] = new Interest({name:'Economics', nickname:"Econ"});
+hass.interests[hass.interests.length] = new Interest({name:'Electronic Arts', nickname:"EA"});
+hass.interests[hass.interests.length] = new Interest({name:'Electronic Media, Arts, & Communication', nickname:"EMAC"});
+hass.interests[hass.interests.length] = new Interest({name:'Games & Simulation Arts and Sciences', nickname:"GSAS"});
+hass.interests[hass.interests.length] = new Interest({name:'Philosophy', nickname:"Phil"});
+hass.interests[hass.interests.length] = new Interest({name:'Psychology', nickname:"Psych"});
+hass.interests[hass.interests.length] = new Interest({name:'Science, Technology & Society', nickname:"STS"});
+hass.interests[hass.interests.length] = new Interest({name:'Sustainability Studies', nickname:"SuS"});
+
+for (var i =0; i< hass.interests.length; i++){
+	hass.interests[i].save();
+}
+
+hass.save();
+
+
+//}
+
+//{ SETUP ARCHITECTURE CATEGORY
+var arch = new Category({ name: 'Architecture'});
+
+arch.interests[arch.interests.length] = new Interest({name:'Architecture', nickname:"ARCH"});
+arch.interests[arch.interests.length] = new Interest({name:'Lighting', nickname:"LGHT"});
+for (var i =0; i< arch.interests.length; i++){
+	arch.interests[i].save();
+}
+
+arch.save();
+//}
+
+//{ SETUP IT & WS CATEGORY
+var itws = new Category({ name: 'Information Technology & Web Science'});
+
+itws.interests[itws.interests.length] = new Interest({name:'Information Technology & Web Science', nickname:"ITWS"});
+for (var i =0; i< itws.interests.length; i++){
+	itws.interests[i].save();
+}
+
+itws.save();
+//}
 
 var posts = [];
 var post1 = new Post({poster:'Dr. ABC', content:'For students looking for experience with digital design. For credit or salary.', title:'VLSI Project', tags:['Electrical Engineering'], fullfilled:false});
@@ -140,15 +210,17 @@ posts.push(post2);
 var post3 = new Post({poster:'Dr. GHI', content:"More physics stuff find out more later.", title:'Physics', fulfilled:true});
 post3.save();
 posts.push(post3);
-console.log("engineering: " + JSON.stringify(engineering));
+//}
+//console.log("engineering: " + JSON.stringify(engineering));
 //console.log("first interest posts: " + Interest.findOne().exec().returnPosts());
 
+/*
 Interest.findOne({},function(err,result){
 	console.log("err is " + err);
 	//console.log("first interest posts: " + JSON.stringify(result.returnPosts() ) );
 	result.returnPosts()
 });
-
+*/
 //engineering.interests[0].returnPosts();
 //console.log(posts);
 //Setup the server to listen on port 80 (Web traffic port), allow it to parse POSTED body data, and let it render EJS pages 
@@ -163,10 +235,9 @@ app.use(express.static(__dirname));
 //  res.end('Hello World\n');
 //}).listen(8080, '127.0.0.1');
 app.get('/', function(req, res){
-	  res.redirect('index.html');
-	  res.redirect('request.html');
-	  res.redirect('makeTags.js');
-	  res.redirect('post.html');
+	console.log("redirecting to login page");
+	  res.redirect('login.html');
+
 });
 
 /*var server = app.listen(80, function() {
@@ -177,8 +248,26 @@ app.get('/', function(req, res){
 console.log('Server running at http://127.0.0.1:8080/');
 
 
+/*app.get("/index",function(req,res){
+
+	console.log("trying to get index.html");
+	if (req.session.user){
+		res.redirect("index.html");
+	}
+	else{
+		res.redirect("login.html");
+	}
+
+});*/
+
 
 app.get("/categories",function(req,res){
+
+	console.log("req.session.user is " + req.session.user);
+	if (req.session.user == null){
+		res.end("[]");
+		return;
+	}
 
 	Category.find({},function(err,data){
 	
@@ -237,6 +326,7 @@ app.post("/login",function(req,res){
 	}
 	User.findOne({email:sentEmail, password:sentPassword}, function(err, loggedUser){
 		if(err) return console.error(err);
+		req.session.user = loggedUser;
 		console.log(loggedUser);
 		if(loggedUser!=null){
 			res.redirect("index.html");
@@ -287,6 +377,17 @@ app.post("/register", function(req, res){
 	});
 
 });
+
+app.get('/amILoggedIn', function(req, res){
+	if(req.session.user){
+		res.end("yes");
+		return;
+	}
+	else{
+		res.end("no");
+		return;
+	}
+});
 /*
 app.post("/unloadError",function(req, res){
 	console.log("The request is: " +req.body.unload);
@@ -333,4 +434,3 @@ Category.find({name:"engineering"}, function(err, categories){
 		}
 	}
 });*/
-

@@ -82,17 +82,23 @@
 				
 			</div>
 			
-			
-			
-			
-			<!-- sidebar/tags -->
-			<!-- <div id="sidebar"></div> -->
-			<div id="tags" class="col-md-3"> <!--tags-->
-				<p class="lead">Tags</p>
-				<div id="categoriesListGroup" class="list-group">
-				</div>
-			</div>
-			<!-- /sidebar/tags -->
+				<!-- sidebar/tags -->
+					<!-- <div id="sidebar"></div> -->
+					
+					<div id="tags" class="col-md-3" > <!--tags--><!--style="position:fixed; left:1085px"-->
+						<p class="lead">Tags</p>
+						<!--<div id="accordion" class="panel-group list-group categoriesListGroup">-->
+							<!-- tags generated dynamically-->
+							
+							<div id="categoriesListGroup" class="list-group">
+								<script src="makeTags.js">
+								</script>
+							</div>
+							
+						<!--</div>-->
+					</div>
+						
+				<!-- /sidebar/tags -->
 			
 			
 		</div>
@@ -110,33 +116,25 @@
 		</footer>
 	</div>
 	<!-- /footer -->
-	
+
+
 	
 	<script>
 	$(document).ready(function(){
 	
-		console.log("about to try to get categories");
-		$.get("/categories",function(categories){
+		var tagCollapse = true;
+		
+		//$.get("/categories",function(categories){
 			/*console.log("typeof response is " + typeof response);
 			response = $.parseJSON(response);
-			console.log("typeof response is " + typeof response);
-			console.log(response);
-			console.log("response.names.length is " + response.names.length);
-			var names = response.names;
-			for (var i = 0; i < names.length; i++)
-			{
-				var cat  = '<div class="list-group">\n' +
-						'<a href="#" class="list-group-item active">' + names[i] + '</a>\n' +	
-					 '</div>\n'
-				$("#categoriesListGroup").append(cat);
-			}*/
-			
+			console.log("typeof response is " + typeof response);*/
+			/*
 			categories = $.parseJSON(categories);
 			for (var i = 0; i < categories.length; i++)
 			{
 				var cat = '<div class="list-group">\n' + 
 					'<a href="#" class="list-group-item active">' + categories[i].name + '</a>\n';
-				var posts = '';
+
 				for (var j = 0; j < categories[i].interests.length; j++)
 				{
 					cat += '<a href="#" class="list-group-item">' + categories[i].interests[j].name + '</a>';
@@ -145,19 +143,8 @@
 				$("#categoriesListGroup").append(cat);
 				//$("#postBox").append(posts);
 			}
-		});
-		/*
-		$.get("posts",function(posts){
-			posts = $.parseJSON(posts);
-			var postHTML = ''
-			for (var i =0; i< posts.length; i++){
-				postHTML += '<div class="row"> <div class="col-md-12"> <b>' + posts[i].poster + '</b><span class="pull-right">' + 
-								posts[i].timePosted + '</span><div class="list-group"><p>' + posts[i].content +
-								'</p></div></div></div><hr>';
-			}
-			$("#postBox").append(postHTML);
-		});
-		*/
+		});*/
+		
 		$.get("posts",function(posts){
 			posts = $.parseJSON(posts);
 			var postHTML = ''
@@ -214,14 +201,70 @@
 				console.log(collapse.css("display"));
 				e.stopPropagation();
 			});
-		
+			/*
+			$('.active').on('click', function(e) {
+				//alert('clicked');
+				e.preventDefault();
+				var more = $(this).closest('.list-group').find('.more');
+				console.log(more.html())
+				if (tagCollapse){
+					more.hide();
+					tagCollapse = false;
+				}
+				else{
+					more.show();
+					tagCollapse = true;
+				}
+				
+			});
+			*/
+			/*
+			$('.more').on('click', function(e) {
+				//alert('clicked');
+				e.preventDefault();
+				if(tagCollapse){
+					var lessButton = $(this).closest('.more-button').html();
+					console.log(lessButton);
+					lessButton = lessButton.replace("more...", "less");
+					console.log(lessButton)
+					$(this).closest('.more-button').append(lessButton);
+					$(this).hide();
+					tagCollapse = false;
+				}
+				else{
+					 var moreButton = $(this).closest('.more-button').html();
+					console.log(moreButton);
+					moreButton = moreButton.replace("less", "more...");
+					console.log(moreButton)
+					$(this).closest('.more-button').append(moreButton);
+					$(this).hide();
+					tagCollapse = true;
+				}
+			});*/
+			/*
+			$('.more').on('click', function(e) {
+				e.preventDefault();
+				if(tagCollapse){
+					$(this).html('less');
+					tagCollapse = false;
+				}
+				else{
+					$(this).html('more...');
+					tagCollapse = true;
+				}
+				//$(this).hide();
+			});
+			*/
 		});
 		
-	});	//end of main thing
+	});
 	
 	</script>
+	
 
 </body>
+
+
 
 
 </html>

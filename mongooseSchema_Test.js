@@ -68,7 +68,7 @@ var Post = mongoose.model('Post', postSchema);
 interestSchema.methods.returnPosts = function(){
 Post.find({tags:this.name}, function(err, relevantPosts){
 	if(err) return console.error(err);
-	console.log(relevantPosts);
+	return relevantPosts;
 });
 }
 
@@ -86,6 +86,7 @@ User.remove({}, function(err){
 	console.log("removed users");
 });
 */
+/*
 Category.remove({},function(err){
 	console.log("removed categories");
 });
@@ -97,7 +98,7 @@ Post.remove({}, function(err){
 Interest.remove({}, function(err){
 	console.log("removed interests");
 });
-
+*/
 /*
 var sampleUser = new User({email: 'sample@rpi.edu', password: 'password', blocked: false, loginFail: false});
 sampleUser.save();
@@ -387,6 +388,16 @@ app.get('/amILoggedIn', function(req, res){
 		res.end("no");
 		return;
 	}
+});
+
+app.post('/interestInfo', function(req,res){
+	var queryName = req.body.name;
+	Interest.findOne({nickname:queryName},function(err,result){
+		console.log("err is " + err);
+		res.write(JSON.stringify(result) );
+		res.end();
+	});
+
 });
 /*
 app.post("/unloadError",function(req, res){

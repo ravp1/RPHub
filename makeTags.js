@@ -18,7 +18,7 @@ $(document).ready(function(){
 					'<a href="#" class="list-group-item active">' + names[i] + '</a>\n' +	
 				 '</div>\n'*/
 			var cat = '<div class="list-group">\n' + 
-				'<a href="#" class="list-group-item active">' + categories[i].name + '</a>\n';
+				'<a href="#" class="list-group-item active" style="background-color:#2d946c">' + categories[i].name + '</a>\n';
 			var manyInterest = (categories[i].interests.length>2);
 			console.log(manyInterest);
 			for (var j = 0; j < categories[i].interests.length; j++)
@@ -36,11 +36,10 @@ $(document).ready(function(){
 			}
 			cat += "</div>";
 			$("#categoriesListGroup").append(cat);
+			$('.panel-collapse').collapse('hide');
 		}
 		
-			console.log("I am capable of literally anything after the .get");
-			$('.panel-collapse').collapse('hide');
-			console.log("I made it here");
+			//$('.panel-collapse').collapse('hide');
 			$('.more').on('click', function(e) {
 				e.preventDefault();
 				if(tagCollapse){

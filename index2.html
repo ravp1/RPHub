@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	
+	<!-- JavaScript -->
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	
+	
+	<title>RPHub - things</title>
+	
+	<!-- <link href='http://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'> -->
+	
+	<!-- Bootstrap core CSS -->
+	<link href="css/bootstrap.css" rel="stylesheet">
+
+	<!--custom CSS-->
+	<link href="css/RPHub-test.css" rel="stylesheet">
+
+</head>
+
+<body class="body2">
+
+	<!-- header -->
+	<!-- <div id="header"></div> -->
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index.html">RPHub</a>
+				
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="#about">About</a>
+					</li>
+					<li><a href="#services">Profile</a>
+					</li>
+					<li><a href="#contact">Contact</a>
+					</li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container -->
+	</nav>
+	
+	<!-- /header -->
+	
+	
+	<div class="container">
+
+		<div class="row"> <!-- entire body -->
+
+			<div class="col-md-9"> <!-- center part -->
+
+				<img class="img-responsive" src="logo.svg" alt="" style="border:none;"/>
+				<!-- <div style="font-family: 'Indie Flower', cursive; font-size:140pt; text-align:center; line-height:70%;">RPHub</div> -->
+				
+				
+				
+				<ul  id="listofPosts">
+					<div class="text-right">
+						<a href="request.html" class="btn btn-success">Request Something</a>
+					</div>
+					
+					<!-- database stuff goes here -->
+					
+				</ul>
+				
+			</div>
+			
+				<!-- sidebar/tags -->
+					<!-- <div id="sidebar"></div> -->
+					
+					<div id="tags" class="col-md-3" > <!--tags--><!--style="position:fixed; left:1085px"-->
+						<p class="lead">Tags</p>
+						<!--<div id="accordion" class="panel-group list-group categoriesListGroup">-->
+							<!-- tags generated dynamically-->
+							
+							<div id="categoriesListGroup" class="list-group">
+								<script src="makeTags.js">
+								</script>
+							</div>
+							
+						<!--</div>-->
+					</div>
+						
+				<!-- /sidebar/tags -->
+			
+			
+		</div>
+
+	</div>
+	<!-- /.container -->
+
+	<!-- footer -->
+	<!-- <div id="footer"></div> -->
+	<div class="container">
+		<footer>
+			<div class="row">
+				RPHub © by Henry Choi and Ravi Panse. An <a href="http://rcos.rpi.edu/"> RCOS </a> Project.
+			</div>
+		</footer>
+	</div>
+	<!-- /footer -->
+
+
+	
+	<script>
+	$(document).ready(function(){
+	
+		var tagCollapse = true;
+		
+		//$.get("/categories",function(categories){
+			/*console.log("typeof response is " + typeof response);
+			response = $.parseJSON(response);
+			console.log("typeof response is " + typeof response);*/
+			/*
+			categories = $.parseJSON(categories);
+			for (var i = 0; i < categories.length; i++)
+			{
+				var cat = '<div class="list-group">\n' + 
+					'<a href="#" class="list-group-item active">' + categories[i].name + '</a>\n';
+
+				for (var j = 0; j < categories[i].interests.length; j++)
+				{
+					cat += '<a href="#" class="list-group-item">' + categories[i].interests[j].name + '</a>';
+				}
+				cat += "</div>";
+				$("#categoriesListGroup").append(cat);
+				//$("#postBox").append(posts);
+			}
+		});*/
+		
+		$.get("posts",function(posts){
+			posts = $.parseJSON(posts);
+			var postHTML = ''
+			for (var i =0; i< posts.length; i++){
+				postHTML +=
+				'\
+				<br>\
+				<li class="list-group-item collapse-group" style="border-radius: 4px">\
+					<fieldset>\
+						<legend>\
+							<!-- <span class="glyphicon glyphicon-' + ( posts[i].fulfilled ? 'ok" style="color: green':'remove" style="color: grey' ) + '"></span> -->' +
+							posts[i].title + '\
+							<small>- ' + posts[i].poster + '</small>\
+							\
+							<small style="float: right">' + posts[i].timePosted + '</small>\
+						</legend>\
+						\
+						<p>' + posts[i].content + '</p>\
+						<div style="text-align:center"> <button class="btn btn-default" align="center"> Respond &raquo </button> </div>\
+						\
+						<div class="collapse">\
+							<br>\
+							Send a message to <a href="mailto:professor@rpi.edu?Subject=NAMEOFPROJECT">professor@rpi.edu</a>\
+							<textarea class="input-xlarge" name="message" id="message" rows="5" ></textarea>\
+							\
+							<br>\
+							\
+							<div class="form-actions">\
+								<button type="submit" class="btn btn-primary btn-large">Submit</button>\
+								<button class="btn btn-default collapse-button">Collapse</button>\
+							</div>\
+						</div>\
+					\
+					</fieldset>\
+				</li>\
+				';
+				console.log(JSON.stringify(posts));
+			}
+			$("#listofPosts").append(postHTML);
+			
+			//collapse stuff
+			$('.collapse-group').on('click', function(c) {
+				c.preventDefault();
+				var collapse = $(this).find('.collapse');
+				collapse.show();
+			});
+			
+			$('.collapse-button').on('click', function(e) {
+				//alert('clicked');
+				e.preventDefault();
+				var collapse = $(this).closest('.collapse');
+				console.log(collapse.html())
+				collapse.hide();
+				console.log(collapse.css("display"));
+				e.stopPropagation();
+			});
+			/*
+			$('.active').on('click', function(e) {
+				//alert('clicked');
+				e.preventDefault();
+				var more = $(this).closest('.list-group').find('.more');
+				console.log(more.html())
+				if (tagCollapse){
+					more.hide();
+					tagCollapse = false;
+				}
+				else{
+					more.show();
+					tagCollapse = true;
+				}
+				
+			});
+			*/
+			/*
+			$('.more').on('click', function(e) {
+				//alert('clicked');
+				e.preventDefault();
+				if(tagCollapse){
+					var lessButton = $(this).closest('.more-button').html();
+					console.log(lessButton);
+					lessButton = lessButton.replace("more...", "less");
+					console.log(lessButton)
+					$(this).closest('.more-button').append(lessButton);
+					$(this).hide();
+					tagCollapse = false;
+				}
+				else{
+					 var moreButton = $(this).closest('.more-button').html();
+					console.log(moreButton);
+					moreButton = moreButton.replace("less", "more...");
+					console.log(moreButton)
+					$(this).closest('.more-button').append(moreButton);
+					$(this).hide();
+					tagCollapse = true;
+				}
+			});*/
+			/*
+			$('.more').on('click', function(e) {
+				e.preventDefault();
+				if(tagCollapse){
+					$(this).html('less');
+					tagCollapse = false;
+				}
+				else{
+					$(this).html('more...');
+					tagCollapse = true;
+				}
+				//$(this).hide();
+			});
+			*/
+		});
+		
+	});
+	
+	</script>
+	
+
+</body>
+
+
+
+
+</html>

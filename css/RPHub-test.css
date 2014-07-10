@@ -173,8 +173,10 @@ textarea{
     top: 35px;
     left: 0;
     z-index: 99999;    
-    background-color: #444;   
-    background-image: linear-gradient(#444, #111);  
+    background-color: #3e1f67;   
+    /*background-image: linear-gradient(#1a0d2c , #2c164a  ); */
+	/*background-image: linear-gradient(#164a36 , #1b5840   );*/
+	background-image: linear-gradient(#1f4967  , #1b3f58  );
 	
     -moz-border-bottom-right-radius: 5px;
     border-bottom-right-radius: 5px;

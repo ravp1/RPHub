@@ -162,7 +162,7 @@
 							<small style="float: right">' + posts[i].timePosted + '</small>\
 						</legend>\
 						\
-						<p>' + posts[i].content + '</p>\
+						<p style="white-space: pre-line">' + posts[i].content + '</p>\
 						<div style="text-align:center"> <button class="btn btn-default" align="center"> Respond &raquo </button> </div>\
 						\
 						<div class="collapse">\
@@ -218,43 +218,7 @@
 				
 			});
 			*/
-			/*
-			$('.more').on('click', function(e) {
-				//alert('clicked');
-				e.preventDefault();
-				if(tagCollapse){
-					var lessButton = $(this).closest('.more-button').html();
-					console.log(lessButton);
-					lessButton = lessButton.replace("more...", "less");
-					console.log(lessButton)
-					$(this).closest('.more-button').append(lessButton);
-					$(this).hide();
-					tagCollapse = false;
-				}
-				else{
-					 var moreButton = $(this).closest('.more-button').html();
-					console.log(moreButton);
-					moreButton = moreButton.replace("less", "more...");
-					console.log(moreButton)
-					$(this).closest('.more-button').append(moreButton);
-					$(this).hide();
-					tagCollapse = true;
-				}
-			});*/
-			/*
-			$('.more').on('click', function(e) {
-				e.preventDefault();
-				if(tagCollapse){
-					$(this).html('less');
-					tagCollapse = false;
-				}
-				else{
-					$(this).html('more...');
-					tagCollapse = true;
-				}
-				//$(this).hide();
-			});
-			*/
+
 		});
 		
 	});

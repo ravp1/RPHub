@@ -1,0 +1,17 @@
+
+
+design ideas
+----------------------
+
+twitter-like tags, but with bolded default tags
+
+hard-coded categories?????????????????????????????????????????
+	make user choose category
+	
+"special" interests (meta interests)
+	e.g. help/tutoring, job, research, project, textbooks, 
+	just different in that they're "default" (they get bolded if used)
+	and they're associated with category
+	
+if a tag gets in the 95th percentile of posts, it becomes a default tag?
+

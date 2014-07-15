@@ -8,6 +8,10 @@ var express = require('express'),
 var mongoose = require('mongoose');
 var session = require('express-session');
 
+var ejs = require("ejs");
+
+app.set('view engine', 'ejs');
+
 mongoose.connect('mongodb://localhost/test');
 
 var db = mongoose.connection;
@@ -16,7 +20,7 @@ db.once('open', function callback(){
 
 });
 
-
+//{  SCHEMA STUFF
 var Schema = mongoose.Schema;
 
 //a category may be, for example, engineering or performance
@@ -50,8 +54,6 @@ var categorySchema = new Schema({
 	
 });
 
-app.use(session({secret: 'monkey wizard'}))
-
 
 var postSchema = new Schema({
 	poster: String,
@@ -68,7 +70,7 @@ var Post = mongoose.model('Post', postSchema);
 interestSchema.methods.returnPosts = function(){
 Post.find({tags:this.name}, function(err, relevantPosts){
 	if(err) return console.error(err);
-	return relevantPosts;
+	console.log(relevantPosts);
 });
 }
 
@@ -81,12 +83,15 @@ var User = mongoose.model('User', userSchema);
 var Category = mongoose.model('Category', categorySchema);
 
 var Interest = mongoose.model('Interest', interestSchema);
-/*
+//}
+
+app.use(session({secret: 'monkey wizard'}))
+
+/*REMOVE CATEGORIES, POSTS, INTERESTS, USERS (NO LONGER PART OF PROCESS)
 User.remove({}, function(err){
 	console.log("removed users");
 });
-*/
-/*
+
 Category.remove({},function(err){
 	console.log("removed categories");
 });
@@ -99,10 +104,13 @@ Interest.remove({}, function(err){
 	console.log("removed interests");
 });
 */
-/*
+
+/* CREATE SAMPLE USER (ALREADY DONE)
 var sampleUser = new User({email: 'sample@rpi.edu', password: 'password', blocked: false, loginFail: false});
 sampleUser.save();
 */
+
+/* CREATE DEFAULT CATEGORIES, INETERESTS, POSTS (ALREADY CREATED; NO NEED TO RUN EVERY TIME)
 //{ SETUP ENGINEERING CATEGORY
 var engineering = new Category({ name: 'Engineering'});
 
@@ -215,13 +223,15 @@ posts.push(post3);
 //console.log("engineering: " + JSON.stringify(engineering));
 //console.log("first interest posts: " + Interest.findOne().exec().returnPosts());
 
-/*
-Interest.findOne({},function(err,result){
+Interest.findOne({name: "Electrical Engineering"},function(err,result){
 	console.log("err is " + err);
 	//console.log("first interest posts: " + JSON.stringify(result.returnPosts() ) );
 	result.returnPosts()
 });
+
 */
+
+
 //engineering.interests[0].returnPosts();
 //console.log(posts);
 //Setup the server to listen on port 80 (Web traffic port), allow it to parse POSTED body data, and let it render EJS pages 
@@ -264,7 +274,7 @@ console.log('Server running at http://127.0.0.1:8080/');
 
 app.get("/categories",function(req,res){
 
-	console.log("req.session.user is " + req.session.user);
+	//console.log("req.session.user is " + req.session.user);
 	if (req.session.user == null){
 		res.end("[]");
 		return;
@@ -286,6 +296,67 @@ app.get("/categories",function(req,res){
 
 });
 
+
+app.get('/c', function(req, res) {
+	console.log("With invalid url, I made it here before crashing!");
+  if (!req.query.cat){
+	res.end();
+	return;
+  }
+  var cat = req.query.cat;
+  console.log("the url for this request is" + req.url);
+  console.log("the path for this request is" + req.path);
+  console.log("the pathname for this request is" + req.pathname);
+  Interest.findOne({nickname:cat},function(err,interest){
+	  if (interest == null){
+		res.end();
+		return;
+	  }
+	  var interestName = interest.name;
+	  var posts = interest.returnPosts();
+	  res.render('interests2', { name: interestName, posts: posts });
+	  console.log("posts are: " + posts);
+	});
+});
+
+app.get('/c/:intName', function(req, res) {
+  if (!req.params.intName){
+	res.end();
+	return;
+  }
+  var intName = req.params.intName;
+  //console.log("the url for this request is" + req.url);
+  //console.log("the path for this request is" + req.path);
+  Interest.findOne({nickname:intName},function(err,interest){
+	  if (interest == null){
+		res.end();
+		return;
+	  }
+	  var interestName = interest.name;
+	  var posts = interest.returnPosts();
+	  res.render('interests2', { name: interestName, posts: posts });
+	  console.log("posts are: " + posts);
+	});
+});
+
+app.get('/c/:intName/:post', function(req, res) {
+  if (!req.params.intName){
+	res.end();
+	return;
+  }
+  var intName = req.params.intName;
+  Interest.findOne({nickname:intName},function(err,interest){
+	  if (interest == null){
+		res.end();
+		return;
+	  }
+	  var interestName = interest.name;
+	  var posts = interest.returnPosts();
+	  res.render('posts', { name: interestName, posts: posts });
+	  console.log("posts are: " + posts);
+	});
+});
+
 app.get("/posts", function(req, res){
 	Post.find({}, function(err,data){
 		res.write(JSON.stringify(data));
@@ -297,8 +368,9 @@ app.post("/sendMessage",function(req,res){
 
 	subject = req.body.subject;
 	message = req.body.message;
-	console.log(subject);
-	console.log(message);
+	
+	var count = message.match(/\n/g);  
+	console.log(count.length);
 	if (subject == null || message == null)
 	{
 		res.redirect("request.html");
@@ -306,9 +378,8 @@ app.post("/sendMessage",function(req,res){
 	}
 	var post = new Post({content:message, title:subject, fulfilled:false});
 	post.save();
-	posts.push(post);
-	
-	res.redirect("request.html");
+	console.log(post);
+	res.redirect("index.html");
 	//res.end();
 
 });
@@ -317,8 +388,6 @@ app.post("/login",function(req,res){
 
 	sentEmail = req.body.email;
 	sentPassword = req.body.password;
-	console.log(sentEmail);
-	console.log(sentPassword);
 	
 	if (sentEmail == undefined || sentPassword == undefined)
 	{
@@ -328,7 +397,6 @@ app.post("/login",function(req,res){
 	User.findOne({email:sentEmail, password:sentPassword}, function(err, loggedUser){
 		if(err) return console.error(err);
 		req.session.user = loggedUser;
-		console.log(loggedUser);
 		if(loggedUser!=null){
 			res.redirect("index.html");
 		}
@@ -409,10 +477,10 @@ app.post("/unloadError",function(req, res){
 		});
 	}
 });
-*/
+
 //db.collection("posts").find({tags:this.name});
 
-/*
+
 
 interestSchema.methods.returnPosts = function(){
 	return Post.find().where(this).in().exec(function(err, relevantPosts){
@@ -428,20 +496,5 @@ function makeNewCategory(name, interests)
 
 categorySchema.methods.findCommonPosters = function(cb) {
 	return this.model('Category').find({interests: [{posts:[{poster: this.interests.posts.poster}] }] }, cb);
-}*/
-/* example function call:
-	engineering.findCommonPosters(function(err, categories){
-		console.log(categories);
-	});
+}
 */
-/*
-Category.find({name:"engineering"}, function(err, categories){
-	if(err) return console.error(err);
-	else
-	{
-		for (var i =0; i<categories.length; i++)
-		{
-			resp.write(categories[i].name);
-		}
-	}
-});*/

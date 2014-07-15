@@ -25,3 +25,16 @@ figure out a system so that the website always 'knows' who is logged in
 modify user.html so people can add/edit personal information if the displayed user is the user the website knows is logged in
 if the user being shown on user.html is not the logged user, display the personal information they have added
 add code to automatically check for tags in a post before adding it to the library of posts
+
+
+*Kiwi
+*peacock
+*parrot
+*albatross
+toucan
+trumpeter
+*starling
+vanga
+
+grapevine
+RPHub

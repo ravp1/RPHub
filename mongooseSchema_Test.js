@@ -35,13 +35,17 @@ var userSchema = new Schema({
 	email: String,
 	password: String,
 	loginTries: Number,
-	interests: [interestSchema],
+	interests: [String],
 	blocked: Boolean,
 	loginFail: Boolean,
+	posts: [postSchema],
+	
 });
 var interestSchema = new Schema({
 	name: String,
-	nickname: String
+	nickname: String,
+	//noSpace: String,
+	relatedInterests: [String],
 });
 
 var categorySchema = new Schema({
@@ -59,7 +63,9 @@ var postSchema = new Schema({
 	poster: String,
 	content: String,
 	title: String,
+	timeString: String,
 	timePosted: Date,
+	replyAddress: String,
 	tags: [String], //interest 
 	fullfilled: Boolean,
 	comments: [{name: String, posts:[{poster:String, content:String, timePosted:Date}]}],
@@ -106,11 +112,11 @@ Interest.remove({}, function(err){
 */
 
 /* CREATE SAMPLE USER (ALREADY DONE)
-var sampleUser = new User({email: 'sample@rpi.edu', password: 'password', blocked: false, loginFail: false});
+var sampleUser = new User({email: 'sample@rpi.edu', password: 'password', blocked: false, loginFail: false, name:{first:"Sample", last:"User"}});
 sampleUser.save();
 */
 
-/* CREATE DEFAULT CATEGORIES, INETERESTS, POSTS (ALREADY CREATED; NO NEED TO RUN EVERY TIME)
+/*// CREATE DEFAULT CATEGORIES, INETERESTS, POSTS (ALREADY CREATED; NO NEED TO RUN EVERY TIME)
 //{ SETUP ENGINEERING CATEGORY
 var engineering = new Category({ name: 'Engineering'});
 
@@ -126,6 +132,7 @@ engineering.interests[engineering.interests.length] = new Interest({name:'Materi
 engineering.interests[engineering.interests.length] = new Interest({name:'Mechanical Engineering', nickname:"MechE"});
 engineering.interests[engineering.interests.length] = new Interest({name:'Nuclear Engineering', nickname:"NucE"});
 for (var i =0; i< engineering.interests.length; i++){
+	engineering.interests[i].noSpace = engineering.interests[i].name.replace(/ /g, "").replace(/,/g, "").toLowerCase();
 	engineering.interests[i].save();
 }
 console.log(engineering.interests[3]);
@@ -135,16 +142,17 @@ engineering.save();
 //{ SETUP SCIENCE CATEGORY
 var science = new Category({name:'Science'});
 science.interests[science.interests.length] = new Interest({name:'Biology', nickname:"Bio"});
-science.interests[science.interests.length] = new Interest({name:'Biochemistry & Biophysics', nickname:"BCBP"});
+science.interests[science.interests.length] = new Interest({name:'Biochemistry & Biophysics', nickname:"BCBP",});
 science.interests[science.interests.length] = new Interest({name:'Bioinformatics & Molecular Biology', nickname:"BIMB"});
 science.interests[science.interests.length] = new Interest({name:'Chemistry', nickname:"Chem"});
 science.interests[science.interests.length] = new Interest({name:'Computer Science', nickname:"CompSci"});
-science.interests[science.interests.length] = new Interest({name:'Environmental Science', nickname:"EnvSci"});
+science.interests[science.interests.length] = new Interest({name:'Environmental Science', nickname:"EnvSci",});
 science.interests[science.interests.length] = new Interest({name:'Geology', nickname:"Geo"});
 science.interests[science.interests.length] = new Interest({name:'Hydrogeology', nickname:"Hydrogeo"});
 science.interests[science.interests.length] = new Interest({name:'Mathematics', nickname:"Math"});
-science.interests[science.interests.length] = new Interest({name:'Physics & Applied Physics', nickname:"Phys"});
+science.interests[science.interests.length] = new Interest({name:'Physics & Applied Physics', nickname:"Phys" });
 for (var i =0; i< science.interests.length; i++){
+	science.interests[i].noSpace = science.interests[i].name.replace(/ /g, "").replace(/,/g, "").toLowerCase();
 	science.interests[i].save();
 }
 science.save();
@@ -156,6 +164,7 @@ var management = new Category({ name: 'Management'});
 management.interests[management.interests.length] = new Interest({name:'Business & Management', nickname:"MGMT"});
 management.interests[management.interests.length] = new Interest({name:'Financial Engineering', nickname:"Finance"});
 for (var i =0; i< management.interests.length; i++){
+	management.interests[i].noSpace = management.interests[i].name.replace(/ /g, "").replace(/,/g, "").toLowerCase();
 	management.interests[i].save();
 }
 
@@ -178,6 +187,7 @@ hass.interests[hass.interests.length] = new Interest({name:'Science, Technology 
 hass.interests[hass.interests.length] = new Interest({name:'Sustainability Studies', nickname:"SuS"});
 
 for (var i =0; i< hass.interests.length; i++){
+	hass.interests[i].noSpace = hass.interests[i].name.replace(/ /g, "").replace(/,/g, "").toLowerCase();
 	hass.interests[i].save();
 }
 
@@ -192,6 +202,7 @@ var arch = new Category({ name: 'Architecture'});
 arch.interests[arch.interests.length] = new Interest({name:'Architecture', nickname:"ARCH"});
 arch.interests[arch.interests.length] = new Interest({name:'Lighting', nickname:"LGHT"});
 for (var i =0; i< arch.interests.length; i++){
+	arch.interests[i].noSpace = arch.interests[i].name.replace(/ /g, "").replace(/,/g, "").toLowerCase();
 	arch.interests[i].save();
 }
 
@@ -203,22 +214,25 @@ var itws = new Category({ name: 'Information Technology & Web Science'});
 
 itws.interests[itws.interests.length] = new Interest({name:'Information Technology & Web Science', nickname:"ITWS"});
 for (var i =0; i< itws.interests.length; i++){
+	itws.interests[i].noSpace = itws.interests[i].name.replace(/ /g, "").replace(/,/g, "").toLowerCase();
 	itws.interests[i].save();
 }
 
 itws.save();
 //}
 
+
 var posts = [];
-var post1 = new Post({poster:'Dr. ABC', content:'For students looking for experience with digital design. For credit or salary.', title:'VLSI Project', tags:['Electrical Engineering'], fullfilled:false});
+var post1 = new Post({poster:'Dr. ABC', content:'For students looking for experience with digital design. For credit or salary.', title:'VLSI Project', tags:['Electrical Engineering'], fullfilled:false, replyAddress: 'panser@rpi.edu',});
 post1.save();
 posts.push(post1);
-var post2 = new Post({poster:'Dr. DEF', content:"Computational physics research in density functional theory. Must be junior or above with programming experience.", title:'DFT Research', fulfilled:false});
+var post2 = new Post({poster:'Dr. DEF', content:"Computational physics research in density functional theory. Must be junior or above with programming experience.", title:'DFT Research', fulfilled:false, replyAddress: 'panser@rpi.edu'});
 post2.save();
 posts.push(post2);
-var post3 = new Post({poster:'Dr. GHI', content:"More physics stuff find out more later.", title:'Physics', fulfilled:true});
+var post3 = new Post({poster:'Dr. GHI', content:"More physics stuff find out more later.", title:'Physics', fulfilled:true, replyAddress: 'panser@rpi.edu'});
 post3.save();
 posts.push(post3);
+
 //}
 //console.log("engineering: " + JSON.stringify(engineering));
 //console.log("first interest posts: " + Interest.findOne().exec().returnPosts());
@@ -235,7 +249,7 @@ Interest.findOne({name: "Electrical Engineering"},function(err,result){
 //engineering.interests[0].returnPosts();
 //console.log(posts);
 //Setup the server to listen on port 80 (Web traffic port), allow it to parse POSTED body data, and let it render EJS pages 
-server.listen(8080);
+server.listen(80);
 app.use(bodyParser());
 //app.set('view engine', 'ejs');
 
@@ -319,7 +333,7 @@ app.get('/c', function(req, res) {
 	});
 });
 
-app.get('/c/:intName', function(req, res) {
+app.get('/interests/:intName', function(req, res) {
   if (!req.params.intName){
 	res.end();
 	return;
@@ -334,12 +348,12 @@ app.get('/c/:intName', function(req, res) {
 	  }
 	  var interestName = interest.name;
 	  var posts = interest.returnPosts();
-	  res.render('interests2', { name: interestName, posts: posts });
+	  res.render('interests3', { name: interestName, posts: posts });
 	  console.log("posts are: " + posts);
 	});
 });
 
-app.get('/c/:intName/:post', function(req, res) {
+app.get('/interests/:intName/:post', function(req, res) {
   if (!req.params.intName){
 	res.end();
 	return;
@@ -368,17 +382,18 @@ app.post("/sendMessage",function(req,res){
 
 	subject = req.body.subject;
 	message = req.body.message;
-	
-	var count = message.match(/\n/g);  
-	console.log(count.length);
+	var date = new Date();
+	timeS = date.toDateString();
+	console.log(timeS);
+	var currentUser = req.session.user.name.first + " " + req.session.user.name.last;
+	var sentEmail = req.session.user.email;
 	if (subject == null || message == null)
 	{
 		res.redirect("request.html");
 		return;
 	}
-	var post = new Post({content:message, title:subject, fulfilled:false});
+	var post = new Post({content:message, title:subject, fulfilled:false, timePosted: date, poster:currentUser, timeString:timeS, replyAddress:sentEmail});
 	post.save();
-	console.log(post);
 	res.redirect("index.html");
 	//res.end();
 

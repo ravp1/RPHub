@@ -8,72 +8,134 @@
 	<meta name="author" content="">
 	
 	<!-- JavaScript -->
-	<!-- <script src="js/jquery-1.10.2.js"></script> -->
 	<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
 	
-	<!-- 
-	<script> 
-		$(function(){$("#sidebar").load("common-sidebartags.html");});
-		$(function(){$("#header").load("common-header.html");});
-		$(function(){$("#footer").load("common-footer.html");});
-	</script> 
-	 -->
 	
 	<title>RPHub - things</title>
-
+	
+	<!-- <link href='http://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'> -->
+	
 	<!-- Bootstrap core CSS -->
-	<link href="css/bootstrap.css" rel="stylesheet">
+	<link href="/css/bootstrap.css" rel="stylesheet">
 
 	<!-- Add custom CSS here -->
-	<link href="css/RPHub-test.css" rel="stylesheet">
+	<link href="/css/orig.css" rel="stylesheet">
+	<link href="/css/dropdown.css" rel="stylesheet">
 
 </head>
 
 <body>
-	
+
 	<!-- header -->
 	<!-- <div id="header"></div> -->
-	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="index.html">RPHub</a>
+	<div id="navbar" role="navigation">
+		<a href="index.html" id="title">
+			RPHub
+		</a>
+		<ul id="menu">
+			<script src="/makeNavbar.js">
+			</script>
+		</ul>
+		
+		<form style="float: left;">
+			
+			<div class="input-group">
+				<input class="form-control" id="navsearch" name="search" placeholder="Search" type="text">
 			</div>
-
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse navbar-ex1-collapse">
-				<ul class="nav navbar-nav">
-					<li><a href="#about">About</a>
-					</li>
-					<li><a href="#services">Profile</a>
-					</li>
-					<li><a href="#contact">Contact</a>
-					</li>
-				</ul>
-			</div>
-			<!-- /.navbar-collapse -->
-		</div>
-		<!-- /.container -->
-	</nav>
-	
+			
+		</form>
+		
+		<!-- <span style="float: right;" class="menu">First Last</span> -->
+		
+	</div>
 	<!-- /header -->
 	
+	<div id="sidebar">
 	
-	<div class="container">
-
-		<div class="row"> <!-- entire body -->
+		<h3>First Last</h3>
+		<ul>
+			<li class="nav-item">
+				<a href="#home" class="selected">
+					<!-- <img class="icon" src="/images/x.png"> -->
+					<span class="glyphicon glyphicon-home">
+					</span>Home
+				</a>
+			</li>
+			<li class="nav-item">
+				<a href="#favs">
+					<span class="glyphicon glyphicon-heart">
+					</span>Favorites
+				</a>
+			</li>
+			<li class="nav-item">
+				<a href="#notifs">
+					<span class="glyphicon glyphicon-asterisk">
+					</span>Notifications
+				</a>
+			</li>
 			
-			<div id="main" class="col-md-9"> <!-- center part -->
-				
-				<br>
-				
-				<div class="well">
+		</ul>
+
+		<h3>Interests</h3>
+		<ul>
+			<li class="nav-item-fields">
+				<a href="#electrical">
+					<span class="glyphicon glyphicon-arrow-right">
+					</span>Electrical Engineering
+				</a>
+			</li>
+			<li class="nav-item-activity">
+				<a href="#mechanical">
+					<span class="glyphicon glyphicon-arrow-right">
+					</span>Mechanical Engineering
+				</a>
+			</li>
+			<li class="nav-item-yield">
+				<a href="#other">
+					<span class="glyphicon glyphicon-arrow-right">
+					</span>Other
+				</a>
+			</li>
+			<li class="nav-item">
+				<a href="#addinterest" class="selected">
+					<!-- <img class="icon" src="/images/x.png"> -->
+					<span class="glyphicon glyphicon-plus">
+					</span>Add
+				</a>
+			</li>
+		</ul>
+		
+		<h3>Manage</h3>
+		<ul class="">
+			<li class="nav-item-equipment">
+				<a href="#myrequests">
+					<span class="glyphicon glyphicon-tag">
+					</span>My Requests
+				</a>
+			</li>
+			<li class="nav-item-settings">
+				<a href="#settings">
+					<span class="glyphicon glyphicon-cog">
+					</span>Settings
+				</a>
+			</li>
+			<li class="nav-item-equipment">
+				<a href="#myrequests">
+					<span class="glyphicon glyphicon-off">
+					</span>Log Off
+				</a>
+			</li>
+
+		</ul>
+	</div>
+	
+
+	<div id="meat"> <!-- entire body -->
+
+		<div > <!-- center part -->
+
+			<div class="well">
 					
 					<!-- <div class="text-right">
 						<a class="btn btn-success">Request Something</a>
@@ -108,40 +170,27 @@
 					</form>
 					
 				</div>
-
-			</div>
-			
-			<!-- sidebar/tags -->
-			<!-- <div id="sidebar"></div> -->
-			<div id="tags" class="col-md-3"> <!--tags-->
-				<p class="lead">Tags</p>
-				<div id="categoriesListGroup" class="list-group">
-					<!-- tags generated dynamically-->
-					<script src="makeTags.js">
-					</script>
-				</div>
-			</div>
-			
-			<!-- /sidebar/tags -->
 			
 		</div>
-
-	</div>
-	<!-- /.container -->
-	
-	<!-- footer -->
-	<!-- <div id="footer"></div> -->
-	<div class="container">
-		<footer>
-			<div class="row">
-				<div class="col-lg-12">
+		
+		<!-- footer -->
+		<!-- <div id="footer"></div> -->
+		<div class="container">
+			<footer>
+				<div class="row">
 					RPHub © by Henry Choi and Ravi Panse. An <a href="http://rcos.rpi.edu/"> RCOS </a> Project.
 				</div>
-			</div>
-		</footer>
+			</footer>
+		</div>
+		<!-- /footer -->
+		
+		
 	</div>
-	<!-- /footer -->
 	
+
 </body>
+
+
+
 
 </html>

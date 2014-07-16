@@ -41,56 +41,12 @@
 	})
 	</script> -->
 	<div id="navbar" role="navigation">
-		<a href="/index.html" id="title">
+		<a href="/" id="title">
 			RPHub
 		</a>
 		<ul id="menu">
-			<!--
-			<li>
-				<a href="#">Architecture</a>
-				<ul>
-					<li><a href="#">Acoustics</a></li>
-					<li><a href="#">Lighting</a></li>
-				</ul>
-			</li>
-			
-			<li>
-				<a href="#">Business</a>
-			</li>
-			
-			<li>
-				<a href="#">Engineering</a>
-				<ul>
-					<li><a href="#">Aeronautical Engineering</a></li>
-					<li><a href="#">Biomedical Engineering</a></li>
-					<li><a href="#">Chemical Engineering</a></li>
-					<li><a href="#">Civil Engineering</a></li>
-					<li><a href="#">Computer& Systems Engineering</a></li>
-					<li><a href="#">Electrical Engineering</a></li>
-					<li><a href="#">Environmental Engineering</a></li>
-					<li><a href="#">Industrial & Management Engineering</a></li>
-					<li><a href="#">Materials Engineering</a></li>
-					<li><a href="#">Mechanical Engineering</a></li>
-					<li><a href="#">Nuclear Engineering</a></li>
-				</ul>
-			</li>
-			
-			<li>
-				<a href="#">Humanities</a>
-			</li>
-			
-			<li>
-				<a href="#">IT</a>
-				<ul>
-					<li><a href="#">Information Technology & Web Science</a></li>
-				</ul>
-			</li>
-			
-			<li>
-				<a href="#">Science</a>
-				
-			</li>
-			-->
+			<script src="/makeNavbar.js">
+			</script>
 		</ul>
 		
 		<form style="float: left;">
@@ -111,7 +67,7 @@
 	
 	
 	<div id="sidebar">
-
+	
 		<h3>First Last</h3>
 		<ul>
 			<li class="nav-item">
@@ -193,8 +149,8 @@
 		
 		<br>
 		
-		<div class="" id="interest-heading" style="margin-bottom:30px">
-			<p class="h1" style="font-size: 60px; text-align: center"> <%= name %> </p>
+		<div class="" id="interest-heading">
+			<p class="h1" style="font-size: 60px; text-align: center"> <%= interest.name %> </p>
 			
 			<span >
 				<a href="#mech" class="btn btn-default"> Mechanical </a>
@@ -212,7 +168,7 @@
 			<!-- <div class="text-right">
 				<a class="btn btn-success">Request Something</a>
 			</div> -->
-			
+			<!--
 			<li class="list-group-item collapse-group">
 				<fieldset>
 					
@@ -225,7 +181,7 @@
 					
 					<label class="control-label" for="subject">not done yet--I have a request about something</label>
 					<p>This is what i need content content content content  lorem ipsum shi</p>
-					<div style="text-align:center"> <button class="btn btn-teal" align="center"> Respond &raquo </button> </div>
+					<div style="text-align:center"> <button class="btn btn-teal btn-respond" align="center"> Respond <span class="caret"></span> </button> </div>
 					
 					<div class="collapse">
 						<br>
@@ -243,76 +199,82 @@
 				
 				</fieldset>
 			</li>
-			
-			
-			
-			<li class="list-group-item collapse-group">
-				<fieldset>
-					<legend>
-						<span class="glyphicon glyphicon-remove" style="color: grey"></span>
-						Title
-						<small>- Poster</small>
+			-->
+			<% for(var i=posts.length-1; i>=0; i--) {%>
+			<br>
+				<li class="list-group-item collapse-group">
+					<fieldset>
+						<legend>
+							<%= posts[i].title %>
+							<small>- <%=posts[i].poster %> </small>
+							
+							<small style="float: right"> <%=posts[i].timeString %></small>
+						</legend>
 						
-						<small style="float: right">Date</small>
-					</legend>
+						<p style="white-space: pre-line"><%=posts[i].content %></p>
+						<div style="text-align:center"> <button class="btn btn-default btn-teal btn-respond" align="center"> Respond <span class="caret"></span> </button> </div>
+						
+						<form class="collapse" action="mailto:panser@rpi.edu" method="post" enctype="text/plain" >
+							<br>
+							Send a message to <b><%=posts[i].replyAddress %></b>
+							<textarea class="input-xlarge" name="message" id="message" rows="5" style="min-width: 612px"></textarea>
+							
+							<br>
+							
+							<div class="form-actions">
+								<button type="submit" name="submit" value="Submit" class="btn btn-primary btn-large">Submit</button>
+								<button class="btn btn-default collapse-button">Collapse</button>
+							</div>
+						</form>
 					
-					<label class="control-label" for="subject">I have a request about something</label>
-					<p>This is what i need content content content content  lorem ipsum shi</p>
-					<div style="text-align:center"> <button class="btn btn-teal" align="center"> Respond &raquo </button> </div>
-					
-					<div class="collapse">
-						<br>
-						Send a message to <a href="mailto:professor@rpi.edu?Subject=NAMEOFPROJECT">professor@rpi.edu</a>:
-						<br>
-						<textarea class="input-xlarge" name="message" id="message" rows="5" ></textarea>
-						
-						<br>
-						
-						<div class="form-actions">
-							<button type="submit" class="btn btn-primary btn-large">Submit</button>
-							<button class="btn btn-default collapse-button">Collapse</button>
-						</div>
-					</div>
-				
-				</fieldset>
-			</li>
-			
-			
-			
-			<li class="list-group-item collapse-group">
-				<fieldset>
-					<legend>
-						<span class="glyphicon glyphicon-ok" style="color: green"></span>
-						Title
-						<small>- Poster</small>
-						
-						<small style="float: right">Date</small>
-					</legend>
-					
-					<label class="control-label" for="subject">it has been done--I have a request about something</label>
-					<p>This is what i need content content content content  lorem ipsum shi</p>
-					<div style="text-align:center"> <button class="btn btn-teal" align="center"> Respond &raquo </button> </div>
-					
-					<div class="collapse">
-						<br>
-						Send a message to <a href="mailto:professor@rpi.edu?Subject=NAMEOFPROJECT">professor@rpi.edu</a>:
-						<br>
-						<textarea class="input-xlarge" name="message" id="message" rows="5" ></textarea>
-						
-						<br>
-						
-						<div class="form-actions">
-							<button type="submit" class="btn btn-primary btn-large">Submit</button>
-							<button class="btn btn-default collapse-button">Collapse</button>
-						</div>
-					</div>
-				
-				</fieldset>
-			</li>
-			
+					</fieldset>
+				</li>
+			<% } %>
 		</ul>
 		
 		<script>
+	$(document).ready(function(){
+		/*
+		$.get("/posts",function(posts){
+			posts = $.parseJSON(posts);
+			var postHTML = ''
+			for (var i =0; i< posts.length; i++){
+				postHTML +=
+				'\
+				<br>\
+				<li class="list-group-item collapse-group">\
+					<fieldset>\
+						<legend>\
+							' + posts[i].title + '\
+							<small>- ' + posts[i].poster + '</small>\
+							\
+							<small style="float: right">' + posts[i].timeString + '</small>\
+						</legend>\
+						\
+						<p style="white-space: pre-line">' + posts[i].content + '</p>\
+						<div style="text-align:center"> <button class="btn btn-default btn-teal btn-respond" align="center"> Respond <span class="caret"></span> </button> </div>\
+						\
+						<form class="collapse" action="mailto:panser@rpi.edu" method="post" enctype="text/plain" >\
+							<br>\
+							Send a message to <b>panser@rpi.edu</b>\
+							<textarea class="input-xlarge" name="message" id="message" rows="5" style="min-width: 612px"></textarea>\
+							\
+							<br>\
+							\
+							<div class="form-actions">\
+								<button type="submit" name="submit" value="Submit" class="btn btn-primary btn-large">Submit</button>\
+								<button class="btn btn-default collapse-button">Collapse</button>\
+							</div>\
+						</form>\
+					\
+					</fieldset>\
+				</li>\
+				';
+				//console.log(JSON.stringify(posts));
+			}
+			$(".posts").append(postHTML);
+			
+			//collapse stuff
 			$('.collapse-group').on('click', function(c) {
 				c.preventDefault();
 				var collapse = $(this).find('.collapse');
@@ -329,7 +291,11 @@
 				e.stopPropagation();
 			});
 			
-		</script>
+		});*/
+
+	});
+	
+	</script>
 	
 		
 		<!-- footer -->

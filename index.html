@@ -17,10 +17,11 @@
 	<!-- <link href='http://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'> -->
 	
 	<!-- Bootstrap core CSS -->
-	<link href="css/bootstrap.css" rel="stylesheet">
+	<link href="/css/bootstrap.css" rel="stylesheet">
 
-	<!--custom CSS-->
-	<link href="css/RPHub-test.css" rel="stylesheet">
+	<!-- Add custom CSS here -->
+	<link href="/css/orig.css" rel="stylesheet">
+	<link href="/css/dropdown.css" rel="stylesheet">
 
 </head>
 
@@ -28,150 +29,178 @@
 
 	<!-- header -->
 	<!-- <div id="header"></div> -->
-	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="index.html">RPHub</a>
-				
+	<div id="navbar" role="navigation">
+		<a href="index.html" id="title">
+			RPHub
+		</a>
+		<ul id="menu">
+			<script src="/makeNavbar.js">
+			</script>
+		</ul>
+		
+		<form style="float: left;">
+			
+			<div class="input-group">
+				<input class="form-control" id="navsearch" name="search" placeholder="Search" type="text">
 			</div>
-
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse navbar-ex1-collapse">
-				<ul class="nav navbar-nav">
-					<li><a href="#about">About</a>
-					</li>
-					<li><a href="#services">Profile</a>
-					</li>
-					<li><a href="#contact">Contact</a>
-					</li>
-				</ul>
-			</div>
-			<!-- /.navbar-collapse -->
-		</div>
-		<!-- /.container -->
-	</nav>
-	
+			
+		</form>
+		
+		<!-- <span style="float: right;" class="menu">First Last</span> -->
+		
+	</div>
 	<!-- /header -->
 	
+	<div id="sidebar">
 	
-	<div class="container">
-
-		<div class="row"> <!-- entire body -->
-
-			<div class="col-md-9"> <!-- center part -->
-
-				<img class="img-responsive" src="logo.svg" alt="" style="border:none;"/>
-				<!-- <div style="font-family: 'Indie Flower', cursive; font-size:140pt; text-align:center; line-height:70%;">RPHub</div> -->
-				
-				
-				
-				<ul class="list-group well" id="listofPosts">
-					<div class="text-right">
-						<a href="request.html" class="btn btn-success">Request Something</a>
-					</div>
-					<!--
-					<br>
-						<li class="list-group-item collapse-group">
-							<fieldset>
-								<legend>
-									posts[i].title 
-									<small>-  posts[i].poster </small>
-									<small style="float: right"> posts[i].timeString </small>
-								</legend>
-								<p style="white-space: pre-line"> posts[i].content </p>
-								<div style="text-align:center"> <button class="btn btn-default" align="center"> Respond &raquo </button> </div>
-
-								<form class="collapse" action="mailto:panser@rpi.edu" method="post" enctype="text/plain" >
-									<br>
-									Send a message to <!--<a href="mailto:'+ panser@rpi.edu + '?Subject=NAMEOFPROJECT">--><!-- <b>panser@rpi.edu</b><!-- </a>-->
-					<!--
-									<textarea class="input-xlarge" name="message" id="message" rows="5" ></textarea>
-									<br>
-					-->
-									<!--<div class="form-actions">
-										<button type="submit" name="submit" value="Submit" class="btn btn-primary btn-large">Submit</button>
-										<button class="btn btn-default collapse-button">Collapse</button>
-									</div>-->
-					<!--
-								</form>
-							
-							</fieldset>
-						</li>
-					-->
-					
-					<!-- database stuff goes here -->
-					
-				</ul>
-				
-			</div>
+		<h3>First Last</h3>
+		<ul>
+			<li class="nav-item">
+				<a href="#home" class="selected">
+					<!-- <img class="icon" src="/images/x.png"> -->
+					<span class="glyphicon glyphicon-home">
+					</span>Home
+				</a>
+			</li>
+			<li class="nav-item">
+				<a href="#favs">
+					<span class="glyphicon glyphicon-heart">
+					</span>Favorites
+				</a>
+			</li>
+			<li class="nav-item">
+				<a href="#notifs">
+					<span class="glyphicon glyphicon-asterisk">
+					</span>Notifications
+				</a>
+			</li>
 			
-				<!-- sidebar/tags -->
-					<!-- <div id="sidebar"></div> -->
-					
-					<div id="tags" class="col-md-3" > <!--tags--><!--style="position:fixed; left:1085px"-->
-						<p class="lead">Tags</p>
-						<!--<div id="accordion" class="panel-group list-group categoriesListGroup">-->
-							<!-- tags generated dynamically-->
-							
-							<div id="categoriesListGroup" class="list-group">
-								<script src="makeTags.js">
-								</script>
-							</div>
-							
-						<!--</div>-->
-					</div>
+		</ul>
+
+		<h3>Interests</h3>
+		<ul>
+			<li class="nav-item-fields">
+				<a href="#electrical">
+					<span class="glyphicon glyphicon-arrow-right">
+					</span>Electrical Engineering
+				</a>
+			</li>
+			<li class="nav-item-activity">
+				<a href="#mechanical">
+					<span class="glyphicon glyphicon-arrow-right">
+					</span>Mechanical Engineering
+				</a>
+			</li>
+			<li class="nav-item-yield">
+				<a href="#other">
+					<span class="glyphicon glyphicon-arrow-right">
+					</span>Other
+				</a>
+			</li>
+			<li class="nav-item">
+				<a href="#addinterest" class="selected">
+					<!-- <img class="icon" src="/images/x.png"> -->
+					<span class="glyphicon glyphicon-plus">
+					</span>Add
+				</a>
+			</li>
+		</ul>
+		
+		<h3>Manage</h3>
+		<ul class="">
+			<li class="nav-item-equipment">
+				<a href="#myrequests">
+					<span class="glyphicon glyphicon-tag">
+					</span>My Requests
+				</a>
+			</li>
+			<li class="nav-item-settings">
+				<a href="#settings">
+					<span class="glyphicon glyphicon-cog">
+					</span>Settings
+				</a>
+			</li>
+			<li class="nav-item-equipment">
+				<a href="#myrequests">
+					<span class="glyphicon glyphicon-off">
+					</span>Log Off
+				</a>
+			</li>
+
+		</ul>
+	</div>
+	
+
+	<div id="meat"> <!-- entire body -->
+
+		<div > <!-- center part -->
+
+			<img class="img-responsive" src="logo.svg" alt="" style="border:none; margin:0 auto 0 auto"/>
+			<!-- <div style="font-family: 'Indie Flower', cursive; font-size:140pt; text-align:center; line-height:70%;">RPHub</div> -->
+			
+			
+			
+			<ul class="list-group well" id="listofPosts">
+				<div class="text-right">
+					<a href="request.html" class="btn btn-success">Request Something</a>
+				</div>
+				<!--
+				<br>
+					<li class="list-group-item collapse-group">
+						<fieldset>
+							<legend>
+								posts[i].title 
+								<small>-  posts[i].poster </small>
+								<small style="float: right"> posts[i].timeString </small>
+							</legend>
+							<p style="white-space: pre-line"> posts[i].content </p>
+							<div style="text-align:center"> <button class="btn btn-default" align="center"> Respond &raquo </button> </div>
+
+							<form class="collapse" action="mailto:panser@rpi.edu" method="post" enctype="text/plain" >
+								<br>
+								Send a message to <!--<a href="mailto:'+ panser@rpi.edu + '?Subject=NAMEOFPROJECT">--><!-- <b>panser@rpi.edu</b><!-- </a>-->
+				<!--
+								<textarea class="input-xlarge" name="message" id="message" rows="5" ></textarea>
+								<br>
+				-->
+								<!--<div class="form-actions">
+									<button type="submit" name="submit" value="Submit" class="btn btn-primary btn-large">Submit</button>
+									<button class="btn btn-default collapse-button">Collapse</button>
+								</div>-->
+				<!--
+							</form>
 						
-				<!-- /sidebar/tags -->
-			
+						</fieldset>
+					</li>
+				-->
+				
+				<!-- database stuff goes here -->
+				
+			</ul>
 			
 		</div>
-
+		
+		<!-- footer -->
+		<!-- <div id="footer"></div> -->
+		<div class="container">
+			<footer>
+				<div class="row">
+					RPHub © by Henry Choi and Ravi Panse. An <a href="http://rcos.rpi.edu/"> RCOS </a> Project.
+				</div>
+			</footer>
+		</div>
+		<!-- /footer -->
+		
+		
 	</div>
-	<!-- /.container -->
 
-	<!-- footer -->
-	<!-- <div id="footer"></div> -->
-	<div class="container">
-		<footer>
-			<div class="row">
-				RPHub © by Henry Choi and Ravi Panse. An <a href="http://rcos.rpi.edu/"> RCOS </a> Project.
-			</div>
-		</footer>
-	</div>
-	<!-- /footer -->
+
 
 
 	
 	<script>
 	$(document).ready(function(){
-		
-		//$.get("/categories",function(categories){
-			/*console.log("typeof response is " + typeof response);
-			response = $.parseJSON(response);
-			console.log("typeof response is " + typeof response);*/
-			/*
-			categories = $.parseJSON(categories);
-			for (var i = 0; i < categories.length; i++)
-			{
-				var cat = '<div class="list-group">\n' + 
-					'<a href="#" class="list-group-item active">' + categories[i].name + '</a>\n';
-
-				for (var j = 0; j < categories[i].interests.length; j++)
-				{
-					cat += '<a href="#" class="list-group-item">' + categories[i].interests[j].name + '</a>';
-				}
-				cat += "</div>";
-				$("#categoriesListGroup").append(cat);
-				//$("#postBox").append(posts);
-			}
-		});*/
-		
+	
 		$.get("posts",function(posts){
 			posts = $.parseJSON(posts);
 			var postHTML = ''
@@ -189,12 +218,12 @@
 						</legend>\
 						\
 						<p style="white-space: pre-line">' + posts[i].content + '</p>\
-						<div style="text-align:center"> <button class="btn btn-default" align="center"> Respond &raquo </button> </div>\
+						<div style="text-align:center"> <button class="btn btn-default btn-teal btn-respond" align="center"> Respond <span class="caret"></span> </button> </div>\
 						\
 						<form class="collapse" action="mailto:panser@rpi.edu" method="post" enctype="text/plain" >\
 							<br>\
 							Send a message to <b>panser@rpi.edu</b>\
-							<textarea class="input-xlarge" name="message" id="message" rows="5" ></textarea>\
+							<textarea class="input-xlarge" name="message" id="message" rows="5" style="min-width: 612px"></textarea>\
 							\
 							<br>\
 							\
@@ -227,23 +256,6 @@
 				console.log(collapse.css("display"));
 				e.stopPropagation();
 			});
-			/*
-			$('.active').on('click', function(e) {
-				//alert('clicked');
-				e.preventDefault();
-				var more = $(this).closest('.list-group').find('.more');
-				console.log(more.html())
-				if (tagCollapse){
-					more.hide();
-					tagCollapse = false;
-				}
-				else{
-					more.show();
-					tagCollapse = true;
-				}
-				
-			});
-			*/
 
 		});
 		

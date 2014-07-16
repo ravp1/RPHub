@@ -44,7 +44,7 @@ var userSchema = new Schema({
 var interestSchema = new Schema({
 	name: String,
 	nickname: String,
-	//noSpace: String,
+	noSpace: String,
 	relatedInterests: [String],
 });
 
@@ -120,19 +120,20 @@ sampleUser.save();
 //{ SETUP ENGINEERING CATEGORY
 var engineering = new Category({ name: 'Engineering'});
 
-engineering.interests[engineering.interests.length] = new Interest({name:'Aeronautical Engineering', nickname:"Aero"});
-engineering.interests[engineering.interests.length] = new Interest({name:'Biomedical Engineering', nickname:"BME"});
-engineering.interests[engineering.interests.length] = new Interest({name:'Chemical Engineering', nickname:"ChemE"});
-engineering.interests[engineering.interests.length] = new Interest({name:'Civil Engineering', nickname:"Civil"});
-engineering.interests[engineering.interests.length] = new Interest({name:'Computer & Systems Engineering', nickname:"CSE"});
-engineering.interests[engineering.interests.length] = new Interest({name:'Electrical Engineering', nickname:"EE"});
-engineering.interests[engineering.interests.length] = new Interest({name:'Environmental Engineering', nickname:"EnvE"});
-engineering.interests[engineering.interests.length] = new Interest({name:'Industrial & Management Engineering', nickname:"IME"});
-engineering.interests[engineering.interests.length] = new Interest({name:'Materials Engineering', nickname:"MatSci"});
-engineering.interests[engineering.interests.length] = new Interest({name:'Mechanical Engineering', nickname:"MechE"});
-engineering.interests[engineering.interests.length] = new Interest({name:'Nuclear Engineering', nickname:"NucE"});
+engineering.interests[engineering.interests.length] = new Interest({name:'Aeronautical Engineering', nickname:"aero"});
+engineering.interests[engineering.interests.length] = new Interest({name:'Biomedical Engineering', nickname:"bmed"});
+engineering.interests[engineering.interests.length] = new Interest({name:'Chemical Engineering', nickname:"chme"});
+engineering.interests[engineering.interests.length] = new Interest({name:'Civil Engineering', nickname:"civl"});
+engineering.interests[engineering.interests.length] = new Interest({name:'Computer & Systems Engineering', nickname:"cse"});
+engineering.interests[engineering.interests.length] = new Interest({name:'Electrical Engineering', nickname:"ee"});
+engineering.interests[engineering.interests.length] = new Interest({name:'Environmental Engineering', nickname:"enve"});
+engineering.interests[engineering.interests.length] = new Interest({name:'Industrial & Management Engineering', nickname:"isye"});
+engineering.interests[engineering.interests.length] = new Interest({name:'Materials Engineering', nickname:"mtle"});
+engineering.interests[engineering.interests.length] = new Interest({name:'Mechanical Engineering', nickname:"meche"});
+engineering.interests[engineering.interests.length] = new Interest({name:'Nuclear Engineering', nickname:"nuke"});
 for (var i =0; i< engineering.interests.length; i++){
 	engineering.interests[i].noSpace = engineering.interests[i].name.replace(/ /g, "").replace(/,/g, "").toLowerCase();
+	engineering.interests[i].nickname = engineering.interests[i].nickname.toUpperCase();
 	engineering.interests[i].save();
 }
 console.log(engineering.interests[3]);
@@ -141,18 +142,19 @@ engineering.save();
 
 //{ SETUP SCIENCE CATEGORY
 var science = new Category({name:'Science'});
-science.interests[science.interests.length] = new Interest({name:'Biology', nickname:"Bio"});
-science.interests[science.interests.length] = new Interest({name:'Biochemistry & Biophysics', nickname:"BCBP",});
-science.interests[science.interests.length] = new Interest({name:'Bioinformatics & Molecular Biology', nickname:"BIMB"});
-science.interests[science.interests.length] = new Interest({name:'Chemistry', nickname:"Chem"});
-science.interests[science.interests.length] = new Interest({name:'Computer Science', nickname:"CompSci"});
-science.interests[science.interests.length] = new Interest({name:'Environmental Science', nickname:"EnvSci",});
-science.interests[science.interests.length] = new Interest({name:'Geology', nickname:"Geo"});
-science.interests[science.interests.length] = new Interest({name:'Hydrogeology', nickname:"Hydrogeo"});
-science.interests[science.interests.length] = new Interest({name:'Mathematics', nickname:"Math"});
-science.interests[science.interests.length] = new Interest({name:'Physics & Applied Physics', nickname:"Phys" });
+science.interests[science.interests.length] = new Interest({name:'Biology', nickname:"biol"});
+science.interests[science.interests.length] = new Interest({name:'Biochemistry & Biophysics', nickname:"bcbp",});
+science.interests[science.interests.length] = new Interest({name:'Bioinformatics & Molecular Biology', nickname:"bimb"});
+science.interests[science.interests.length] = new Interest({name:'Chemistry', nickname:"chem"});
+science.interests[science.interests.length] = new Interest({name:'Computer Science', nickname:"csci"});
+science.interests[science.interests.length] = new Interest({name:'Environmental Science', nickname:"envs",});
+science.interests[science.interests.length] = new Interest({name:'Geology', nickname:"geol"});
+science.interests[science.interests.length] = new Interest({name:'Hydrogeology', nickname:"hgeo"});
+science.interests[science.interests.length] = new Interest({name:'Mathematics', nickname:"math"});
+science.interests[science.interests.length] = new Interest({name:'Physics & Applied Physics', nickname:"phys" });
 for (var i =0; i< science.interests.length; i++){
 	science.interests[i].noSpace = science.interests[i].name.replace(/ /g, "").replace(/,/g, "").toLowerCase();
+	science.interests[i].nickname = science.interests[i].nickname.toUpperCase();
 	science.interests[i].save();
 }
 science.save();
@@ -161,10 +163,11 @@ science.save();
 //{ SETUP MANAGEMENT CATEGORY
 var management = new Category({ name: 'Management'});
 
-management.interests[management.interests.length] = new Interest({name:'Business & Management', nickname:"MGMT"});
-management.interests[management.interests.length] = new Interest({name:'Financial Engineering', nickname:"Finance"});
+management.interests[management.interests.length] = new Interest({name:'Business & Management', nickname:"mgmt"});
+management.interests[management.interests.length] = new Interest({name:'Financial Engineering', nickname:"fnce"});
 for (var i =0; i< management.interests.length; i++){
 	management.interests[i].noSpace = management.interests[i].name.replace(/ /g, "").replace(/,/g, "").toLowerCase();
+	management.interests[i].nickname = management.interests[i].nickname.toUpperCase();
 	management.interests[i].save();
 }
 
@@ -174,20 +177,21 @@ management.save();
 //{ SETUP HASS CATEGORY
 var hass = new Category({ name: 'Humanities, Arts, & Soc. Sciences'});
 
-hass.interests[hass.interests.length] = new Interest({name:'Cognitive Science', nickname:"CogSci"});
-hass.interests[hass.interests.length] = new Interest({name:'Communication', nickname:"Comm"});
-hass.interests[hass.interests.length] = new Interest({name:'Design, Innovation, and Society', nickname:"DIS"});
-hass.interests[hass.interests.length] = new Interest({name:'Economics', nickname:"Econ"});
-hass.interests[hass.interests.length] = new Interest({name:'Electronic Arts', nickname:"EA"});
-hass.interests[hass.interests.length] = new Interest({name:'Electronic Media, Arts, & Communication', nickname:"EMAC"});
-hass.interests[hass.interests.length] = new Interest({name:'Games & Simulation Arts and Sciences', nickname:"GSAS"});
-hass.interests[hass.interests.length] = new Interest({name:'Philosophy', nickname:"Phil"});
-hass.interests[hass.interests.length] = new Interest({name:'Psychology', nickname:"Psych"});
-hass.interests[hass.interests.length] = new Interest({name:'Science, Technology & Society', nickname:"STS"});
-hass.interests[hass.interests.length] = new Interest({name:'Sustainability Studies', nickname:"SuS"});
+hass.interests[hass.interests.length] = new Interest({name:'Cognitive Science', nickname:"cogs"});
+hass.interests[hass.interests.length] = new Interest({name:'Communication', nickname:"comm"});
+hass.interests[hass.interests.length] = new Interest({name:'Design, Innovation, and Society', nickname:"dis"});
+hass.interests[hass.interests.length] = new Interest({name:'Economics', nickname:"econ"});
+hass.interests[hass.interests.length] = new Interest({name:'Electronic Arts', nickname:"ea"});
+hass.interests[hass.interests.length] = new Interest({name:'Electronic Media, Arts, & Communication', nickname:"emac"});
+hass.interests[hass.interests.length] = new Interest({name:'Games & Simulation Arts and Sciences', nickname:"gsas"});
+hass.interests[hass.interests.length] = new Interest({name:'Philosophy', nickname:"phil"});
+hass.interests[hass.interests.length] = new Interest({name:'Psychology', nickname:"psyc"});
+hass.interests[hass.interests.length] = new Interest({name:'Science, Technology & Society', nickname:"sts"});
+hass.interests[hass.interests.length] = new Interest({name:'Sustainability Studies', nickname:"sust"});
 
 for (var i =0; i< hass.interests.length; i++){
 	hass.interests[i].noSpace = hass.interests[i].name.replace(/ /g, "").replace(/,/g, "").toLowerCase();
+	hass.interests[i].nickname = hass.interests[i].nickname.toUpperCase();
 	hass.interests[i].save();
 }
 
@@ -199,10 +203,11 @@ hass.save();
 //{ SETUP ARCHITECTURE CATEGORY
 var arch = new Category({ name: 'Architecture'});
 
-arch.interests[arch.interests.length] = new Interest({name:'Architecture', nickname:"ARCH"});
-arch.interests[arch.interests.length] = new Interest({name:'Lighting', nickname:"LGHT"});
+arch.interests[arch.interests.length] = new Interest({name:'Architecture', nickname:"arch"});
+arch.interests[arch.interests.length] = new Interest({name:'Lighting', nickname:"lght"});
 for (var i =0; i< arch.interests.length; i++){
 	arch.interests[i].noSpace = arch.interests[i].name.replace(/ /g, "").replace(/,/g, "").toLowerCase();
+	arch.interests[i].nickname = arch.interests[i].nickname.toUpperCase();
 	arch.interests[i].save();
 }
 
@@ -212,24 +217,26 @@ arch.save();
 //{ SETUP IT & WS CATEGORY
 var itws = new Category({ name: 'Information Technology & Web Science'});
 
-itws.interests[itws.interests.length] = new Interest({name:'Information Technology & Web Science', nickname:"ITWS"});
+itws.interests[itws.interests.length] = new Interest({name:'Information Technology & Web Science', nickname:"itws"});
 for (var i =0; i< itws.interests.length; i++){
 	itws.interests[i].noSpace = itws.interests[i].name.replace(/ /g, "").replace(/,/g, "").toLowerCase();
+	itws.interests[i].nickname = itws.interests[i].nickname.toUpperCase();
 	itws.interests[i].save();
 }
 
 itws.save();
 //}
 
-
+var timeStamp = new Date();
+var timeStr = timeStamp.toDateString();
 var posts = [];
-var post1 = new Post({poster:'Dr. ABC', content:'For students looking for experience with digital design. For credit or salary.', title:'VLSI Project', tags:['Electrical Engineering'], fullfilled:false, replyAddress: 'panser@rpi.edu',});
+var post1 = new Post({poster:'Sample Professor', content:'For students looking for experience with digital design. For credit or salary.', title:'VLSI Project', tags:['Electrical Engineering'], fullfilled:false, replyAddress: 'panser@rpi.edu', timePosted: timeStamp, timeString: timeStr});
 post1.save();
 posts.push(post1);
-var post2 = new Post({poster:'Dr. DEF', content:"Computational physics research in density functional theory. Must be junior or above with programming experience.", title:'DFT Research', fulfilled:false, replyAddress: 'panser@rpi.edu'});
+var post2 = new Post({poster:'Sample Professor', content:"Computational physics research in density functional theory. Must be junior or above with programming experience.", title:'DFT Research', fulfilled:false, replyAddress: 'panser@rpi.edu', timePosted: timeStamp, timeString: timeStr});
 post2.save();
 posts.push(post2);
-var post3 = new Post({poster:'Dr. GHI', content:"More physics stuff find out more later.", title:'Physics', fulfilled:true, replyAddress: 'panser@rpi.edu'});
+var post3 = new Post({poster:'Sample Professor', content:"More physics stuff find out more later.", title:'Physics', fulfilled:true, replyAddress: 'panser@rpi.edu', timePosted: timeStamp, timeString: timeStr});
 post3.save();
 posts.push(post3);
 
@@ -312,15 +319,16 @@ app.get("/categories",function(req,res){
 
 
 app.get('/c', function(req, res) {
-	console.log("With invalid url, I made it here before crashing!");
   if (!req.query.cat){
 	res.end();
 	return;
   }
   var cat = req.query.cat;
+  /*
   console.log("the url for this request is" + req.url);
   console.log("the path for this request is" + req.path);
   console.log("the pathname for this request is" + req.pathname);
+  */
   Interest.findOne({nickname:cat},function(err,interest){
 	  if (interest == null){
 		res.end();
@@ -329,45 +337,26 @@ app.get('/c', function(req, res) {
 	  var interestName = interest.name;
 	  var posts = interest.returnPosts();
 	  res.render('interests2', { name: interestName, posts: posts });
-	  console.log("posts are: " + posts);
 	});
 });
 
 app.get('/interests/:intName', function(req, res) {
-  if (!req.params.intName){
-	res.end();
-	return;
-  }
-  var intName = req.params.intName;
-  //console.log("the url for this request is" + req.url);
-  //console.log("the path for this request is" + req.path);
-  Interest.findOne({nickname:intName},function(err,interest){
-	  if (interest == null){
+	if (!req.params.intName){
 		res.end();
 		return;
-	  }
-	  var interestName = interest.name;
-	  var posts = interest.returnPosts();
-	  res.render('interests3', { name: interestName, posts: posts });
-	  console.log("posts are: " + posts);
-	});
-});
-
-app.get('/interests/:intName/:post', function(req, res) {
-  if (!req.params.intName){
-	res.end();
-	return;
-  }
-  var intName = req.params.intName;
-  Interest.findOne({nickname:intName},function(err,interest){
-	  if (interest == null){
-		res.end();
-		return;
-	  }
-	  var interestName = interest.name;
-	  var posts = interest.returnPosts();
-	  res.render('posts', { name: interestName, posts: posts });
-	  console.log("posts are: " + posts);
+	}
+	var intName = req.params.intName;
+	//console.log("the url for this request is" + req.url);
+	//console.log("the path for this request is" + req.path);
+	Interest.findOne({nickname:intName},function(err,interest){
+		if (interest == null){
+			res.end();
+			return;
+		}
+		Post.find({tags:interest.name}, function(err, relevantPosts){
+			if(err) return console.error(err);
+			res.render('interests3', { interest: interest, posts: relevantPosts });
+		});
 	});
 });
 
@@ -378,13 +367,25 @@ app.get("/posts", function(req, res){
 	});
 });
 
+var findTags = function(message){
+	var tags = message.split("#");
+	tags.shift();
+	for (var i =0; i< tags.length; i++){
+		var endTag = tags[i].search(" ");
+		if (endTag !== -1){
+			tags[i] = tags[i].slice(0,endTag).toUpperCase();
+		}
+	}
+	return tags;
+}
+
 app.post("/sendMessage",function(req,res){
 
 	subject = req.body.subject;
 	message = req.body.message;
+	var tags = findTags(message);
 	var date = new Date();
-	timeS = date.toDateString();
-	console.log(timeS);
+	var timeS = date.toDateString();
 	var currentUser = req.session.user.name.first + " " + req.session.user.name.last;
 	var sentEmail = req.session.user.email;
 	if (subject == null || message == null)
@@ -392,7 +393,15 @@ app.post("/sendMessage",function(req,res){
 		res.redirect("request.html");
 		return;
 	}
-	var post = new Post({content:message, title:subject, fulfilled:false, timePosted: date, poster:currentUser, timeString:timeS, replyAddress:sentEmail});
+	var post = new Post({content:message, title:subject, fulfilled:false, timePosted: date, poster:currentUser, timeString:timeS, replyAddress:sentEmail, tags:[]});
+	for (var i =0; i< tags.length; i++){
+		Interest.findOne({$or : [{noSpace: tags[i]}, {nickname: tags[i]}]},function(err,result){
+			if (result != null){
+				post.tags.push(result.name);
+				post.save();
+			}
+		});
+	}
 	post.save();
 	res.redirect("index.html");
 	//res.end();
@@ -493,23 +502,4 @@ app.post("/unloadError",function(req, res){
 	}
 });
 
-//db.collection("posts").find({tags:this.name});
-
-
-
-interestSchema.methods.returnPosts = function(){
-	return Post.find().where(this).in().exec(function(err, relevantPosts){
-		if(err) return console.error(err);
-		else return relevantPosts;
-	}
-}
-
-function makeNewCategory(name, interests)
-{
-	var newCat = new Category({name:name, interests:interests});
-}
-
-categorySchema.methods.findCommonPosters = function(cb) {
-	return this.model('Category').find({interests: [{posts:[{poster: this.interests.posts.poster}] }] }, cb);
-}
 */

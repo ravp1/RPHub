@@ -1,6 +1,5 @@
 <script>
 	$(document).ready(function(){
-		console.log("makeNavbar.ejs");
 		$.get("/amILoggedIn", function(data){
 			//console.log(data);
 			if (data =="no") {window.location.href = '/login.html';}

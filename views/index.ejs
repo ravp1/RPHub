@@ -36,27 +36,9 @@
 
 <body>
 	<!-- header -->
-	<!-- <div id="header"></div> -->
-	<div id="navbar" role="navigation">
-		<a href="index.html" id="title">
-			RPHub
-		</a>
-		<ul id="menu">
-			<script src="/makeNavbar.js">
-			</script>
-		</ul>
+	
+		<%- include makeNavbar.ejs %>
 		
-		<form style="float: left;">
-			
-			<div class="input-group">
-				<input class="form-control" id="navsearch" name="search" placeholder="Search" type="text">
-			</div>
-			
-		</form>
-		
-		<!-- <span style="float: right;" class="menu">First Last</span> -->
-
-	</div>
 	<!-- /header -->
 	
 	<div id="sidebar">
@@ -149,6 +131,37 @@
 			
 			<div class="posts" id="listofPosts" data-columns> <!-- listofPosts -->
 				
+				<% for(var i=posts.length-1; i>=0; i--) {%>
+				
+				<div class="list-group-item collapse-group">
+					<fieldset>
+						<legend>
+							<%=posts[i].title%>
+							<small>- <%=posts[i].poster %> </small>
+							
+							<small style="float: right"> <%=posts[i].timeString %> </small>
+						</legend>
+						
+						<p style="white-space: pre-line"> <%=posts[i].content%></p>
+						<div style="text-align:center"> <button class="btn btn-default btn-teal btn-respond" align="center"> Respond <span class="caret"></span> </button> </div>
+						
+						<form class="collapse" action="mailto:panser@rpi.edu" method="post" enctype="text/plain" >
+							<br>
+							Send a message to <b><%=posts[i].replyAddress%></b>
+							<textarea class="input-xlarge" name="message" id="message" rows="5" style="min-width: 612px"></textarea>
+							
+							<br>
+							
+							<div class="form-actions">
+								<button type="submit" name="submit" value="Submit" class="btn btn-primary btn-large">Submit</button>
+								<button class="btn btn-default collapse-button">Collapse</button>
+							</div>
+						</form>
+					
+					</fieldset>
+				</div>
+				
+				<% } %>
 				
 				<div class="list-group-item collapse-group">
 					<fieldset>

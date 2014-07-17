@@ -267,8 +267,10 @@ app.use(express.static(__dirname));
 //  res.end('Hello World\n');
 //}).listen(8080, '127.0.0.1');
 app.get('/', function(req, res){
-	console.log("redirecting to login page");
-	res.render('index', {});
+	Posts.find({},function(err,data){
+		res.render('index', {posts:data});
+	});
+
 
 });
 
@@ -388,7 +390,7 @@ app.post("/login",function(req,res){
 		if(err) return console.error(err);
 		req.session.user = loggedUser;
 		if(loggedUser!=null){
-			res.render('index', { });
+			res.redirect("/");
 		}
 		else{
 			console.log("Failed login; please try again.");

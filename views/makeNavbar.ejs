@@ -1,0 +1,54 @@
+<script>
+	$(document).ready(function(){
+		console.log("makeNavbar.ejs");
+		$.get("/amILoggedIn", function(data){
+			//console.log(data);
+			if (data =="no") {window.location.href = '/login.html';}
+		});
+		
+		$.get("/categories",function(categories){
+			
+			categories = $.parseJSON(categories);
+
+			for (var i = 0; i < categories.length; i++)
+			{
+				var cat = '<li>\
+					<a href="#">'+categories[i].name +'</a>\
+					<ul>';
+				for (var j = 0; j < categories[i].interests.length; j++)
+				{
+					cat += '<li><a href="/interests/'+ categories[i].interests[j].nickname+'">' + categories[i].interests[j].name + '</a></li>';
+				}
+				cat += '</ul>\
+					</li>';
+				$("#menu").append(cat);
+				//$('.panel-collapse').collapse('hide');
+			}
+			
+		});
+	});
+</script>
+		
+<div id="navbar" role="navigation">
+		<a href="/" id="title">
+			RPHub
+		</a>
+		<ul id="menu">
+		</ul>
+		
+		<form style="float: left;">
+			
+			<div class="input-group">
+				<input class="form-control" id="navsearch" name="search" placeholder="Search" type="text">
+			</div>
+			
+		</form>
+		
+		<div class="ui-widget">
+  <label for="tags">Tag programming languages: </label>
+  <input id="tags" size="50">
+</div>
+		
+		<!-- <span style="float: right;" class="menu">First Last</span> -->
+		
+	</div>

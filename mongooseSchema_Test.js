@@ -268,7 +268,7 @@ app.use(express.static(__dirname));
 //}).listen(8080, '127.0.0.1');
 app.get('/', function(req, res){
 	console.log("redirecting to login page");
-	  res.redirect('login.html');
+	res.redirect('login.html');
 
 });
 
@@ -279,18 +279,6 @@ app.get('/', function(req, res){
 });*/
 console.log('Server running at http://127.0.0.1:8080/');
 
-
-/*app.get("/index",function(req,res){
-
-	console.log("trying to get index.html");
-	if (req.session.user){
-		res.redirect("index.html");
-	}
-	else{
-		res.redirect("login.html");
-	}
-
-});*/
 
 
 app.get("/categories",function(req,res){
@@ -315,29 +303,6 @@ app.get("/categories",function(req,res){
 		res.end();
 	});
 
-});
-
-
-app.get('/c', function(req, res) {
-  if (!req.query.cat){
-	res.end();
-	return;
-  }
-  var cat = req.query.cat;
-  /*
-  console.log("the url for this request is" + req.url);
-  console.log("the path for this request is" + req.path);
-  console.log("the pathname for this request is" + req.pathname);
-  */
-  Interest.findOne({nickname:cat},function(err,interest){
-	  if (interest == null){
-		res.end();
-		return;
-	  }
-	  var interestName = interest.name;
-	  var posts = interest.returnPosts();
-	  res.render('interests2', { name: interestName, posts: posts });
-	});
 });
 
 app.get('/interests/:intName', function(req, res) {
@@ -370,11 +335,13 @@ app.get("/posts", function(req, res){
 var findTags = function(message){
 	var tags = message.split("#");
 	tags.shift();
+	tags.push("isye");
 	for (var i =0; i< tags.length; i++){
 		var endTag = tags[i].search(" ");
 		if (endTag !== -1){
-			tags[i] = tags[i].slice(0,endTag).toUpperCase();
+			tags[i] = tags[i].slice(0,endTag);
 		}
+		tags[i] = tags[i].toUpperCase();
 	}
 	return tags;
 }
@@ -433,13 +400,6 @@ app.post("/login",function(req,res){
 			});
 		}
 	});
-	/*
-	var post = new Post({content:password, title:email, fulfilled:false});
-	post.save();
-	posts.push(post);
-	
-	res.redirect("index.html");*/
-	//res.end();
 
 });
 

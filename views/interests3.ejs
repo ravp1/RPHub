@@ -26,45 +26,101 @@
 	<script src="/include.js">
 	</script>
 	-->
+	
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+	<link rel="stylesheet" href="/resources/demos/style.css">
+	<script>
+		$(function() {
+		var availableTags = [
+		  "ActionScript",
+		  "AppleScript",
+		  "Asp",
+		  "BASIC",
+		  "C",
+		  "C++",
+		  "Clojure",
+		  "COBOL",
+		  "ColdFusion",
+		  "Erlang",
+		  "Fortran",
+		  "Groovy",
+		  "Haskell",
+		  "Java",
+		  "JavaScript",
+		  "Lisp",
+		  "Perl",
+		  "PHP",
+		  "Python",
+		  "Ruby",
+		  "Scala",
+		  "Scheme"
+		];
+		function split( val ) {
+		  return val.split( /,\s*/ );
+		}
+		function extractLast( term ) {
+		  return split( term ).pop();
+		}
+
+		$( "#tags" )
+		  // don't navigate away from the field on tab when selecting an item
+		  .bind( "keydown", function( event ) {
+			if ( event.keyCode === $.ui.keyCode.TAB &&
+				$( this ).autocomplete( "instance" ).menu.active ) {
+			  event.preventDefault();
+			}
+		  })
+		  .autocomplete({
+			minLength: 0,
+			source: function( request, response ) {
+			  // delegate back to autocomplete, but extract the last term
+			  response( $.ui.autocomplete.filter(
+				availableTags, extractLast( request.term ) ) );
+			},
+			focus: function() {
+			  // prevent value inserted on focus
+			  return false;
+			},
+			select: function( event, ui ) {
+			  var terms = split( this.value );
+			  // remove the current input
+			  terms.pop();
+			  // add the selected item
+			  terms.push( ui.item.value );
+			  // add placeholder to get the comma-and-space at the end
+			  terms.push( "" );
+			  this.value = terms.join( ", " );
+			  return false;
+			}
+		  });
+		});
+	</script>
+	
+	
+	
+	
 </head>
 
 <body>
-	
-	<!-- header -->
-	<!-- <script>
-	$('#main').on('click',function(){
-		alert('hi');
-		$('.navbar-collapse').collapse('hide');
-	})
-	</script> -->
-	<div id="navbar" role="navigation">
-		<a href="/" id="title">
-			RPHub
-		</a>
-		<ul id="menu">
-			<script src="/makeNavbar.js">
-			</script>
-		</ul>
-		
-		<form style="float: left;">
-			
-			<div class="input-group">
-				<input class="form-control" id="navsearch" name="search" placeholder="Search" type="text">
-			</div>
-			
-		</form>
-		
-		<!-- <span style="float: right;" class="menu">First Last</span> -->
-		
-	</div>
-	
-	
 
+	<!-- header -->
+	
+		<%- include makeNavbar.ejs %>
+		
 	<!-- /header -->
 	
 	
 	<div id="sidebar">
 	
+	
+		<!-- <div class="ui-widget">
+  <label for="tags">Tag programming languages: </label>
+  <input id="tags" size="50">
+</div>
+ -->
+
 		<h3>First Last</h3>
 		<ul>
 			<li class="nav-item">
@@ -231,47 +287,7 @@
 		
 		<script>
 	$(document).ready(function(){
-		/*
-		$.get("/posts",function(posts){
-			posts = $.parseJSON(posts);
-			var postHTML = ''
-			for (var i =0; i< posts.length; i++){
-				postHTML +=
-				'\
-				<br>\
-				<li class="list-group-item collapse-group">\
-					<fieldset>\
-						<legend>\
-							' + posts[i].title + '\
-							<small>- ' + posts[i].poster + '</small>\
-							\
-							<small style="float: right">' + posts[i].timeString + '</small>\
-						</legend>\
-						\
-						<p style="white-space: pre-line">' + posts[i].content + '</p>\
-						<div style="text-align:center"> <button class="btn btn-default btn-teal btn-respond" align="center"> Respond <span class="caret"></span> </button> </div>\
-						\
-						<form class="collapse" action="mailto:panser@rpi.edu" method="post" enctype="text/plain" >\
-							<br>\
-							Send a message to <b>panser@rpi.edu</b>\
-							<textarea class="input-xlarge" name="message" id="message" rows="5" style="min-width: 612px"></textarea>\
-							\
-							<br>\
-							\
-							<div class="form-actions">\
-								<button type="submit" name="submit" value="Submit" class="btn btn-primary btn-large">Submit</button>\
-								<button class="btn btn-default collapse-button">Collapse</button>\
-							</div>\
-						</form>\
-					\
-					</fieldset>\
-				</li>\
-				';
-				//console.log(JSON.stringify(posts));
-			}
-			$(".posts").append(postHTML);
-			
-			//collapse stuff
+		//collapse stuff
 			$('.collapse-group').on('click', function(c) {
 				c.preventDefault();
 				var collapse = $(this).find('.collapse');
@@ -287,9 +303,6 @@
 				console.log(collapse.css("display"));
 				e.stopPropagation();
 			});
-			
-		});*/
-
 	});
 	
 	</script>

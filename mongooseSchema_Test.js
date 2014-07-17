@@ -268,7 +268,7 @@ app.use(express.static(__dirname));
 //}).listen(8080, '127.0.0.1');
 app.get('/', function(req, res){
 	console.log("redirecting to login page");
-	res.redirect('login.html');
+	res.render('index', {});
 
 });
 
@@ -335,7 +335,6 @@ app.get("/posts", function(req, res){
 var findTags = function(message){
 	var tags = message.split("#");
 	tags.shift();
-	tags.push("isye");
 	for (var i =0; i< tags.length; i++){
 		var endTag = tags[i].search(" ");
 		if (endTag !== -1){
@@ -370,7 +369,7 @@ app.post("/sendMessage",function(req,res){
 		});
 	}
 	post.save();
-	res.redirect("index.html");
+	res.render('index', {});
 	//res.end();
 
 });
@@ -389,7 +388,7 @@ app.post("/login",function(req,res){
 		if(err) return console.error(err);
 		req.session.user = loggedUser;
 		if(loggedUser!=null){
-			res.redirect("index.html");
+			res.render('index', { });
 		}
 		else{
 			console.log("Failed login; please try again.");
@@ -425,7 +424,7 @@ app.post("/register", function(req, res){
 			var newUser = new User({email: sentEmail, password: sentPassword, name:{first:sentFirst, last:sentLast}, blocked: false, loginFail: false, loginTries:0});
 			newUser.save();
 			console.log("Congratulations! You have created a new user!");
-			res.redirect('index.html');
+			res.render('index', {});
 		}
 	});
 

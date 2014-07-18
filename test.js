@@ -267,8 +267,10 @@ app.use(express.static(__dirname));
 //  res.end('Hello World\n');
 //}).listen(8080, '127.0.0.1');
 app.get('/', function(req, res){
-	console.log("redirecting to login page");
-	  res.redirect('login.html');
+	Post.find({},function(err,data){
+		res.render('index', {posts:data});
+	});
+
 
 });
 
@@ -279,18 +281,6 @@ app.get('/', function(req, res){
 });*/
 console.log('Server running at http://127.0.0.1:8080/');
 
-
-/*app.get("/index",function(req,res){
-
-	console.log("trying to get index.html");
-	if (req.session.user){
-		res.redirect("index.html");
-	}
-	else{
-		res.redirect("login.html");
-	}
-
-});*/
 
 
 app.get("/categories",function(req,res){
@@ -315,29 +305,6 @@ app.get("/categories",function(req,res){
 		res.end();
 	});
 
-});
-
-
-app.get('/c', function(req, res) {
-  if (!req.query.cat){
-	res.end();
-	return;
-  }
-  var cat = req.query.cat;
-  /*
-  console.log("the url for this request is" + req.url);
-  console.log("the path for this request is" + req.path);
-  console.log("the pathname for this request is" + req.pathname);
-  */
-  Interest.findOne({nickname:cat},function(err,interest){
-	  if (interest == null){
-		res.end();
-		return;
-	  }
-	  var interestName = interest.name;
-	  var posts = interest.returnPosts();
-	  res.render('interests2', { name: interestName, posts: posts });
-	});
 });
 
 app.get('/interests/:intName', function(req, res) {
@@ -373,8 +340,9 @@ var findTags = function(message){
 	for (var i =0; i< tags.length; i++){
 		var endTag = tags[i].search(" ");
 		if (endTag !== -1){
-			tags[i] = tags[i].slice(0,endTag).toUpperCase();
+			tags[i] = tags[i].slice(0,endTag);
 		}
+		tags[i] = tags[i].toUpperCase();
 	}
 	return tags;
 }
@@ -403,7 +371,7 @@ app.post("/sendMessage",function(req,res){
 		});
 	}
 	post.save();
-	res.redirect("index.html");
+	res.redirect("/");
 	//res.end();
 
 });
@@ -422,7 +390,7 @@ app.post("/login",function(req,res){
 		if(err) return console.error(err);
 		req.session.user = loggedUser;
 		if(loggedUser!=null){
-			res.redirect("index.html");
+			res.redirect("/");
 		}
 		else{
 			console.log("Failed login; please try again.");
@@ -433,13 +401,6 @@ app.post("/login",function(req,res){
 			});
 		}
 	});
-	/*
-	var post = new Post({content:password, title:email, fulfilled:false});
-	post.save();
-	posts.push(post);
-	
-	res.redirect("index.html");*/
-	//res.end();
 
 });
 
@@ -465,7 +426,7 @@ app.post("/register", function(req, res){
 			var newUser = new User({email: sentEmail, password: sentPassword, name:{first:sentFirst, last:sentLast}, blocked: false, loginFail: false, loginTries:0});
 			newUser.save();
 			console.log("Congratulations! You have created a new user!");
-			res.redirect('index.html');
+			res.redirect("/");
 		}
 	});
 

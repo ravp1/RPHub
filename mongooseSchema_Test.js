@@ -267,7 +267,7 @@ app.use(express.static(__dirname));
 //  res.end('Hello World\n');
 //}).listen(8080, '127.0.0.1');
 app.get('/', function(req, res){
-	Posts.find({},function(err,data){
+	Post.find({},function(err,data){
 		res.render('index', {posts:data});
 	});
 
@@ -371,7 +371,7 @@ app.post("/sendMessage",function(req,res){
 		});
 	}
 	post.save();
-	res.render('index', {});
+	res.redirect("/");
 	//res.end();
 
 });
@@ -426,7 +426,7 @@ app.post("/register", function(req, res){
 			var newUser = new User({email: sentEmail, password: sentPassword, name:{first:sentFirst, last:sentLast}, blocked: false, loginFail: false, loginTries:0});
 			newUser.save();
 			console.log("Congratulations! You have created a new user!");
-			res.render('index', {});
+			res.redirect("/");
 		}
 	});
 

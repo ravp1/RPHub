@@ -12,7 +12,7 @@ var ejs = require("ejs");
 
 app.set('view engine', 'ejs');
 
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/test');
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));

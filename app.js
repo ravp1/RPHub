@@ -95,7 +95,7 @@ var Category = mongoose.model('Category', categorySchema);
 var Interest = mongoose.model('Interest', interestSchema);
 //}
 
-REMOVE CATEGORIES, POSTS, INTERESTS, USERS (NO LONGER PART OF PROCESS)
+//REMOVE CATEGORIES, POSTS, INTERESTS, USERS (NO LONGER PART OF PROCESS)
 User.remove({}, function(err){
 	console.log("removed users");
 });

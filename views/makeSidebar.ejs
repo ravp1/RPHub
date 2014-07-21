@@ -1,9 +1,16 @@
+<script>
+	$(document).ready(function(){
+		$.get("/amILoggedIn", function(data){
+			//console.log(data);
+			if (data =="no") {window.location.href = '/login.html';}
+		});
+	});
+</script>
 	<div id="sidebar">
-	
-		<h3>First Last</h3>
+		<h3><%=user.name.first%> <%=user.name.last%></h3>
 		<ul>
 			<li class="nav-item">
-				<a href="#home" class="selected">
+				<a href="/" class="selected">
 					<!-- <img class="icon" src="/images/x.png"> -->
 					<span class="glyphicon glyphicon-home">
 					</span>Home

@@ -12,7 +12,9 @@ var ejs = require("ejs");
 
 app.set('view engine', 'ejs');
 
-mongoose.connect(process.env.MONGOLAB_URI +"/test" || 'mongodb://localhost/test');
+mongoose.connect(process.env.MONGOLAB_URI 
+                || process.env.MONGOHQ_URL 
+				|| 'mongodb://localhost/test');
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -282,7 +284,7 @@ app.locals.user = null;
 //}).listen(8080, '127.0.0.1');
 app.get('/', function(req, res){
 	if (app.locals.user == null){
-		res.render('login', {});
+		res.render('login.ejs', {});
 	}
 	else{
 		Post.find({},function(err,data){

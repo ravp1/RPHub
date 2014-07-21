@@ -72,7 +72,7 @@
 			//console.log(data);
 			if (data =="no") {window.location.href = '/login.html';}
 		});
-		
+		/*
 		$.get("/categories",function(categories){
 			
 			categories = $.parseJSON(categories);
@@ -93,6 +93,7 @@
 			}
 			
 		});
+		*/
 	});
 </script>
 		
@@ -101,6 +102,16 @@
 			RPHub
 		</a>
 		<ul id="menu">
+			<% for (var i = 0; i < categories.length; i++) {%>
+				<li>
+					<a href=""><%=categories[i].name %></a>
+					<ul>
+						<% for (var j = 0; j < categories[i].interests.length; j++) {%>
+							<li><a href="/interests/<%=categories[i].interests[j].nickname%>"><%=categories[i].interests[j].name%></a></li>
+						<% } %>
+					</ul>
+				</li>
+			<% } %>
 		</ul>
 		
 		<form style="float: left;">

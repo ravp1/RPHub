@@ -243,6 +243,7 @@ var post3 = new Post({poster:'Sample Professor', content:"More physics stuff fin
 post3.save();
 posts.push(post3);
 
+/*
 //}
 //console.log("engineering: " + JSON.stringify(engineering));
 //console.log("first interest posts: " + Interest.findOne().exec().returnPosts());
@@ -252,7 +253,7 @@ Interest.findOne({name: "Electrical Engineering"},function(err,result){
 	//console.log("first interest posts: " + JSON.stringify(result.returnPosts() ) );
 	result.returnPosts()
 });
-/*
+
 */
 
 

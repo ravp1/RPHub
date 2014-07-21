@@ -12,7 +12,7 @@ var ejs = require("ejs");
 
 app.set('view engine', 'ejs');
 
-mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/test');
+mongoose.connect(process.env.MONGOLAB_URI +"/test" || 'mongodb://localhost/test');
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -256,7 +256,7 @@ Interest.findOne({name: "Electrical Engineering"},function(err,result){
 //engineering.interests[0].returnPosts();
 //console.log(posts);
 //Setup the server to listen on port 80 (Web traffic port), allow it to parse POSTED body data, and let it render EJS pages 
-server.listen(80);
+server.listen(process.env.PORT || 80);
 app.use(bodyParser());
 //app.set('view engine', 'ejs');
 

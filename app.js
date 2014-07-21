@@ -95,7 +95,7 @@ var Category = mongoose.model('Category', categorySchema);
 var Interest = mongoose.model('Interest', interestSchema);
 //}
 
-/*REMOVE CATEGORIES, POSTS, INTERESTS, USERS (NO LONGER PART OF PROCESS)
+REMOVE CATEGORIES, POSTS, INTERESTS, USERS (NO LONGER PART OF PROCESS)
 User.remove({}, function(err){
 	console.log("removed users");
 });
@@ -111,7 +111,7 @@ Post.remove({}, function(err){
 Interest.remove({}, function(err){
 	console.log("removed interests");
 });
-*/
+/**/
 
 /*//CREATE SAMPLE USER (ALREADY DONE)
 var sampleUser = new User({email: 'sample@rpi.edu', password: 'password', blocked: false, loginFail: false, name:{first:"Sample", last:"User"}});

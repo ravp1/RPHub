@@ -95,7 +95,7 @@ var Category = mongoose.model('Category', categorySchema);
 var Interest = mongoose.model('Interest', interestSchema);
 //}
 
-//REMOVE CATEGORIES, POSTS, INTERESTS, USERS (NO LONGER PART OF PROCESS)
+/*//REMOVE CATEGORIES, POSTS, INTERESTS, USERS (NO LONGER PART OF PROCESS)
 
 Category.remove({},function(err){
 	console.log("removed categories");
@@ -104,7 +104,7 @@ Category.remove({},function(err){
 Interest.remove({}, function(err){
 	console.log("removed interests");
 });
-/*
+
 User.remove({}, function(err){
 	console.log("removed users");
 });
@@ -120,7 +120,7 @@ sampleUser.save();
 
 */
 
-/*// CREATE DEFAULT CATEGORIES, INETERESTS, POSTS (ALREADY CREATED; NO NEED TO RUN EVERY TIME)
+// CREATE DEFAULT CATEGORIES, INETERESTS, POSTS (ALREADY CREATED; NO NEED TO RUN EVERY TIME)
 //{ SETUP ENGINEERING CATEGORY
 var engineering = new Category({ name: 'Engineering'});
 
@@ -230,7 +230,7 @@ for (var i =0; i< itws.interests.length; i++){
 
 itws.save();
 //}
-
+/*
 var timeStamp = new Date();
 var timeStr = timeStamp.toDateString();
 var posts = [];

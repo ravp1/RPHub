@@ -113,7 +113,7 @@ Interest.remove({}, function(err){
 });
 */
 
- CREATE SAMPLE USER (ALREADY DONE)
+//CREATE SAMPLE USER (ALREADY DONE)
 var sampleUser = new User({email: 'sample@rpi.edu', password: 'password', blocked: false, loginFail: false, name:{first:"Sample", last:"User"}});
 sampleUser.save();
 /*

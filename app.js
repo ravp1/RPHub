@@ -119,7 +119,7 @@ sampleUser.save();
 
 */
 
-// CREATE DEFAULT CATEGORIES, INETERESTS, POSTS (ALREADY CREATED; NO NEED TO RUN EVERY TIME)
+/*// CREATE DEFAULT CATEGORIES, INETERESTS, POSTS (ALREADY CREATED; NO NEED TO RUN EVERY TIME)
 //{ SETUP ENGINEERING CATEGORY
 var engineering = new Category({ name: 'Engineering'});
 
@@ -229,7 +229,7 @@ for (var i =0; i< itws.interests.length; i++){
 
 itws.save();
 //}
-/*
+
 var timeStamp = new Date();
 var timeStr = timeStamp.toDateString();
 var posts = [];

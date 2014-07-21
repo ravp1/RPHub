@@ -95,21 +95,22 @@ var Category = mongoose.model('Category', categorySchema);
 var Interest = mongoose.model('Interest', interestSchema);
 //}
 
-/*//REMOVE CATEGORIES, POSTS, INTERESTS, USERS (NO LONGER PART OF PROCESS)
-User.remove({}, function(err){
-	console.log("removed users");
-});
+//REMOVE CATEGORIES, POSTS, INTERESTS, USERS (NO LONGER PART OF PROCESS)
 
 Category.remove({},function(err){
 	console.log("removed categories");
 });
 
-Post.remove({}, function(err){
-	console.log("removed posts");
-});
-
 Interest.remove({}, function(err){
 	console.log("removed interests");
+});
+/*
+User.remove({}, function(err){
+	console.log("removed users");
+});
+
+Post.remove({}, function(err){
+	console.log("removed posts");
 });
 */
 

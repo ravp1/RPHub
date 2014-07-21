@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	
+	<!-- JavaScript -->
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	
+	
+	<title>RPHub - things</title>
+	
+	<%- include imports.ejs %>
+
+</head>
+
+<body>
+
+		<!-- header -->
+	
+		<%- include makeNavbar.ejs %>
+		
+	<!-- /header -->
+	
+	
+	<!--sidebar-->
+		<%- include makeSidebar.ejs %>
+	
+	<!--sidebar-->
+	
+
+	<div id="meat"> <!-- entire body -->
+
+		<div > <!-- center part -->
+
+			<div class="well">
+					
+					<!-- <div class="text-right">
+						<a class="btn btn-success">Request Something</a>
+					</div> -->
+					
+					<form id="contact-form" action="/sendMessage" method="post" class="form-horizontal">
+						<!-- <fieldset> -->
+							<legend>Request Form</legend>
+							
+							<table style="width:100%">
+								<tr>
+								<td style="padding-right:100px">
+									<div class="control-group">
+										<label class="control-label" for="subject">Subject</label>
+										<div class="controls">
+											<input type="text" class="input-xlarge" name="subject" id="subject">
+										</div>
+									</div>
+								</td>
+								<td style="padding-right:100px">
+									<label class="control-label" for="firstName">First Name</label>
+									<div class="controls">
+										<input type="text" class="input-xlarge" name="firstName" id="firstName">
+									</div>
+								</td>
+								<td>
+								<div class="control-group" style="position: relative;">
+									<label class="control-label" for="lastName">Last Name</label>
+									<div class="controls">
+										<input type="text" class="input-xlarge" name="lastName" id="lastName" rows="1" ></input>
+									</div>
+								</div>
+								</td>
+								</tr>
+							</table>
+							
+							<div class="control-group">
+								<label class="control-label" for="message">Request</label>
+								<div class="controls">
+									<textarea class="input-xlarge" name="message" id="message" 
+										rows="5" ></textarea>
+								</div>
+							</div>
+
+							<p></p> <!--add some space-->
+
+							<div class="form-actions">
+								<button type="submit" value="Submit" class="btn btn-primary btn-large submit">Submit</button>
+								<a href="#som" class="btn btn-default cancel">Cancel</a>
+							</div>
+						<!-- </fieldset> -->
+					</form>
+					
+				</div>
+			
+		</div>
+		
+		<!-- footer -->
+		<!-- <div id="footer"></div> -->
+		<div class="container">
+			<footer>
+				<div class="row">
+					RPHub © by Henry Choi and Ravi Panse. An <a href="http://rcos.rpi.edu/"> RCOS </a> Project.
+				</div>
+			</footer>
+		</div>
+		<!-- /footer -->
+		
+		
+	</div>
+	
+
+</body>
+
+
+
+
+</html>

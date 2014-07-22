@@ -163,6 +163,10 @@ body {
 	padding: 0;
 }
 
+.submit-button{
+	padding: 10px 10px 10px 0px;
+}
+
 .collapse-group{
 	/* width: 100%; */
 	min-width: 565px;	/* depends on salvattore */

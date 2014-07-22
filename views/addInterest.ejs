@@ -27,31 +27,49 @@
 	<div id="meat"> <!-- entire body -->		
 		
 		<!-- <a href="request.html" id="reqbtn" class="btn btn-success" style="float: right">Request Something</a> -->
-		
-		<div id="cblist">
-			<input type="checkbox" value="first checkbox" id="cb1" /> <label for="cb1">first checkbox</label>
-		</div>
-
-		<input type="text" id="txtName" />
-		<input type="button" value="ok" id="btnSave" />
-
-		<script type="text/javascript">
-		$(document).ready(function() {
-			$('#btnSave').click(function() {
-				addCheckbox($('#txtName').val());
+		<form id="contact-form" action="/updateInterest" method="post" class="form-horizontal">
+			<div id="cblist">
+				<% 
+				var id = 0;
+				for (var i = 0; i < categories.length; i++) {
+				%>
+					<div class="list-group">
+						<a class="list-group-item active"><%=categories[i].name%></a>
+					</div>
+					<!--<input type="checkbox"  id="cb<%=id%>" name="checkbox[]" value="<%=categories[i].name%>"/> <label for="cb<%=id%>"><%=categories[i].name%></label>-->
+					<ul>
+						<% for (var j = 0; j < categories[i].interests.length; j++) {%>
+							<li class="list-group-item">
+								<input type="checkbox"  id="cb<%=id%>" name="checkbox[]" value="<%=categories[i].interests[j].name%>"/> <label for="cb<%=id%>"><%=categories[i].interests[j].name%></label>
+							</li>
+						<% } %>
+					</ul>
+				<% id++;} %>
+			</div>
+			<div class="submit-button">
+				<button type="submit" value="Submit" class="btn btn-primary btn-large submit">Submit</button>
+			</div>
+			<!--
+			<input type="text" id="txtName" />
+			<input type="button" value="ok" id="btnSave" />
+			<script type="text/javascript">
+			$(document).ready(function() {
+				$('#btnSave').click(function() {
+					addCheckbox($('#txtName').val());
+				});
 			});
-		});
 
-		function addCheckbox(name) {
-		   var container = $('#cblist');
-		   var inputs = container.find('input');
-		   var id = inputs.length+1;
+			function addCheckbox(name) {
+			   var container = $('#cblist');
+			   var inputs = container.find('input');
+			   var id = inputs.length+1;
 
-		   $('<input />', { type: 'checkbox', id: 'cb'+id, value: name }).appendTo(container);
-		   $('<label />', { 'for': 'cb'+id, text: name }).appendTo(container);
-		}
-		</script>
-		
+			   $('<input />', { type: 'checkbox', id: 'cb'+id, value: name }).appendTo(container);
+			   $('<label />', { 'for': 'cb'+id, text: name }).appendTo(container);
+			}
+			</script>
+			-->
+		</form>
 		<!-- footer -->
 		<div>
 			RPHub © by Henry Choi and Ravi Panse. An <a href="http://rcos.rpi.edu/"> RCOS </a> Project.

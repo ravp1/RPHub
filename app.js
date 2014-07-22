@@ -287,7 +287,7 @@ app.locals.user = null;
 //}).listen(8080, '127.0.0.1');
 app.get('/', function(req, res){
 	if (app.locals.user == null){
-		res.render('login.ejs', {});
+		res.render('login', {});
 	}
 	else{
 		Post.find({},function(err,data){
@@ -335,7 +335,12 @@ app.get('/register', function(req, res){
 });
 
 app.get('/addInterest', function(req, res){
-	res.render('addInterest',{});
+	if (app.locals.user == null){
+		res.redirect('/');
+	}
+	else{
+		res.render('addInterest',{});
+	}
 });
 
 app.get("/interests",function(req,res){
@@ -370,7 +375,7 @@ app.post("/sendMessage",function(req,res){
 	var sentEmail = req.session.user.email;
 	if (subject == null || message == null)
 	{
-		res.redirect("request.html");
+		res.redirect("/request");
 		return;
 	}
 	var post = new Post({content:message, title:subject, fulfilled:false, timePosted: date, poster:currentUser, timeString:timeS, replyAddress:sentEmail, tags:[]});
@@ -395,7 +400,7 @@ app.post("/login",function(req,res){
 	
 	if (sentEmail == undefined || sentPassword == undefined)
 	{
-		res.redirect("login.html");
+		res.redirect("/");
 		return;
 	}
 	User.findOne({email:sentEmail, password:sentPassword}, function(err, loggedUser){
@@ -407,7 +412,7 @@ app.post("/login",function(req,res){
 		}
 		else{
 			console.log("Failed login; please try again.");
-			res.redirect("login.html");
+			res.redirect("/");
 			app.get("/loginError", function(req, res){
 				res.write('true');
 				res.end();
@@ -429,7 +434,7 @@ app.post("/registerUser", function(req, res){
 		if(err) return console.error(err);
 		if(loggedUser!=null){
 			console.log("There is already an account associated with this email. Please login or click 'Forgot password'");
-			res.redirect("register.html");
+			res.redirect("/register");
 		}
 		else if (sentEmail == "" || sentPassword == "" || sentFirst == "" || sentLast == "")
 		{
@@ -442,7 +447,23 @@ app.post("/registerUser", function(req, res){
 			res.redirect("/");
 		}
 	});
+});
 
+app.post("/updateInterest", function(req, res){
+	//checkbox = req.body.checkbox;
+	var checkbox = req.body.checkbox;
+	/*
+	for(var i =0; i<6; i++){
+		checkbox.push(eval("req.body.checkbox" + i));
+	}
+	*/
+	if(checkbox){
+		for(var i=0; i<checkbox.length; i++){
+			console.log(checkbox[i]);
+		}
+		console.log("The checkbox is " +checkbox);
+	}
+	res.redirect("/addInterest");
 });
 
 app.get('/amILoggedIn', function(req, res){

@@ -12,13 +12,17 @@ var ejs = require("ejs");
 
 app.set('view engine', 'ejs');
 
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect(process.env.MONGOLAB_URI 
+                || process.env.MONGOHQ_URL 
+				|| 'mongodb://localhost/test');
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback(){
 
 });
+
+app.use(session({secret: 'monkey wizard'}));
 
 //{  SCHEMA STUFF
 var Schema = mongoose.Schema;
@@ -91,29 +95,29 @@ var Category = mongoose.model('Category', categorySchema);
 var Interest = mongoose.model('Interest', interestSchema);
 //}
 
-app.use(session({secret: 'monkey wizard'}))
-
-/*REMOVE CATEGORIES, POSTS, INTERESTS, USERS (NO LONGER PART OF PROCESS)
-User.remove({}, function(err){
-	console.log("removed users");
-});
+/*//REMOVE CATEGORIES, POSTS, INTERESTS, USERS (NO LONGER PART OF PROCESS)
 
 Category.remove({},function(err){
 	console.log("removed categories");
 });
 
-Post.remove({}, function(err){
-	console.log("removed posts");
-});
-
 Interest.remove({}, function(err){
 	console.log("removed interests");
 });
+
+User.remove({}, function(err){
+	console.log("removed users");
+});
+
+Post.remove({}, function(err){
+	console.log("removed posts");
+});
 */
 
-/* CREATE SAMPLE USER (ALREADY DONE)
+/*//CREATE SAMPLE USER (ALREADY DONE)
 var sampleUser = new User({email: 'sample@rpi.edu', password: 'password', blocked: false, loginFail: false, name:{first:"Sample", last:"User"}});
 sampleUser.save();
+
 */
 
 /*// CREATE DEFAULT CATEGORIES, INETERESTS, POSTS (ALREADY CREATED; NO NEED TO RUN EVERY TIME)
@@ -240,6 +244,7 @@ var post3 = new Post({poster:'Sample Professor', content:"More physics stuff fin
 post3.save();
 posts.push(post3);
 
+
 //}
 //console.log("engineering: " + JSON.stringify(engineering));
 //console.log("first interest posts: " + Interest.findOne().exec().returnPosts());
@@ -256,82 +261,94 @@ Interest.findOne({name: "Electrical Engineering"},function(err,result){
 //engineering.interests[0].returnPosts();
 //console.log(posts);
 //Setup the server to listen on port 80 (Web traffic port), allow it to parse POSTED body data, and let it render EJS pages 
-server.listen(8080);
+server.listen(process.env.PORT || 8080);
 app.use(bodyParser());
 //app.set('view engine', 'ejs');
-
-app.use(express.static(__dirname));
-
-//http.createServer(function (req, res) {
-//  res.writeHead(200, {'Content-Type': 'text/plain'});
-//  res.end('Hello World\n');
-//}).listen(8080, '127.0.0.1');
-app.get('/', function(req, res){
-	Post.find({},function(err,data){
-		res.render('index', {posts:data});
-	});
-
-
-});
 
 /*var server = app.listen(80, function() {
     console.log('Listening on port %d', server.address().port);
 	
 	
 });*/
+
 console.log('Server running at http://127.0.0.1:8080/');
 
+app.use(express.static(__dirname));
 
+Category.find({},function(err,data){
+	app.locals.categories = data;
+});
 
-app.get("/categories",function(req,res){
+app.locals.user = null;
 
-	//console.log("req.session.user is " + req.session.user);
-	if (req.session.user == null){
-		res.end("[]");
-		return;
+//http.createServer(function (req, res) {
+//  res.writeHead(200, {'Content-Type': 'text/plain'});
+//  res.end('Hello World\n');
+//}).listen(8080, '127.0.0.1');
+app.get('/', function(req, res){
+	if (app.locals.user == null){
+		res.render('login', {});
 	}
+	else{
+		Post.find({},function(err,data){
+			res.render('index', {posts:data});
+		});
+	}
+});
 
-	Category.find({},function(err,data){
-	
-	
-		/*var response = {names:[]};
-		for (var i = 0; i < data.length; i++)
-		{
-			response.names.push(data[i].name);
+app.get('/interests/:intName', function(req, res) {
+	if (app.locals.user == null){
+		res.redirect('/');
+	}
+	else{
+		if (!req.params.intName){
+			res.end();
+			return;
 		}
-		console.log(response);
-		res.write(JSON.stringify(response) );*/
+		var intName = req.params.intName;
+		//console.log("the url for this request is" + req.url);
+		//console.log("the path for this request is" + req.path);
+		Interest.findOne({nickname:intName},function(err,interest){
+			if (interest == null){
+				res.end();
+				return;
+			}
+			Post.find({tags:interest.name}, function(err, relevantPosts){
+				if(err) return console.error(err);
+				res.render('interests3', { interest: interest, posts: relevantPosts });
+			});
+		});
+	}
+});
+
+app.get('/request', function(req, res){
+	if (app.locals.user == null){
+		res.redirect('/');
+	}
+	else{
+		res.render('request',{});
+	}
+});
+
+app.get('/register', function(req, res){
+	res.render('register',{});
+});
+
+app.get('/addInterest', function(req, res){
+	if (app.locals.user == null){
+		res.redirect('/');
+	}
+	else{
+		res.render('addInterest',{});
+	}
+});
+
+app.get("/interests",function(req,res){
+	Interest.find({},function(err,data){
 		res.write(JSON.stringify(data) );
 		res.end();
 	});
 
-});
-
-app.get('/interests/:intName', function(req, res) {
-	if (!req.params.intName){
-		res.end();
-		return;
-	}
-	var intName = req.params.intName;
-	//console.log("the url for this request is" + req.url);
-	//console.log("the path for this request is" + req.path);
-	Interest.findOne({nickname:intName},function(err,interest){
-		if (interest == null){
-			res.end();
-			return;
-		}
-		Post.find({tags:interest.name}, function(err, relevantPosts){
-			if(err) return console.error(err);
-			res.render('interests3', { interest: interest, posts: relevantPosts });
-		});
-	});
-});
-
-app.get("/posts", function(req, res){
-	Post.find({}, function(err,data){
-		res.write(JSON.stringify(data));
-		res.end();
-	});
 });
 
 var findTags = function(message){
@@ -358,7 +375,7 @@ app.post("/sendMessage",function(req,res){
 	var sentEmail = req.session.user.email;
 	if (subject == null || message == null)
 	{
-		res.redirect("request.html");
+		res.redirect("/request");
 		return;
 	}
 	var post = new Post({content:message, title:subject, fulfilled:false, timePosted: date, poster:currentUser, timeString:timeS, replyAddress:sentEmail, tags:[]});
@@ -383,18 +400,19 @@ app.post("/login",function(req,res){
 	
 	if (sentEmail == undefined || sentPassword == undefined)
 	{
-		res.redirect("login.html");
+		res.redirect("/");
 		return;
 	}
 	User.findOne({email:sentEmail, password:sentPassword}, function(err, loggedUser){
 		if(err) return console.error(err);
 		req.session.user = loggedUser;
 		if(loggedUser!=null){
+			app.locals.user = loggedUser;
 			res.redirect("/");
 		}
 		else{
 			console.log("Failed login; please try again.");
-			res.redirect("login.html");
+			res.redirect("/");
 			app.get("/loginError", function(req, res){
 				res.write('true');
 				res.end();
@@ -404,7 +422,7 @@ app.post("/login",function(req,res){
 
 });
 
-app.post("/register", function(req, res){
+app.post("/registerUser", function(req, res){
 	sentEmail = req.body.email;
 	sentPassword = req.body.password;
 	sentFirst = req.body.firstName;
@@ -416,7 +434,7 @@ app.post("/register", function(req, res){
 		if(err) return console.error(err);
 		if(loggedUser!=null){
 			console.log("There is already an account associated with this email. Please login or click 'Forgot password'");
-			res.redirect("register.html");
+			res.redirect("/register");
 		}
 		else if (sentEmail == "" || sentPassword == "" || sentFirst == "" || sentLast == "")
 		{
@@ -429,7 +447,23 @@ app.post("/register", function(req, res){
 			res.redirect("/");
 		}
 	});
+});
 
+app.post("/updateInterest", function(req, res){
+	//checkbox = req.body.checkbox;
+	var checkbox = req.body.checkbox;
+	/*
+	for(var i =0; i<6; i++){
+		checkbox.push(eval("req.body.checkbox" + i));
+	}
+	*/
+	if(checkbox){
+		for(var i=0; i<checkbox.length; i++){
+			console.log(checkbox[i]);
+		}
+		console.log("The checkbox is " +checkbox);
+	}
+	res.redirect("/addInterest");
 });
 
 app.get('/amILoggedIn', function(req, res){
@@ -442,6 +476,21 @@ app.get('/amILoggedIn', function(req, res){
 		return;
 	}
 });
+/*  All the old stuff (may be useful later)
+app.get("/categories",function(req,res){
+
+	//console.log("req.session.user is " + req.session.user);
+	if (req.session.user == null){
+		res.end("[]");
+		return;
+	}
+	console.log("This doesn't happen by default, does it?");
+	Category.find({},function(err,data){
+		res.write(JSON.stringify(data) );
+		res.end();
+	});
+
+});
 
 app.post('/interestInfo', function(req,res){
 	var queryName = req.body.name;
@@ -452,7 +501,7 @@ app.post('/interestInfo', function(req,res){
 	});
 
 });
-/*
+
 app.post("/unloadError",function(req, res){
 	console.log("The request is: " +req.body.unload);
 	if(req.body.unload==='true'){

@@ -1,10 +1,4 @@
 
-/* .h1 {
-	background: violet;
-	color: white;
-	
-} */
-
 
 /***BODY***/
 body {
@@ -234,4 +228,23 @@ body {
 footer {
 	margin: 50px 0;
 }
+
+
+
+
+
+
+
+/*******************************************************/
+/***index.ejs***/
+#rphublogo{
+	border:none;
+	margin:0 auto 0 auto;
+	min-width: 565px;
+}
+
+#reqbtn{
+	float:right;
+}
+
 

@@ -334,6 +334,14 @@ app.get('/register', function(req, res){
 	res.render('register',{});
 });
 
+app.get("/interests",function(req,res){
+	Interest.find({},function(err,data){
+		res.write(JSON.stringify(data) );
+		res.end();
+	});
+
+});
+
 var findTags = function(message){
 	var tags = message.split("#");
 	tags.shift();

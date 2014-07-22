@@ -334,6 +334,10 @@ app.get('/register', function(req, res){
 	res.render('register',{});
 });
 
+app.get('/addInterest', function(req, res){
+	res.render('addInterest',{});
+});
+
 app.get("/interests",function(req,res){
 	Interest.find({},function(err,data){
 		res.write(JSON.stringify(data) );

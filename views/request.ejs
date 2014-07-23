@@ -7,14 +7,11 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	
-	<!-- JavaScript -->
-	<script src="js/jquery-1.11.1.min.js"></script>
-	<script src="js/bootstrap.js"></script>
-	
-	
-	<title>RPHub - things</title>
-	
 	<%- include imports.ejs %>
+	
+	<title>RPHub - Request</title>
+	
+	<link href="/views/request.css" rel="stylesheet">
 
 </head>
 
@@ -30,7 +27,7 @@
 
 	<div id="meat"> <!-- entire body -->
 
-		<form id="contact-form" style="max-width: 1050px;" action="/sendMessage" method="post" class="form-horizontal">
+		<form id="request-form" style="max-width: 1050px;" action="/sendMessage" method="post" class="form-horizontal well">
 			
 			<legend>Request Form</legend>
 			
@@ -41,40 +38,43 @@
 				</div>
 			</div>
 			
-			<div class="control-group">
-				<label class="control-label" for="message">Request</label>
+			<table style="width:100%">
+				<tr>
+					<td style="width:33%">
+						<label class="control-label" for="">Compensation Type</label>
+						<div>
+							<input type="radio" name="compen" value="cred">Credits
+							<input type="radio" name="compen" value="cash">Cash
+							<input type="radio" name="compen" value="both">Both
+						<div>
+					</td>
+					<td style="width:33%">
+						<label class="control-label" for="">Amount</label>
+						<div class="controls">
+							<input type="text" class="input-xlarge" name="firstName" id="firstName">
+						</div>
+					</td>
+					<td style="width:33%">
+						<label class="control-label" for="">Hr/Wk</label>
+						<div class="controls">
+							<input type="text" class="input-xlarge" name="hrwk" id="hrwk">
+						</div>
+					</td>
+				</tr>
+			</table>
+			
+			<div class="control-group" style="">
+				<label class="control-label" for="tags">Tag Interests: </label>
 				<div class="controls">
-					<textarea class="input-xlarge" name="message" id="message" 
-						rows="5" ></textarea>
+					<input type="text" class="input-xlarge" name="tags" id="tags">
 				</div>
 			</div>
 			
-			<table>
-				<tr>
-				<td>
-					<label class="control-label" for="firstName">Compensation Type</label>
-					<div class="controls">
-						<input type="text" class="input-xlarge" name="firstName" id="firstName">
-					</div>
-				</td>
-				<td>
-					<label class="control-label" for="firstName">Amount</label>
-					<div class="controls">
-						<input type="text" class="input-xlarge" name="firstName" id="firstName">
-					</div>
-				</td>
-				<td>
-				<div class="control-group" style="position: relative;">
-					<div>
-						<label class="control-label" for="tags">Tag Interests: </label>
-						<div class="controls">
-							<input id="tags" size="100">
-						</div>
-					</div>
-				</div>
-				</td>
-				</tr>
-			</table>
+			<div class="control-group">
+				<label class="control-label" for="message">Request</label>			
+				<textarea class="input-xlarge" name="message" id="message" 
+					rows="5" ></textarea>
+			</div>
 			
 			<div class="form-actions">
 				<button type="submit" value="Submit" class="btn btn-primary btn-large submit">Submit</button>

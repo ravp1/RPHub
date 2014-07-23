@@ -115,13 +115,13 @@ Post.remove({}, function(err){
 });
 */
 
-//CREATE SAMPLE USER (ALREADY DONE)
+/*//CREATE SAMPLE USER (ALREADY DONE)
 var sampleUser = new User({email: 'sample@rpi.edu', password: 'password', blocked: false, loginFail: false, name:{first:"Sample", last:"User"}});
 sampleUser.save();
 
-/**/
+*/
 
-// CREATE DEFAULT CATEGORIES, INETERESTS, POSTS (ALREADY CREATED; NO NEED TO RUN EVERY TIME)
+/*// CREATE DEFAULT CATEGORIES, INETERESTS, POSTS (ALREADY CREATED; NO NEED TO RUN EVERY TIME)
 //{ SETUP ENGINEERING CATEGORY
 var engineering = new Category({ name: 'Engineering'});
 
@@ -245,7 +245,7 @@ var post3 = new Post({poster:'Sample Professor', content:"More physics stuff fin
 post3.save();
 posts.push(post3);
 
-/*
+
 //}
 //console.log("engineering: " + JSON.stringify(engineering));
 //console.log("first interest posts: " + Interest.findOne().exec().returnPosts());

@@ -24,7 +24,7 @@ db.once('open', function callback(){
 
 app.use(session({secret: 'monkey wizard'}));
 
-//{  SCHEMA STUFF
+/*//{  SCHEMA STUFF
 var Schema = mongoose.Schema;
 
 //a category may be, for example, engineering or performance
@@ -94,8 +94,9 @@ var Category = mongoose.model('Category', categorySchema);
 
 var Interest = mongoose.model('Interest', interestSchema);
 //}
+*/
 
-//REMOVE CATEGORIES, POSTS, INTERESTS, USERS (NO LONGER PART OF PROCESS)
+/*//REMOVE CATEGORIES, POSTS, INTERESTS, USERS (NO LONGER PART OF PROCESS)
 
 Category.remove({},function(err){
 	console.log("removed categories");
@@ -112,15 +113,15 @@ User.remove({}, function(err){
 Post.remove({}, function(err){
 	console.log("removed posts");
 });
-/**/
+*/
 
-/*//CREATE SAMPLE USER (ALREADY DONE)
+//CREATE SAMPLE USER (ALREADY DONE)
 var sampleUser = new User({email: 'sample@rpi.edu', password: 'password', blocked: false, loginFail: false, name:{first:"Sample", last:"User"}});
 sampleUser.save();
 
-*/
+/**/
 
-/*// CREATE DEFAULT CATEGORIES, INETERESTS, POSTS (ALREADY CREATED; NO NEED TO RUN EVERY TIME)
+// CREATE DEFAULT CATEGORIES, INETERESTS, POSTS (ALREADY CREATED; NO NEED TO RUN EVERY TIME)
 //{ SETUP ENGINEERING CATEGORY
 var engineering = new Category({ name: 'Engineering'});
 

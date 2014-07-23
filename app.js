@@ -136,7 +136,7 @@ engineering.interests[engineering.interests.length] = new Interest({name:'Materi
 engineering.interests[engineering.interests.length] = new Interest({name:'Mechanical Engineering', nickname:"mech"});
 engineering.interests[engineering.interests.length] = new Interest({name:'Nuclear Engineering', nickname:"nuke"});
 for (var i =0; i< engineering.interests.length; i++){
-	engineering.interests[i].noSpace = engineering.interests[i].name.replace(/ /g, "").replace(/,/g, "").toLowerCase();
+	engineering.interests[i].noSpace = engineering.interests[i].name.replace(/ /g, "").replace(/,/g, "").replace(/&/g, "").toLowerCase();
 	engineering.interests[i].nickname = engineering.interests[i].nickname.toUpperCase();
 	engineering.interests[i].save();
 }
@@ -157,7 +157,7 @@ science.interests[science.interests.length] = new Interest({name:'Hydrogeology',
 science.interests[science.interests.length] = new Interest({name:'Mathematics', nickname:"math"});
 science.interests[science.interests.length] = new Interest({name:'Physics & Applied Physics', nickname:"phys" });
 for (var i =0; i< science.interests.length; i++){
-	science.interests[i].noSpace = science.interests[i].name.replace(/ /g, "").replace(/,/g, "").toLowerCase();
+	science.interests[i].noSpace = science.interests[i].name.replace(/ /g, "").replace(/,/g, "").replace(/&/g, "").toLowerCase();
 	science.interests[i].nickname = science.interests[i].nickname.toUpperCase();
 	science.interests[i].save();
 }
@@ -170,7 +170,7 @@ var management = new Category({ name: 'Management'});
 management.interests[management.interests.length] = new Interest({name:'Business & Management', nickname:"mgmt"});
 management.interests[management.interests.length] = new Interest({name:'Financial Engineering', nickname:"fnce"});
 for (var i =0; i< management.interests.length; i++){
-	management.interests[i].noSpace = management.interests[i].name.replace(/ /g, "").replace(/,/g, "").toLowerCase();
+	management.interests[i].noSpace = management.interests[i].name.replace(/ /g, "").replace(/,/g, "").replace(/&/g, "").toLowerCase();
 	management.interests[i].nickname = management.interests[i].nickname.toUpperCase();
 	management.interests[i].save();
 }
@@ -194,7 +194,7 @@ hass.interests[hass.interests.length] = new Interest({name:'Science, Technology 
 hass.interests[hass.interests.length] = new Interest({name:'Sustainability Studies', nickname:"sust"});
 
 for (var i =0; i< hass.interests.length; i++){
-	hass.interests[i].noSpace = hass.interests[i].name.replace(/ /g, "").replace(/,/g, "").toLowerCase();
+	hass.interests[i].noSpace = hass.interests[i].name.replace(/ /g, "").replace(/,/g, "").replace(/&/g, "").toLowerCase();
 	hass.interests[i].nickname = hass.interests[i].nickname.toUpperCase();
 	hass.interests[i].save();
 }
@@ -210,7 +210,7 @@ var arch = new Category({ name: 'Architecture'});
 arch.interests[arch.interests.length] = new Interest({name:'Architecture', nickname:"arch"});
 arch.interests[arch.interests.length] = new Interest({name:'Lighting', nickname:"lght"});
 for (var i =0; i< arch.interests.length; i++){
-	arch.interests[i].noSpace = arch.interests[i].name.replace(/ /g, "").replace(/,/g, "").toLowerCase();
+	arch.interests[i].noSpace = arch.interests[i].name.replace(/ /g, "").replace(/,/g, "").replace(/&/g, "").toLowerCase();
 	arch.interests[i].nickname = arch.interests[i].nickname.toUpperCase();
 	arch.interests[i].save();
 }
@@ -223,7 +223,7 @@ var itws = new Category({ name: 'Information Technology & Web Science'});
 
 itws.interests[itws.interests.length] = new Interest({name:'Information Technology & Web Science', nickname:"itws"});
 for (var i =0; i< itws.interests.length; i++){
-	itws.interests[i].noSpace = itws.interests[i].name.replace(/ /g, "").replace(/,/g, "").toLowerCase();
+	itws.interests[i].noSpace = itws.interests[i].name.replace(/ /g, "").replace(/,/g, "").replace(/&/g, "").toLowerCase();
 	itws.interests[i].nickname = itws.interests[i].nickname.toUpperCase();
 	itws.interests[i].save();
 }
@@ -244,7 +244,7 @@ var post3 = new Post({poster:'Sample Professor', content:"More physics stuff fin
 post3.save();
 posts.push(post3);
 
-
+/*
 //}
 //console.log("engineering: " + JSON.stringify(engineering));
 //console.log("first interest posts: " + Interest.findOne().exec().returnPosts());
@@ -348,7 +348,11 @@ app.get("/interests",function(req,res){
 		res.write(JSON.stringify(data) );
 		res.end();
 	});
+});
 
+app.get("/checkInterests",function(req,res){
+	res.write(JSON.stringify(app.locals.user.interests) );
+	res.end();
 });
 
 var findTags = function(message){
@@ -458,10 +462,10 @@ app.post("/updateInterest", function(req, res){
 	}
 	*/
 	if(checkbox){
-		for(var i=0; i<checkbox.length; i++){
-			console.log(checkbox[i]);
-		}
-		console.log("The checkbox is " +checkbox);
+		app.locals.user.interests = checkbox;
+	}
+	else{
+		app.locals.user.interests=[];
 	}
 	res.redirect("/addInterest");
 });

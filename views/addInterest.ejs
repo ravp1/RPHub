@@ -28,27 +28,63 @@
 		
 		<!-- <a href="request.html" id="reqbtn" class="btn btn-success" style="float: right">Request Something</a> -->
 		<form id="contact-form" action="/updateInterest" method="post" class="form-horizontal">
-			<div id="cblist">
+						<div class="submit-button">
+				<button type="submit" value="Submit" class="btn btn-primary btn-teal btn-lg submit" style="width:100%; margin-left:5px; margin-bottom:15px;">Save</button>
+			</div>
+			<div id="cblist" data-columns>
 				<% 
 				var id = 0;
 				for (var i = 0; i < categories.length; i++) {
 				%>
-					<div class="list-group">
+					<div class="list-group listofCheckboxes">
 						<a class="list-group-item active"><%=categories[i].name%></a>
-					</div>
-					<!--<input type="checkbox"  id="cb<%=id%>" name="checkbox[]" value="<%=categories[i].name%>"/> <label for="cb<%=id%>"><%=categories[i].name%></label>-->
-					<ul>
+					<ul class="subItems">
 						<% for (var j = 0; j < categories[i].interests.length; j++) {%>
-							<li class="list-group-item">
-								<input type="checkbox"  id="cb<%=id%>" name="checkbox[]" value="<%=categories[i].interests[j].name%>"/> <label for="cb<%=id%>"><%=categories[i].interests[j].name%></label>
+							<li class="list-group-item interest">
+							<div class="interest"></div>
+								<input class="something" type="checkbox"  id="cb<%=id%>" name="checkbox[]" value="<%=categories[i].interests[j].noSpace%>"/> <label for="cb<%=id%>"><%=categories[i].interests[j].name%></label>
 							</li>
-						<% } %>
+						<% id++;} %>
 					</ul>
-				<% id++;} %>
+					</div>
+				<%} %>
 			</div>
+			<!--
 			<div class="submit-button">
 				<button type="submit" value="Submit" class="btn btn-primary btn-large submit">Submit</button>
 			</div>
+			-->
+			<script>
+			
+			$(document).ready(function(){
+			
+			$.get("/checkInterests", function(toCheck){
+				toCheck = $.parseJSON(toCheck);
+				console.log(toCheck);
+				for(var i=0; i<toCheck.length; i++){
+					//var element = toCheck[i].split(" ");
+					//var len = element.length;
+					$("input[value="+toCheck[i]+"]").prop("checked",true);
+				}
+			});
+			
+			$('.interest').on('click', function(c) {
+					//c.preventDefault();
+					c.stopPropagation();
+					if( c.target !== this ) {return;}
+					var checkbox = $(this).find('.something');
+					if(checkbox.is(":checked")){
+						checkbox.prop('checked', false);
+					}
+					
+					else{
+						checkbox.prop('checked', true);
+					}
+					
+				});
+			});
+			
+			</script>
 			<!--
 			<input type="text" id="txtName" />
 			<input type="button" value="ok" id="btnSave" />
@@ -82,28 +118,9 @@
 
 
 	
-	<script>
-	$(document).ready(function(){
-		
-		//collapse stuff
-		$('.collapse-group').on('click', function(c) {
-			c.preventDefault();
-			var collapse = $(this).find('.collapse');
-			collapse.show();
-		});
-		
-		$('.collapse-button').on('click', function(e) {
-			//alert('clicked');
-			e.preventDefault();
-			var collapse = $(this).closest('.collapse');
-			console.log(collapse.html())
-			collapse.hide();
-			console.log(collapse.css("display"));
-			e.stopPropagation();
-		});
-		
-	});
 	
+	<script src="/js/salvattore.js"></script>
+
 	
 </body>
 

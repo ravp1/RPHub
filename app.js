@@ -352,19 +352,30 @@ app.get("/interests",function(req,res){
 });
 
 app.get("/checkInterests",function(req,res){
-	/*
-	res.write(JSON.stringify(req.session.user.interests) );
-	for (var i =0; i< req.session.user.interests.length; i++){
-		Interest.findOne({noSpace: req.session.user.interests[i]},function(err,result){
-			if (result != null){
-				//post.tags.push(result.name);
-				//post.save();
-			}
-		});
-	}
-	*/
 	res.write(JSON.stringify(req.session.user.interests) );
 	res.end();
+});
+
+app.get("/logoff",function(req,res){
+	//req.session.user.save();
+	User.findOne({email:req.session.user.email, password:req.session.user.password}, function(err, loggedUser){
+		if(err) return console.error(err);
+		if(loggedUser!=null){
+			loggedUser.interests = req.session.user.interests;
+			loggedUser.save(function(err, data){   
+				//if (err) return res.json(400, err);
+				//res.json(201, data);
+				req.session.destroy();
+				res.redirect('/');
+			});
+		}
+		else{
+			console.log("Some sort of error; user not found");
+			res.end();
+		}
+	});
+	//req.session.destroy();
+	//res.redirect('/');
 });
 
 var findTags = function(message){
@@ -423,6 +434,11 @@ app.post("/login",function(req,res){
 		if(err) return console.error(err);
 		req.session.user = loggedUser;
 		if(loggedUser!=null){
+			/*
+			req.session.reload(function(err) {
+			  // will have a new session here
+			});
+			*/
 			res.redirect("/");
 		}
 		else{

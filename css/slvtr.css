@@ -1,7 +1,4 @@
-/* #listofPosts[data-columns]::before {
-	content: '3 .column.size-1of3';
-}
- */
+
 .column {
     float: left;
 	padding: 0 2.5px;

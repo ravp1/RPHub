@@ -132,11 +132,11 @@ body {
 	overflow: auto;
 	
 	top: 44px;
-	/* bottom: 0px; */
+	bottom: 0px;
 	left: 210px;
 	right: 0px;
 	
-	min-width: 420px;
+	min-width: 600px;
 	/* max-width: 690px;  */
 	/* width: 100%; */ /* dont use */
 	
@@ -148,6 +148,15 @@ body {
 	box-shadow: inset 0px 6px 7px 0px rgba(0,0,0,0.25); */
 }
 
+#meat>div{
+	display: inline-block;
+	width: 100%;
+}
+/* 
+#listofPosts {
+	height: 30px;
+}
+ */
 .input-xlarge{
 	/* min-width:612px; */
 	width:100%;
@@ -164,7 +173,7 @@ body {
 
 .collapse-group{
 	/* width: 100%; */
-	min-width: 565px;	/* depends on salvattore */
+	/* min-width: 565px; */	/* depends on salvattore */
 	background: #fff;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -245,7 +254,7 @@ footer {
 #rphublogo{
 	border:none;
 	margin:0 auto 0 auto;
-	min-width: 565px;
+	/* min-width: 565px; */
 }
 
 #reqbtn{

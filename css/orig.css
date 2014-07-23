@@ -104,6 +104,7 @@ body {
 	padding: 3px 10px 7px 36px;
 	line-height: 15px;
 	text-indent: -9px;
+	height: 31px;  /* 3+7+21(glyphicon size) */
 	
 	display: block;
 	/* color: #666; */

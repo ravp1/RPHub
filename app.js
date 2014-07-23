@@ -362,6 +362,11 @@ app.get("/logoff",function(req,res){
 		if(err) return console.error(err);
 		if(loggedUser!=null){
 			loggedUser.interests = req.session.user.interests;
+			loggedUser.password = req.session.user.password;
+			loggedUser.loginTries = req.session.user.loginTries;
+			loggedUser.blocked = req.session.user.blocked;
+			loggedUser.loginFail = req.session.user.loginFail;
+			loggedUser.posts = req.session.user.posts;
 			loggedUser.save(function(err, data){   
 				//if (err) return res.json(400, err);
 				//res.json(201, data);

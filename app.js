@@ -24,7 +24,7 @@ db.once('open', function callback(){
 
 app.use(session({secret: 'monkey wizard'}));
 
-/*//{  SCHEMA STUFF
+//{  SCHEMA STUFF
 var Schema = mongoose.Schema;
 
 //a category may be, for example, engineering or performance
@@ -94,7 +94,7 @@ var Category = mongoose.model('Category', categorySchema);
 
 var Interest = mongoose.model('Interest', interestSchema);
 //}
-*/
+
 
 /*//REMOVE CATEGORIES, POSTS, INTERESTS, USERS (NO LONGER PART OF PROCESS)
 

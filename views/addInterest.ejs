@@ -64,7 +64,7 @@
 				for(var i=0; i<toCheck.length; i++){
 					//var element = toCheck[i].split(" ");
 					//var len = element.length;
-					$("input[value="+toCheck[i]+"]").prop("checked",true);
+					$("input[value="+toCheck[i].noSpace+"]").prop("checked",true);
 				}
 			});
 			

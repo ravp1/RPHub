@@ -39,7 +39,7 @@ var userSchema = new Schema({
 	email: String,
 	password: String,
 	loginTries: Number,
-	interests: [String],
+	interests: [interestSchema],
 	blocked: Boolean,
 	loginFail: Boolean,
 	posts: [postSchema],
@@ -352,6 +352,17 @@ app.get("/interests",function(req,res){
 });
 
 app.get("/checkInterests",function(req,res){
+	/*
+	res.write(JSON.stringify(req.session.user.interests) );
+	for (var i =0; i< req.session.user.interests.length; i++){
+		Interest.findOne({noSpace: req.session.user.interests[i]},function(err,result){
+			if (result != null){
+				//post.tags.push(result.name);
+				//post.save();
+			}
+		});
+	}
+	*/
 	res.write(JSON.stringify(req.session.user.interests) );
 	res.end();
 });
@@ -456,18 +467,23 @@ app.post("/registerUser", function(req, res){
 app.post("/updateInterest", function(req, res){
 	//checkbox = req.body.checkbox;
 	var checkbox = req.body.checkbox;
-	/*
-	for(var i =0; i<6; i++){
-		checkbox.push(eval("req.body.checkbox" + i));
-	}
-	*/
 	if(checkbox){
-		req.session.user.interests = checkbox;
+		req.session.user.interests = [];
+		for (var i =0; i< checkbox.length; i++){
+			Interest.findOne({noSpace: checkbox[i]},function(err,result){
+				req.session.user.interests.push(result);
+				//req.session.user.interests.save();
+				//req.session.user.save();
+				if(req.session.user.interests.length == checkbox.length){
+					res.redirect("/addInterest");
+				}
+			});
+		}	
 	}
 	else{
 		req.session.user.interests=[];
+		res.redirect("/addInterest");
 	}
-	res.redirect("/addInterest");
 });
 
 app.get('/amILoggedIn', function(req, res){

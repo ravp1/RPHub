@@ -87,16 +87,11 @@
 <body>
 
 	<!-- header -->
-	
-		<%- include makeNavbar.ejs %>
-		
-	<!-- /header -->
-	
+	<%- include makeNavbar.ejs %>
 	
 	<!--sidebar-->
-		<%- include makeSidebar.ejs %>
+	<%- include makeSidebar.ejs %>
 	
-	<!--sidebar-->
 	
 	<div id="meat"> <!-- entire body -->
 		
@@ -116,7 +111,7 @@
 		</div>
 		
 		
-		<ul class="posts">
+		<div id="listofPosts" data-columns>
 			
 			<!-- <div class="text-right">
 				<a class="btn btn-success">Request Something</a>
@@ -154,73 +149,65 @@
 			</li>
 			-->
 			<% for(var i=posts.length-1; i>=0; i--) {%>
-			<br>
-				<li class="list-group-item collapse-group">
-					<fieldset>
-						<legend>
-							<%= posts[i].title %>
-							<small>- <%=posts[i].poster %> </small>
-							
-							<small style="float: right"> <%=posts[i].timeString %></small>
-						</legend>
+			<div class="list-group-item collapse-group">
+				<fieldset>
+					<legend>
+						<%= posts[i].title %>
+						<small>- <%=posts[i].poster %> </small>
 						
-						<p style="white-space: pre-line"><%=posts[i].content %></p>
-						<div style="text-align:center"> <button class="btn btn-default btn-teal btn-respond" align="center"> Respond <span class="caret"></span> </button> </div>
-						
-						<form class="collapse" action="mailto:panser@rpi.edu" method="post" enctype="text/plain" >
-							<br>
-							Send a message to <b><%=posts[i].replyAddress %></b>
-							<textarea class="input-xlarge" name="message" id="message" rows="5" style="min-width: 612px"></textarea>
-							
-							<br>
-							
-							<div class="form-actions">
-								<button type="submit" name="submit" value="Submit" class="btn btn-primary btn-large">Submit</button>
-								<button class="btn btn-default collapse-button">Collapse</button>
-							</div>
-						</form>
+						<small style="float: right"> <%=posts[i].timeString %></small>
+					</legend>
 					
-					</fieldset>
-				</li>
+					<p style="white-space: pre-line"><%=posts[i].content %></p>
+					<div style="text-align:center"> <button class="btn btn-default btn-teal btn-respond" align="center"> Respond <span class="caret"></span> </button> </div>
+					
+					<form class="collapse" action="mailto:panser@rpi.edu" method="post" enctype="text/plain" >
+						<br>
+						Send a message to <b><%=posts[i].replyAddress %></b>
+						<textarea class="input-xlarge" name="message" id="message" rows="5"></textarea>
+						
+						<br>
+						
+						<div class="form-actions">
+							<button type="submit" name="submit" value="Submit" class="btn btn-primary btn-large">Submit</button>
+							<button class="btn btn-default collapse-button">Collapse</button>
+						</div>
+					</form>
+				
+				</fieldset>
+			</div>
 			<% } %>
-		</ul>
+		</div>
 		
-		<script>
+		<footer>
+			RPHub © by Henry Choi and Ravi Panse. An <a href="http://rcos.rpi.edu/"> RCOS </a> Project.
+		</footer>
+		
+	</div> <!-- /meat -->
+	
+	
+	<script>
 	$(document).ready(function(){
-		//collapse stuff
-			$('.collapse-group').on('click', function(c) {
-				c.preventDefault();
-				var collapse = $(this).find('.collapse');
-				collapse.show();
-			});
-			
-			$('.collapse-button').on('click', function(e) {
-				//alert('clicked');
-				e.preventDefault();
-				var collapse = $(this).closest('.collapse');
-				console.log(collapse.html())
-				collapse.hide();
-				console.log(collapse.css("display"));
-				e.stopPropagation();
-			});
+		$('.collapse-group').on('click', function(c) {
+			c.preventDefault();
+			var collapse = $(this).find('.collapse');
+			collapse.show();
+		});
+		
+		$('.collapse-button').on('click', function(e) {
+			//alert('clicked');
+			e.preventDefault();
+			var collapse = $(this).closest('.collapse');
+			console.log(collapse.html())
+			collapse.hide();
+			console.log(collapse.css("display"));
+			e.stopPropagation();
+		});
 	});
 	
 	</script>
 	
-		
-		<!-- footer -->
-		<div class="container">
-			<footer>
-				<div class="row">
-					<div class="col-lg-12">
-						RPHub © by Henry Choi and Ravi Panse. An <a href="http://rcos.rpi.edu/"> RCOS </a> Project.
-					</div>
-				</div>
-			</footer>
-		</div>
-		<!-- /footer -->
-
-	</div> <!-- /meat -->
+	<script src="/js/salvattore.js"></script>
 	
 	
 	

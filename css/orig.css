@@ -2,10 +2,10 @@
 
 /***BODY***/
 body {
-	min-width: 890px;
+	/* min-width: 890px; */
 	padding-top: 50px;
 	background-color: #eee; /* f5f5f5 */
-	min-width:690px;
+	min-width: 690px;
 }
 
 
@@ -136,8 +136,9 @@ body {
 	left: 210px;
 	right: 0px;
 	
-	/* min-width: 690px; */
+	min-width: 420px;
 	/* max-width: 690px;  */
+	/* width: 100%; */ /* dont use */
 	
 	overflow-y: auto;
 	overflow-x: hidden;

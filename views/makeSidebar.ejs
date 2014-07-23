@@ -33,24 +33,22 @@
 
 		<h3>Interests</h3>
 		<ul>
+			<% for (var i = 0; i < user.interests.length; i++) {console.log(user.interests);%>
 			<li class="nav-item-fields">
-				<a href="#electrical">
+				<a href="/interests/<%=user.interests[i].nickname%>">
 					<span class="glyphicon glyphicon-arrow-right">
-					</span>Electrical Engineering
+					</span><%=user.interests[i].name%>
 				</a>
 			</li>
-			<li class="nav-item-activity">
-				<a href="#mechanical">
-					<span class="glyphicon glyphicon-arrow-right">
-					</span>Mechanical Engineering
-				</a>
-			</li>
+			<% } %>
+			<!--
 			<li class="nav-item-yield">
 				<a href="#other">
 					<span class="glyphicon glyphicon-arrow-right">
 					</span>Other
 				</a>
 			</li>
+			-->
 			<li class="nav-item">
 				<a href="/addinterest" class="selected">
 					<!-- <img class="icon" src="/images/x.png"> -->

@@ -95,7 +95,6 @@ var Category = mongoose.model('Category', categorySchema);
 var Interest = mongoose.model('Interest', interestSchema);
 //}
 
-
 /*//REMOVE CATEGORIES, POSTS, INTERESTS, USERS (NO LONGER PART OF PROCESS)
 
 Category.remove({},function(err){
@@ -282,6 +281,7 @@ Category.find({},function(err,data){
 
 app.locals.user = null;
 
+//app.locals.userInterests = [];
 //http.createServer(function (req, res) {
 //  res.writeHead(200, {'Content-Type': 'text/plain'});
 //  res.end('Hello World\n');

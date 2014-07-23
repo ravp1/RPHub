@@ -481,6 +481,7 @@ app.get('/amILoggedIn', function(req, res){
 		return;
 	}
 });
+
 /*  All the old stuff (may be useful later)
 app.get("/categories",function(req,res){
 

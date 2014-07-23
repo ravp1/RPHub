@@ -83,7 +83,7 @@ body {
 	
 }
 
-#sidebar h3 {
+#sidebar>h3 {
 	font-size: 11px;
 	color: #b3b3b3;
 	text-transform: uppercase;
@@ -92,16 +92,17 @@ body {
 	margin: 8px 0 0 14px;
 }
 
-#sidebar ul{
+#sidebar>ul{
 	padding: 0;
 }
 
-#sidebar ul li {
+#sidebar>ul>li {
 	list-style-type: none;
 }
 
-#sidebar ul li a{
+#sidebar>ul>li>a{
 	padding: 3px 10px 7px 36px;
+	padding: 5px 10px 5px 36px;
 	line-height: 15px;
 	text-indent: -9px;
 	height: 31px;  /* 3+7+21(glyphicon size) */
@@ -113,15 +114,18 @@ body {
 	cursor: pointer;
 }
 
-#sidebar ul li a span{ /* glyphicons */
-	padding-right: 4px;
-	font-size: 18px;
+#sidebar>ul>li>a>span{
+	/* padding-right: 4px;
+	font-size: 18px; */
 }
 
 #sidebar .glyphicon{
 	/* color: forestgreen; */
 	/* color: coral; */
 	color: #f5f5f5;
+	
+	padding-right: 4px;
+	font-size: 18px;
 }
 
 

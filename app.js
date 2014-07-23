@@ -279,7 +279,7 @@ Category.find({},function(err,data){
 	app.locals.categories = data;
 });
 
-app.locals.user = null;
+//app.locals.user = null;
 
 //app.locals.userInterests = [];
 //http.createServer(function (req, res) {
@@ -287,18 +287,18 @@ app.locals.user = null;
 //  res.end('Hello World\n');
 //}).listen(8080, '127.0.0.1');
 app.get('/', function(req, res){
-	if (app.locals.user == null){
-		res.render('login', {});
+	if (req.session.user == null){
+		res.render('login', {user:req.session.user});
 	}
 	else{
 		Post.find({},function(err,data){
-			res.render('index', {posts:data});
+			res.render('index', {posts:data, user:req.session.user});
 		});
 	}
 });
 
 app.get('/interests/:intName', function(req, res) {
-	if (app.locals.user == null){
+	if (req.session.user == null){
 		res.redirect('/');
 	}
 	else{
@@ -316,31 +316,31 @@ app.get('/interests/:intName', function(req, res) {
 			}
 			Post.find({tags:interest.name}, function(err, relevantPosts){
 				if(err) return console.error(err);
-				res.render('interests3', { interest: interest, posts: relevantPosts });
+				res.render('interests3', { interest: interest, posts: relevantPosts, user:req.session.user });
 			});
 		});
 	}
 });
 
 app.get('/request', function(req, res){
-	if (app.locals.user == null){
+	if (req.session.user == null){
 		res.redirect('/');
 	}
 	else{
-		res.render('request',{});
+		res.render('request',{user:req.session.user});
 	}
 });
 
 app.get('/register', function(req, res){
-	res.render('register',{});
+	res.render('register',{user:req.session.user});
 });
 
 app.get('/addInterest', function(req, res){
-	if (app.locals.user == null){
+	if (req.session.user == null){
 		res.redirect('/');
 	}
 	else{
-		res.render('addInterest',{});
+		res.render('addInterest',{user:req.session.user});
 	}
 });
 
@@ -352,7 +352,7 @@ app.get("/interests",function(req,res){
 });
 
 app.get("/checkInterests",function(req,res){
-	res.write(JSON.stringify(app.locals.user.interests) );
+	res.write(JSON.stringify(req.session.user.interests) );
 	res.end();
 });
 
@@ -412,7 +412,6 @@ app.post("/login",function(req,res){
 		if(err) return console.error(err);
 		req.session.user = loggedUser;
 		if(loggedUser!=null){
-			app.locals.user = loggedUser;
 			res.redirect("/");
 		}
 		else{
@@ -463,10 +462,10 @@ app.post("/updateInterest", function(req, res){
 	}
 	*/
 	if(checkbox){
-		app.locals.user.interests = checkbox;
+		req.session.user.interests = checkbox;
 	}
 	else{
-		app.locals.user.interests=[];
+		req.session.user.interests=[];
 	}
 	res.redirect("/addInterest");
 });

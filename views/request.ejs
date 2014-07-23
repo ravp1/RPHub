@@ -7,19 +7,20 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	
-	<%- include imports.ejs %>
 	
 	<title>RPHub - Request</title>
 	
+	<%- include imports.ejs %>
+	
 	<link href="/views/request.css" rel="stylesheet">
-
+	
+	
 </head>
 
 <body>
-
+	
 	<!-- header -->
 	<%- include makeNavbar.ejs %>
-	
 	
 	<!--sidebar-->
 	<%- include makeSidebar.ejs %>
@@ -43,9 +44,14 @@
 					<td style="width:33%">
 						<label class="control-label" for="">Compensation Type</label>
 						<div>
-							<input type="radio" name="compen" value="cred">Credits
-							<input type="radio" name="compen" value="cash">Cash
-							<input type="radio" name="compen" value="both">Both
+							<input type="radio" name="compen" value="cred">
+							<span>Credits</span>
+							
+							<input type="radio" name="compen" value="cash">
+							<span>Cash</span>
+							
+							<input type="radio" name="compen" value="both">
+							<span>Both</span>
 						<div>
 					</td>
 					<td style="width:33%">
@@ -83,9 +89,7 @@
 		
 		
 		<footer>
-			<!-- <div class="row"> -->
-				RPHub © by Henry Choi and Ravi Panse. An <a href="http://rcos.rpi.edu/"> RCOS </a> Project.
-			<!-- </div> -->
+			RPHub © by Henry Choi and Ravi Panse. An <a href="http://rcos.rpi.edu/"> RCOS </a> Project.
 		</footer>		
 		
 		

@@ -28,14 +28,11 @@
 		
 		<img id="rphublogo" class="img-responsive" src="logo.svg" alt=""/>
 		
-		
-		<!-- <a href="request.html" id="reqbtn" class="btn btn-success" style="float: right">Request Something</a> -->
-		
-		<a href="/request" id="reqbtn" class="btn btn-success">Request Something</a>
-
+		<div>
+			<a href="/request" id="reqbtn" class="btn btn-success">Request Something</a>
+		</div>
 		
 		<div class="posts" id="listofPosts" data-columns> <!-- listofPosts -->
-			
 			
 			<% for(var i=posts.length-1; i>=0; i--) {%>
 			<div class="list-group-item collapse-group">
@@ -72,22 +69,17 @@
 			
 		</div>
 		
-		<!-- footer -->
-		<div>
+		
+		<footer>
 			RPHub © by Henry Choi and Ravi Panse. An <a href="http://rcos.rpi.edu/"> RCOS </a> Project.
-		</div>
-		<!-- <footer></footer> -->
+		</footer>
 		
 		
-		
-	</div>	<!-- meat -->
+	</div> <!-- /meat -->
 
 
-	
 	<script>
 	$(document).ready(function(){
-		
-		//collapse stuff
 		$('.collapse-group').on('click', function(c) {
 			c.preventDefault();
 			var collapse = $(this).find('.collapse');
@@ -103,7 +95,6 @@
 			console.log(collapse.css("display"));
 			e.stopPropagation();
 		});
-		
 	});
 	
 	</script>
@@ -111,7 +102,7 @@
 	<script src="/js/salvattore.js"></script>
 	
 	
+	
 </body>
-
 
 </html>

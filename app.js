@@ -275,6 +275,14 @@ console.log('Server running at http://127.0.0.1:8080/');
 
 app.use(express.static(__dirname));
 
+var smtpTransport = mailer.createTransport("SMTP",{
+   service: "Gmail",
+   auth: {
+       user: "gmail.user@gmail.com",
+       pass: "gmailpass"
+   }
+});
+
 Category.find({},function(err,data){
 	app.locals.categories = data;
 });

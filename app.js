@@ -413,7 +413,7 @@ var parseCompensation = function(compen, payAmount, credAmount){
 	if (compen == "both" || compen =="cash"){
 		compensations[0] = [true, payAmount];
 	}
-	else if(compen =="both" || compen=="cred"){
+	if(compen =="both" || compen=="cred"){
 		compensations[1] = [true, credAmount];
 	}
 	return compensations;

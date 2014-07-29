@@ -39,9 +39,16 @@
 				</div>
 			</div>
 			
+			<div class="control-group" style="">
+				<label class="control-label" for="tags">Tag Interests: </label>
+				<div class="controls">
+					<input type="text" class="input-xlarge" name="tags" id="tags">
+				</div>
+			</div>
+			<!--
 			<table style="width:100%">
 				<tr>
-					<td style="width:33%">
+					<td style="width:25%">
 						<label class="control-label" for="">Compensation Type</label>
 						<div>
 							<input type="radio" name="compen" value="cred">
@@ -68,11 +75,56 @@
 					</td>
 				</tr>
 			</table>
+			-->
+			<div style="display:inline-block; padding-right:18px;">
+				<label class="control-label" for="">Compensation Type</label>
+				<div>
+					<input type="radio" name="compen" value="cred">
+					<span>Credits</span>
+					
+					<input type="radio" name="compen" value="cash">
+					<span>Cash</span>
+					
+					<input type="radio" name="compen" value="both">
+					<span>Both</span>
+				</div>
+			</div>
 			
-			<div class="control-group" style="">
-				<label class="control-label" for="tags">Tag Interests: </label>
+			<div style="display:inline-block; padding-right:15px; width:14%">
+				<label class="control-label" for="">Amount (Pay)</label>
 				<div class="controls">
-					<input type="text" class="input-xlarge" name="tags" id="tags">
+					<input type="text" class="input-xlarge" name="payAmount" id="payAmount">
+				</div>
+			</div>
+			
+			<div style="display:inline-block; padding-right:30px; width:15%">
+				<label class="control-label" for="">Amount (credit)</label>
+				<div class="controls">
+					<input type="text" class="input-xlarge" name="credAmount" id="credAmount">
+				</div>
+			</div>
+			
+			<div style="display:inline-block; padding-right:30px; width:15%">
+				<label class="control-label" for="">Hours/Week</label>
+				<div class="controls">
+					<input type="text" class="input-xlarge" name="hrwk" id="hrwk">
+				</div>
+			</div>
+			
+			<div style="display:inline-block; padding-right:18px;">
+				<label class="control-label" for="">Looking For</label>
+				<div>
+					<input type="checkbox" name="year[]" value="freshmen" id="freshmen">
+					<span>Freshmen</span>
+					
+					<input type="checkbox" name="year[]" value="sophomores" id="sophomores">
+					<span>Sophomores</span>
+					
+					<input type="checkbox" name="year[]" value="juniors" id="juniors">
+					<span>Juniors</span>
+					
+					<input type="checkbox" name="year[]" value="seniors" id="seniors">
+					<span>Seniors</span>
 				</div>
 			</div>
 			
@@ -109,7 +161,7 @@ $(document).ready(function() {
 		}
 		
 		function split( val ) {
-		  return val.split( /,\s*/ );
+		  return val.split( /;\s*/ );
 		}
 		function extractLast( term ) {
 		  return split( term ).pop();
@@ -142,7 +194,7 @@ $(document).ready(function() {
 			  terms.push( ui.item.value );
 			  // add placeholder to get the comma-and-space at the end
 			  terms.push( "" );
-			  this.value = terms.join( ", " );
+			  this.value = terms.join( "; " );
 			  return false;
 			}
 		});

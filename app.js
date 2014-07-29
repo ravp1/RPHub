@@ -72,6 +72,10 @@ var postSchema = new Schema({
 	replyAddress: String,
 	tags: [String], //interest 
 	fullfilled: Boolean,
+	pay: [],
+	credit: [],
+	commitment: Number,
+	years: [String],
 	comments: [{name: String, posts:[{poster:String, content:String, timePosted:Date}]}],
 });
 
@@ -404,11 +408,33 @@ var findTags = function(message){
 	return tags;
 }
 
+var parseCompensation = function(compen, payAmount, credAmount){
+	var compensations = [[false, 0], [false, 0]];
+	if (compen == "both" || compen =="cash"){
+		compensations[0] = [true, payAmount];
+	}
+	else if(compen =="both" || compen=="cred"){
+		compensations[1] = [true, credAmount];
+	}
+	return compensations;
+}
+
 app.post("/sendMessage",function(req,res){
 
 	subject = req.body.subject;
 	message = req.body.message;
-	var tags = findTags(message);
+	//var tags = findTags(message);
+	console.log(req.body.tags);
+	var tags = req.body.tags.split("; ");
+	var comp = parseCompensation(req.body.compen, req.body.payAmount, req.body.credAmount);
+	if (parseInt(req.body.hrwk) != NaN){
+		var hrwk = req.body.hrwk;
+	}
+	else{
+		var hrwk = 0;
+	}
+	console.log(hrwk);
+	var years = req.body.year;
 	var date = new Date();
 	var timeS = date.toDateString();
 	var currentUser = req.session.user.name.first + " " + req.session.user.name.last;
@@ -418,9 +444,17 @@ app.post("/sendMessage",function(req,res){
 		res.redirect("/request");
 		return;
 	}
-	var post = new Post({content:message, title:subject, fulfilled:false, timePosted: date, poster:currentUser, timeString:timeS, replyAddress:sentEmail, tags:[]});
+	var post = new Post({content:message, title:subject, fulfilled:false, timePosted: date, poster:currentUser, timeString:timeS, replyAddress:sentEmail, tags:[], commitment: hrwk, years: years, pay:comp[0], credit:comp[1]});
 	for (var i =0; i< tags.length; i++){
+		/*
 		Interest.findOne({$or : [{noSpace: tags[i]}, {nickname: tags[i]}]},function(err,result){
+			if (result != null){
+				post.tags.push(result.name);
+				post.save();
+			}
+		});
+		*/
+		Interest.findOne({name:tags[i]},function(err,result){
 			if (result != null){
 				post.tags.push(result.name);
 				post.save();

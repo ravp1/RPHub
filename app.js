@@ -426,6 +426,7 @@ app.post("/sendMessage",function(req,res){
 	//var tags = findTags(message);
 	console.log(req.body.tags);
 	var tags = req.body.tags.split("; ");
+	tags.pop();
 	var comp = parseCompensation(req.body.compen, req.body.payAmount, req.body.credAmount);
 	if (parseInt(req.body.hrwk) != NaN){
 		var hrwk = req.body.hrwk;
@@ -433,7 +434,6 @@ app.post("/sendMessage",function(req,res){
 	else{
 		var hrwk = 0;
 	}
-	console.log(hrwk);
 	var years = req.body.year;
 	var date = new Date();
 	var timeS = date.toDateString();

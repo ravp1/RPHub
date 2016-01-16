@@ -298,6 +298,8 @@ Category.find({},function(err,data){
 //  res.writeHead(200, {'Content-Type': 'text/plain'});
 //  res.end('Hello World\n');
 //}).listen(8080, '127.0.0.1');
+
+
 app.get('/', function(req, res){
 	if (req.session.user == null){
 		res.render('login', {user:req.session.user});

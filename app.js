@@ -1,4 +1,3 @@
-
 var express = require('express'),
   app = express(),
   server = require('http').createServer(app),
@@ -14,7 +13,7 @@ app.set('view engine', 'ejs');
 
 mongoose.connect(process.env.MONGOLAB_URI 
                 || process.env.MONGOHQ_URL 
-				|| 'mongodb://localhost/test');
+					 || 'mongodb://localhost/test');
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
